@@ -197,3 +197,7 @@ a.custom-card:hover {
 #des-product{
   text-align: left;
 }
+
+.lbl-error{
+  color: red;
+}

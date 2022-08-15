@@ -57,12 +57,33 @@ btn.addEventListener("click", function(event){
 
 // Formulario de Registro -------------------
 
-//array para guardar datos 
-let nombre = [];
-let email = [];
-let contraseña = [];
-//------------------------
+//volver atras si ya esta registrado
 
+document.getElementById('sign-in').addEventListener("click", function(event){
+    formlogin.style.display = 'block';
+    formreg.style.display = 'none';
+    check.checked = false;
+        regname.value = '';
+        regemail.value = '';
+        regpsw.value = '';
+        regpsw2.value = '';
+        document.getElementById('lblname').innerHTML = ''
+        document.getElementById('lblemail').innerHTML = ''
+        document.getElementById('lblpsw').innerHTML = ''
+        document.getElementById('lblpsw2').innerHTML = ''
+        regname.style.borderColor = 'grey';
+        regemail.style.borderColor = 'grey';
+        regpsw.style.borderColor = 'grey';
+        regpsw2.style.borderColor = 'grey';
+        check.style.borderColor = 'grey';
+});
+
+//array para guardar datos 
+   let arraynombre = [];
+   let arrayemail = [];
+   let arraycontraseña = [];
+   console.log(arrayemail)
+//Validacion de Formulario y Errores
 
 
 btnreg.addEventListener("click", function(event){
@@ -72,39 +93,63 @@ btnreg.addEventListener("click", function(event){
 
 
 btnregistrarse.addEventListener("click",function(event){
+    //check
     if(check.checked != true){
         check.style.borderColor = 'red';
     }else{
         check.style.borderColor = 'grey';
     }
-
-    if(regname.value == ''){
+    //Name----------------------------------------------------------------------------
+    if (regname.value.length < 5 || regname.value == '' || regname.value.length > 30){
         regname.style.borderColor = 'red';
+        if(regname.value.length < 5){
+            document.getElementById('lblname').innerHTML = 'El nombre debe contener al menos 5 caracteres';
+        }
+    }else if(regname.value.length > 30){
+        document.getElementById('lblname').innerHTML = 'El nombre es muy largo';
     }else{
         regname.style.borderColor = 'grey';
+        document.getElementById('lblname').innerHTML = '';
     }
-
-    if(regemail.value == ''){
+    //Email------------------------------------------------------------------------------
+    if(regemail.value.length < 5 || regemail.value == '' || regemail.value.length > 45){
         regemail.style.borderColor = 'red';
+        if(regemail.value.length < 5){
+            document.getElementById('lblemail').innerHTML = 'El email es muy corto';
+        }
     }else{
         regemail.style.borderColor = 'grey';
+        document.getElementById('lblemail').innerHTML = '';
     }
-
-    if(regpsw.value == ''){
+    //Password-----------------------------------------------------------------------------------
+    if(regpsw.value.length < 6 || regpsw.value == '' || regpsw.value.length > 30){
         regpsw.style.borderColor = 'red';
+        if(regpsw.value.length < 5){
+            document.getElementById('lblpsw').innerHTML = 'La password debe contener al menos 6 caracteres';
+        }
     }else{
         regpsw.style.borderColor = 'grey';
+        document.getElementById('lblpsw').innerHTML = '';
     }
-
-    if(regpsw2.value == ''){
+    //Repetir Password----------------------------------------------------------------------------
+    if(regpsw2.value.length < 6 || regpsw2.value == '' || regpsw2.value.length > 30 || regpsw2.value != regpsw.value){
         regpsw2.style.borderColor = 'red';
+        if(regpsw.value.length < 5 || regpsw2.value != regpsw.value){
+            document.getElementById('lblpsw2').innerHTML = 'La password no coincide';
+        }
     }else{
         regpsw2.style.borderColor = 'grey';
+        document.getElementById('lblpsw2').innerHTML = '';
     }
-
-    if(check.checked == true && regname.value != '' && regemail.value != '' && regpsw.value != '' && regpsw2.value != ''){
+    //Validacion Boton----------------------------------------------------------------------------------
+    if(check.checked == true && regname.value != '' && regemail.value != '' && regpsw.value != '' && regpsw2.value != '' && regpsw.value == regpsw2.value){
         formlogin.style.display = 'block';
         formreg.style.display = 'none';
+        check.checked = false;
+        regname.value = '';
+        regemail.value = '';
+        regpsw.value = '';
+        regpsw2.value = '';
         alert('Se Registro Correctamente!')
     }
 })
