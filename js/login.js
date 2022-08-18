@@ -57,6 +57,15 @@ btn.addEventListener("click", function(event){
 
 // Formulario de Registro -------------------
 
+// Msg Error o Success
+function showAlertSuccess() {
+    document.getElementById("alert-success").classList.add("show");
+}
+
+function showAlertError() {
+    document.getElementById("alert-danger").classList.add("show");
+}
+
 //volver atras si ya esta registrado
 
 document.getElementById('sign-in').addEventListener("click", function(event){
@@ -150,7 +159,10 @@ btnregistrarse.addEventListener("click",function(event){
         regemail.value = '';
         regpsw.value = '';
         regpsw2.value = '';
-        alert('Se Registro Correctamente!')
+        alert('Se registro Correctamente')
+        showAlertSuccess()
+    }else{
+        showAlertError()
     }
 })
 

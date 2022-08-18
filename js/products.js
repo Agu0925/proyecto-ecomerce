@@ -1,6 +1,6 @@
 
     fetch(PRODUCTS_URL) //llamo la url con el Fetch
-    .then((resp) => resp.json()) //convierto json a objeto js.
+    .then((resp) => resp.json()) //convierto el json a objeto js.
     .then((datos) => {
         let htmlContentToAppend = "";
 
