@@ -5,8 +5,8 @@ let btn = document.getElementById('btn-login');
 let lblemail = document.getElementById('label-email');
 let lblpw = document.getElementById('label-pw');
 let formlogin = document.getElementById('cont-login');
-let mail = 'prueba@hotmail.com';
-let psw = 12345678;
+//let mail = 'prueba@hotmail.com';
+//let psw = 12345678;
 let intentos = 5;
 //Items Form Reg
 let formreg = document.getElementById('form-registro');
@@ -41,9 +41,9 @@ btn.addEventListener("click", function(event){
     }
 //si el formulario no cumple estos requisitos manda error y no ejecuta el login
  if(correo.value != "" && pw.value != ""){
-    if(correo.value == mail && pw.value == psw){
+    if(/*correo.value == mail && pw.value == psw ||*/ correo.value == array.email && pw.value == array.pass){
         window.location.href='inicio.html';
-        alert('Ingresaste Correctamente');
+        alert('Ingresaste Correctamente Bienvenido ' + array.nombre);
     }else if(intentos > 0){
         alert('Mail o Contraseñas no son correctos, Le quedan '+ intentos +' intentos');
         intentos--
@@ -87,12 +87,24 @@ document.getElementById('sign-in').addEventListener("click", function(event){
         check.style.borderColor = 'grey';
 });
 
-//array para guardar datos 
-   let arraynombre = [];
-   let arrayemail = [];
-   let arraycontraseña = [];
-   console.log(arrayemail)
-//Validacion de Formulario y Errores
+//Objeto para intentar guardar datos en local storage.
+   let cuentas = {
+    nombre: [],
+    email: [],
+    pass: []
+   }
+
+   // Guardar el array en el localStorage
+   localStorage.setItem(cuentas, JSON.stringify(cuentas));
+   //console.log(window.localStorage);
+
+   // Obtener el arreglo de localStorage
+   var array = localStorage.getItem(cuentas);
+
+    // Con parse puedo modificar usando js
+    array = JSON.parse(array);
+    //console.log(array)
+//Validacion de Formulario y Errores ////// *Se puede simplificar con variable bandera ////////
 
 
 btnreg.addEventListener("click", function(event){
@@ -141,7 +153,7 @@ btnregistrarse.addEventListener("click",function(event){
         document.getElementById('lblpsw').innerHTML = '';
     }
     //Repetir Password----------------------------------------------------------------------------
-    if(regpsw2.value.length < 6 || regpsw2.value == '' || regpsw2.value.length > 30 || regpsw2.value != regpsw.value){
+    if(regpsw2.value == '' || regpsw2.value != regpsw.value){
         regpsw2.style.borderColor = 'red';
         if(regpsw.value.length < 5 || regpsw2.value != regpsw.value){
             document.getElementById('lblpsw2').innerHTML = 'La password no coincide';
@@ -151,7 +163,10 @@ btnregistrarse.addEventListener("click",function(event){
         document.getElementById('lblpsw2').innerHTML = '';
     }
     //Validacion Boton----------------------------------------------------------------------------------
-    if(check.checked == true && regname.value != '' && regemail.value != '' && regpsw.value != '' && regpsw2.value != '' && regpsw.value == regpsw2.value){
+    if(check.checked == true && regname.value != '' && regemail.value != '' && regpsw.value != '' && regpsw2.value != '' && regpsw.value == regpsw2.value && regpsw.value.length >= 6 && regname.value.length >= 5 && regemail.value.length >= 5){
+        array.nombre = regname.value;
+        array.email = regemail.value;
+        array.pass = regpsw.value;
         formlogin.style.display = 'block';
         formreg.style.display = 'none';
         check.checked = false;
@@ -159,8 +174,8 @@ btnregistrarse.addEventListener("click",function(event){
         regemail.value = '';
         regpsw.value = '';
         regpsw2.value = '';
+        //console.log(array)
         alert('Se registro Correctamente')
-        showAlertSuccess()
     }else{
         showAlertError()
     }
