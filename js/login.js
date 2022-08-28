@@ -17,7 +17,6 @@ let regname = document.getElementById('reg-nombre');
 let regemail = document.getElementById('reg-email');
 let regpsw = document.getElementById('reg-psw');
 let regpsw2 = document.getElementById('reg-psw2');
-
 formreg.style.display = 'none';
 
 btn.addEventListener("click", function(event){
@@ -40,13 +39,28 @@ btn.addEventListener("click", function(event){
         lblpw.innerHTML = "";
     }
 //si el formulario no cumple estos requisitos manda error y no ejecuta el login
- if(correo.value != "" && pw.value != ""){
-    if(/*correo.value == mail && pw.value == psw ||*/ correo.value == array.email && pw.value == array.pass){
+
+    //login con local storage 
+    if(correo.value != "" && pw.value != ""){
+      if ((window.localStorage.getItem('Cuentas') == undefined)) {
+        lblpw.innerHTML = "Usted no tiene una cuenta, para ingresar debe registrarse.";
+        lblpw.style.color = 'red';
+      }
+    // Obtener el arreglo de localStorage
+        let arrayCuentas = localStorage.getItem('Cuentas');
+            // Con parse puedo modificar usando js
+        let cuentas = JSON.parse(arrayCuentas);
+            //console.log(arrayCuentas)
+    //------
+    if(/*correo.value == mail && pw.value == psw ||*/ correo.value == cuentas.email && pw.value == cuentas.pass){
         window.location.href='inicio.html';
-        alert('Ingresaste Correctamente Bienvenido ' + array.nombre);
+        let logueado = 1;
+        localStorage.setItem('logueado?', JSON.stringify(logueado))
+        alert('Ingresaste Correctamente Bienvenido ' + cuentas.nombre);
     }else if(intentos > 0){
         alert('Mail o Contraseñas no son correctos, Le quedan '+ intentos +' intentos');
         intentos--
+        localStorage.removeItem('logueado?')
     }else{
         btn.disabled = true;
         alert('No te quedan intentos vuelve mas tarde');
@@ -65,7 +79,6 @@ function showAlertSuccess() {
 function showAlertError() {
     document.getElementById("alert-danger").classList.add("show");
 }
-
 //volver atras si ya esta registrado
 
 document.getElementById('sign-in').addEventListener("click", function(event){
@@ -86,25 +99,22 @@ document.getElementById('sign-in').addEventListener("click", function(event){
         regpsw2.style.borderColor = 'grey';
         check.style.borderColor = 'grey';
 });
-
+//  MUEVO ESTO A BOTON REGISTRAR PARA NO SOBRE ESCRIBIR  
 //Objeto para intentar guardar datos en local storage.
-   let cuentas = {
-    nombre: [],
-    email: [],
-    pass: []
-   }
+//    let cuentas = {
+//     nombre: [],
+//     email: [],
+//     pass: []
+//    };
+// Guardar el array en el localStorage
+//    localStorage.setItem('Cuentas', JSON.stringify(cuentas));
+//    //console.log(window.localStorage);
 
-   // Guardar el array en el localStorage
-   localStorage.setItem(cuentas, JSON.stringify(cuentas));
-   //console.log(window.localStorage);
-
-   // Obtener el arreglo de localStorage
-   var array = localStorage.getItem(cuentas);
-
-    // Con parse puedo modificar usando js
-    array = JSON.parse(array);
-    //console.log(array)
-//Validacion de Formulario y Errores ////// *Se puede simplificar con variable bandera ////////
+//    // Obtener el arreglo de localStorage
+//    let arrayCuentas = localStorage.getItem('Cuentas');
+//     // Con parse puedo modificar usando js
+//     cuentas = JSON.parse(arrayCuentas);
+// //Validacion de Formulario y Errores ////// *Se puede simplificar con variable bandera ////////
 
 
 btnreg.addEventListener("click", function(event){
@@ -164,9 +174,16 @@ btnregistrarse.addEventListener("click",function(event){
     }
     //Validacion Boton----------------------------------------------------------------------------------
     if(check.checked == true && regname.value != '' && regemail.value != '' && regpsw.value != '' && regpsw2.value != '' && regpsw.value == regpsw2.value && regpsw.value.length >= 6 && regname.value.length >= 5 && regemail.value.length >= 5){
-        array.nombre = regname.value;
-        array.email = regemail.value;
-        array.pass = regpsw.value;
+        // Array Usuario ---------------
+        let cuentas = {
+            nombre: [regname.value],
+            email: [regemail.value],
+            pass: [regpsw.value]
+        };
+        // Guardar el array en el localStorage
+        localStorage.setItem('Cuentas', JSON.stringify(cuentas));
+        // Array Usuario ---------------
+
         formlogin.style.display = 'block';
         formreg.style.display = 'none';
         check.checked = false;
@@ -174,7 +191,6 @@ btnregistrarse.addEventListener("click",function(event){
         regemail.value = '';
         regpsw.value = '';
         regpsw2.value = '';
-        //console.log(array)
         alert('Se registro Correctamente')
     }else{
         showAlertError()

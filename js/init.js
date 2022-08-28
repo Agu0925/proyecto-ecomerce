@@ -39,3 +39,9 @@ let getJSONData = function(url){
         return result;
     });
 }
+//Comprobar si estas logueado
+  if ((window.localStorage.getItem('logueado?') == undefined
+)) {
+  window.location.href = 'index.html';
+    }
+//Comprobar si estas logueado---------------

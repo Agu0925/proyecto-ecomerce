@@ -1,4 +1,8 @@
 
+    function setCatID(id) {
+        localStorage.setItem("catID", id);
+        window.location = "products.html"
+    }
     fetch(PRODUCTS_URL) //llamo la url con el Fetch
     .then((resp) => resp.json()) //convierto el json a objeto js.
     .then((datos) => {
