@@ -18,7 +18,7 @@ let regemail = document.getElementById('reg-email');
 let regpsw = document.getElementById('reg-psw');
 let regpsw2 = document.getElementById('reg-psw2');
 formreg.style.display = 'none';
-
+//Boton Login
 btn.addEventListener("click", function(event){
 // Formulario no puede enviar datos vacios
     if (correo.value == ""){
@@ -52,7 +52,7 @@ btn.addEventListener("click", function(event){
         let cuentas = JSON.parse(arrayCuentas);
             //console.log(arrayCuentas)
     //------
-    if(/*correo.value == mail && pw.value == psw ||*/ correo.value == cuentas.email && pw.value == cuentas.pass){
+    if(correo.value == cuentas.email && pw.value == cuentas.pass){
         window.location.href='inicio.html';
         let logueado = 1;
         localStorage.setItem('logueado?', JSON.stringify(logueado))

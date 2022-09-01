@@ -39,7 +39,7 @@ let getJSONData = function(url){
         return result;
     });
 }
-//Comprobar si estas logueado
+//Comprobar si estas logueado sino redirigir al login
   if ((window.localStorage.getItem('logueado?') == undefined
 )) {
   window.location.href = 'index.html';
