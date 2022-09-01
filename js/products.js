@@ -1,15 +1,17 @@
 //Funcion para ordenar
 let minCount = undefined;
 let maxCount = undefined;
-//Ordenar por cantidad
+let Pmin = undefined;
+let Pmax = undefined;
+//Ordenar por relevancia
 document.getElementById('sortByCount').addEventListener('click', function(){
     
 });
-//Ordenar alfaAsen
+////Ordenar Precio Ascendente 
 document.getElementById('sortAsc').addEventListener('click', function(){
     
 });
-//Ordenar alfaDesen
+//Ordenar Precio Decendente
 document.getElementById('sortDesc').addEventListener('click', function(){
     
 });
@@ -17,15 +19,15 @@ document.getElementById('sortDesc').addEventListener('click', function(){
 // funcion para tomar la id con onclick
     function setCatID(id) {
         localStorage.setItem("catID", id);
-        window.location = "products.html"
     }
 
     fetch(PRODUCTS_URL) //llamo la url con el Fetch
     .then((resp) => resp.json()) //convierto el json a objeto js.
     .then((datos) => {
             
-            let htmlContentToAppend = "";
+        //Declaro Funcion mostrar para poder utilizar Filtros
             function mostrar(){
+            let htmlContentToAppend = "";
         //Recorrro el array de la url y lo delcaro en una variable para poder usarlo con su respectiva categoria 
                 for(let i = 0; i < datos.products.length; i++){ 
                     let category = datos.products[i];
@@ -49,35 +51,35 @@ document.getElementById('sortDesc').addEventListener('click', function(){
                     </div>
                     `;
                     document.getElementById("container-products").innerHTML = htmlContentToAppend;
+                    console.log(parseInt(category.soldCount));
                 }
             }
         //Filtrando datos --------------------
         mostrar()
         //Boton Filtro
         document.getElementById('rangeFilterCount').addEventListener('click', function(){
+            //Si esta vacio min agrego valor
             if(document.getElementById('rangeFilterCountMin').value == ''){
                 minCount = 1;
                 maxCount = parseInt(document.getElementById('rangeFilterCountMax').value);
-                htmlContentToAppend = "";
                 mostrar();
+                //Si esta vacio max agrego valor
             }else if(document.getElementById('rangeFilterCountMax').value == ''){
                 minCount = parseInt(document.getElementById('rangeFilterCountMin').value);
                 maxCount = 9999999;
-                htmlContentToAppend = "";
                 mostrar();
+                //Si estan los 2 con datos traigo el valor de los inputs
             }else{
                 minCount = parseInt(document.getElementById('rangeFilterCountMin').value);
                 maxCount = parseInt(document.getElementById('rangeFilterCountMax').value);
-                htmlContentToAppend = "";
                 mostrar();
             }
+            //Si estan los 2 vacios los dejo undefined para mostrar todo
             if(document.getElementById('rangeFilterCountMin').value == '' && document.getElementById('rangeFilterCountMax').value == ''){
-                minCount = 1;
-                maxCount = 9999999;
-                htmlContentToAppend = "";
+                minCount = undefined;
+                maxCount = undefined;
                 mostrar();
             }
-                console.log(maxCount)
         });
         //Borrar Filtro
         document.getElementById('clearRangeFilter').addEventListener('click', function(){
@@ -85,7 +87,6 @@ document.getElementById('sortDesc').addEventListener('click', function(){
             document.getElementById('rangeFilterCountMax').value = ''
             minCount = undefined;
             maxCount = undefined;
-            htmlContentToAppend = "";
             mostrar();
         });
         //Ordenar por Buscador
