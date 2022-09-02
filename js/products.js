@@ -3,18 +3,6 @@ let minCount = undefined;
 let maxCount = undefined;
 let Pmin = undefined;
 let Pmax = undefined;
-//Ordenar por relevancia
-document.getElementById('sortByCount').addEventListener('click', function(){
-    
-});
-////Ordenar Precio Ascendente 
-document.getElementById('sortAsc').addEventListener('click', function(){
-    
-});
-//Ordenar Precio Decendente
-document.getElementById('sortDesc').addEventListener('click', function(){
-    
-});
 
 // funcion para tomar la id con onclick
     function setCatID(id) {
@@ -51,12 +39,12 @@ document.getElementById('sortDesc').addEventListener('click', function(){
                     </div>
                     `;
                     document.getElementById("container-products").innerHTML = htmlContentToAppend;
-                    console.log(parseInt(category.soldCount));
+                    //pongo el array en lista para ordenarlo
                 }
             }
         //Filtrando datos --------------------
         mostrar()
-        //Boton Filtro
+        //Boton Filtro por Precio
         document.getElementById('rangeFilterCount').addEventListener('click', function(){
             //Si esta vacio min agrego valor
             if(document.getElementById('rangeFilterCountMin').value == ''){
@@ -81,7 +69,7 @@ document.getElementById('sortDesc').addEventListener('click', function(){
                 mostrar();
             }
         });
-        //Borrar Filtro
+        //Borrar Filtro Precio
         document.getElementById('clearRangeFilter').addEventListener('click', function(){
             document.getElementById('rangeFilterCountMin').value = ''
             document.getElementById('rangeFilterCountMax').value = ''
@@ -89,10 +77,37 @@ document.getElementById('sortDesc').addEventListener('click', function(){
             maxCount = undefined;
             mostrar();
         });
-        //Ordenar por Buscador
-        document.getElementById('buscador').value
-    })
-    
 
+        ////Ordenar Precio Ascendente 
+        document.getElementById('sortAsc').addEventListener('click', function(){
+            datos.products.sort(function (a, b) {
+                return (parseInt(a.cost) -  parseInt(b.cost));
+            })
+            mostrar();
+        });
+
+        //Ordenar Precio Decendente
+        document.getElementById('sortDesc').addEventListener('click', function(){
+            datos.products.sort(function (a, b) {
+                return (parseInt(b.cost) -  parseInt(a.cost));
+            })
+            mostrar();
+        });
+
+        //Ordenar por relevancia Decendente
+        document.getElementById('sortByCount').addEventListener('click', function(){
+            //llamo a products porque category queda adentro de la funcion mostrar
+            datos.products.sort(function (a, b) {
+                 return (parseInt(b.soldCount) -  parseInt(a.soldCount));
+             })
+             mostrar();
+        });
+        //Ordenar por Buscador
+        document.getElementById('buscador').addEventListener('keydown', function(){
+        });
+        document.getElementById('btn-buscar').addEventListener('click', function(){
+            
+        });
+    })
     
     // fin -----------------------------------------------------------------
