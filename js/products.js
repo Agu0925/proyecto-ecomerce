@@ -47,7 +47,7 @@ let buscar = undefined;
                 }
             }
         }
-        //Filtrando datos --------------------
+        //Filtrando datos ---------------------
         mostrar()
         //Boton Filtro por Precio
         document.getElementById('rangeFilterCount').addEventListener('click', function(){
