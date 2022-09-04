@@ -1,8 +1,6 @@
-//Funcion para ordenar
+//Variables para ordenar y buscar
 let minCount = undefined;
 let maxCount = undefined;
-let Pmin = undefined;
-let Pmax = undefined;
 let buscar = undefined;
 
 // funcion para tomar la id con onclick
