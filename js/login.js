@@ -63,6 +63,7 @@ btn.addEventListener("click", function(event){
         localStorage.removeItem('logueado?')
     }else{
         btn.disabled = true;
+        localStorage.removeItem('logueado?')
         alert('No te quedan intentos vuelve mas tarde');
     }
  }

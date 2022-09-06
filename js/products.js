@@ -6,6 +6,7 @@ let buscar = undefined;
 // funcion para tomar la id con onclick
     function setCatID(id) {
         localStorage.setItem("catID", id);
+        window.location = "product-info.html";
     }
 
     fetch(PRODUCTS_URL) //llamo la url con el Fetch
