@@ -5,3 +5,27 @@
 .fa-arrow-left{
     margin-right: 0.3rem;
 }
+#btn-back{
+    padding: 0.3rem;
+    border-radius: 0.3rem;
+}
+#btn-back:hover{   
+    background-color: lightgray;
+}
+
+/* CCS CAJA DE COMENTARIOS */
+#rating-str{
+    margin-bottom: 0.3rem;
+}
+/* Estrellas -------------*/
+.fa-star{
+    color: grey;
+}
+/* Estrellas -------------*/
+.txt-area{
+    resize: none;
+}
+
+.comment-box{
+    margin-bottom: 3rem;
+}

@@ -47,25 +47,36 @@
                         <div class="col-md-6">
                             <div class="images p-3">
                               <!-- Identificadores Imagen -->
-                                <div class="text-center p-4"> <img id="main-image" src="https://ep01.epimg.net/elpais/imagenes/2019/10/30/album/1572424649_614672_1572453030_noticia_normal.jpg" width="250" /> </div>
-                                <div class="thumbnail text-center"> <img onclick="change_image(this)" id="mini-image" class="cursor-active" src="https://imagenes.eldebate.com/files/vertical_composte_image/files/fp/uploads/2022/06/21/62b1e8c87c033.r_d.874-592.jpeg" width="70"> <img onclick="change_image(this)" class="cursor-active" id="mini-image2" src="https://educacion30.b-cdn.net/wp-content/uploads/2019/02/girasoles-978x652.jpg" width="70">  <img onclick="change_image(this)" id="mini-image3" class="cursor-active" src="https://ep01.epimg.net/elpais/imagenes/2019/10/30/album/1572424649_614672_1572453030_noticia_normal.jpg" width="70"></div>
+                                <div class="text-center p-4"> <img id="main-image" src="" width="250" /> </div>
+                                <div class="thumbnail text-center"> 
+                                  <img onclick="change_image(this)" id="mini-image" class="cursor-active" src="" width="70"> 
+                                  <img onclick="change_image(this)" id="mini-image2" class="cursor-active" src="" width="70"> 
+                                  <img onclick="change_image(this)" id="mini-image3" class="cursor-active" src="" width="70">
+                                  <img onclick="change_image(this)" id="mini-image4" class="cursor-active" src="" width="70">
+                                  <img onclick="change_image(this)" id="mini-image5" class="cursor-active" src="" width="70">
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                           <!-- Identificadores Descripcion -->
                             <div class="product p-4">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="d-flex align-items-center cursor-active" id="btn-back"> <i class="fa fa-arrow-left"></i> <span class="ml-1">Back</span> </div> <i class="fa fa-shopping-cart text-muted"></i>
+                                    <div class="d-flex align-items-center cursor-active" id="btn-back"> <i class="fa fa-arrow-left"></i> <span class="ml-1">Atras</span> </div> <i class="fa fa-shopping-cart text-muted"></i>
                                 </div>
-                                <div class="mt-4 mb-3"> <span class="text-uppercase text-muted brand">Orianz</span>
-                                    <h5 class="text-uppercase" id="title-product">Men's slim fit t-shirt</h5>
+                                <div class="mt-4 mb-3"> 
+                                    <span class="text-uppercase text-muted brand" id="prod-cat"></span>
+                                    <h5 class="text-uppercase" id="title-product"></h5>
+                                    <span class="text-uppercase text-muted brand" id="soldCount"></span>
                                     <div class="price d-flex flex-row align-items-center"> 
-                                      <span class="act-price" id="price-product">$20</span>
+                                      <span class="act-price" id="price-product"></span>
                                     </div>
                                 </div>
-                                <p class="about" id="desc-product">Shop from a wide range of t-shirt from orianz. Pefect for your everyday use, you could pair it with a stylish pair of jeans or trousers complete the look.</p>
+                                <p class="about" id="desc-product"></p>
                                 
-                                <div class="cart mt-4 align-items-center"> <button class="btn btn-danger text-uppercase mr-2 px-4">Add to cart</button> <i class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i> </div>
+                                <div class="cart mt-4 align-items-center"> 
+                                  <button class="btn btn-danger text-uppercase mr-2 px-4">Agregar Al Carrito</button>
+                                  <i class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -73,6 +84,47 @@
             </div>
         </div>
     </div>
+    <!-- Caja de Comentarios -->
+    <div class="card">
+      <div class="row">
+    
+              <div class="comment-box ml-2">
+                  
+                  <h4>Agrega un Comentario</h4>
+                  
+                  <div class="rating" id="rating-str"> 
+                      <input type="radio" class="btn-check" name="rating" value="1" id="1"> <label for="1"><i class="fa fa-star cursor-active str-e"></i></label>
+                      <input type="radio" class="btn-check" name="rating" value="2" id="2"> <label for="2"><i class="fa fa-star cursor-active str-e"></i></label> 
+                      <input type="radio" class="btn-check" name="rating" value="3" id="3"> <label for="3"><i class="fa fa-star cursor-active str-e"></i></label>
+                      <input type="radio" class="btn-check" name="rating" value="4" id="4"> <label for="4"><i class="fa fa-star cursor-active str-e"></i></label>
+                      <input type="radio" class="btn-check" name="rating" value="5" id="5"> <label for="5"><i class="fa fa-star cursor-active str-e"></i></label>
+                  </div>
+                  
+                  <div class="comment-area">
+                      
+                      <textarea class="form-control txt-area" placeholder="Cuentanos tu experiencia" rows="4"></textarea>
+                  
+                  </div>
+                  
+                  <div class="comment-btns mt-2">
+                      
+                      <div class="row">
+                          
+                          <div class="col-6">
+                              <div class="pull-left">
+                                <button class="btn btn-danger send btn-sm" id="btn-com">Enviar</button>
+                              </div>
+                          </div>
+                          
+                      </div>
+                  
+                  </div>
+              </div>
+              <div class="container"  id="caja-comentarios">
+                <h4> Comentarios </h4>
+              </div>
+          </div>
+  </div>
     </div>
   </main>
   <footer class="text-muted">

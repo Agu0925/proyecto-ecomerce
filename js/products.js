@@ -10,7 +10,7 @@ let buscar = undefined;
 
     fetch(PRODUCTS_URL) //llamo la url con el Fetch
     .then((resp) => resp.json()) //convierto el json a objeto js.
-    .then((datos) => {
+    .then((datos) => { //creo una funcion flecha para usar los datos
         //Cambio pie de titulo segun la categoria.
             document.getElementById('h2-pie').innerHTML = "Verás aquí todos los productos de la categoria "+ datos.catName +".";
         //Declaro Funcion mostrar para poder utilizar Filtros
