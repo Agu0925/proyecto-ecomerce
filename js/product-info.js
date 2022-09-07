@@ -3,8 +3,6 @@ function change_image(image){
    container.src = image.src;
 }
 
-
-
 document.addEventListener("DOMContentLoaded", function(event) {
 
 document.getElementById('btn-back').addEventListener('click', function(){
@@ -33,11 +31,7 @@ fetch(PRODUCT_INFO_URL)
 
 })
 
-
-
-
-//Caja de Comentarios-------------------------------------------
-//Estrellas
+//Estrellas ------------------------------------------------
 let estrellita = document.getElementsByClassName('str-e');
 function estGris(){
 for (let a = 0; a < estrellita.length; a++) {
@@ -78,8 +72,8 @@ estrellita[4].addEventListener('click', function() {
     //Pintando
     estRoja()
 })
-//Estrellas-----------------------------------------------
 
+//Caja de Comentarios-------------------------------------------
 //Fetch Comentarios 
 fetch(PRODUCT_INFO_COMMENTS_URL)
 .then((resp) => resp.json())
