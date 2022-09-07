@@ -1,7 +1,11 @@
+//declaro estos 2 lets para tomar la id desde local storage de categorias y productos para mostrar correctamente el listado al hacer click en una categoria o producto
+let catID = localStorage.getItem('catID');
+let prodID = localStorage.getItem('prodID');
+//----------------------------------------------
 const CATEGORIES_URL = "https://japceibal.github.io/emercado-api/cats/cat.json";
 const PUBLISH_PRODUCT_URL = "https://japceibal.github.io/emercado-api/sell/publish.json";
-const PRODUCTS_URL = "https://japceibal.github.io/emercado-api/cats_products/101.json";
-const PRODUCT_INFO_URL = "https://japceibal.github.io/emercado-api/products/";
+const PRODUCTS_URL = "https://japceibal.github.io/emercado-api/cats_products/"+ catID +".json";
+const PRODUCT_INFO_URL = "https://japceibal.github.io/emercado-api/products/"+ prodID +".json";
 const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/products_comments/";
 const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";

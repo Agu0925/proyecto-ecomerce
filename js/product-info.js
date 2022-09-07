@@ -9,10 +9,9 @@ function change_image(image){
 
 document.addEventListener("DOMContentLoaded", function(event) {
 
-
-
-
-
+document.getElementById('btn-back').addEventListener('click', function(){
+    window.location.href = 'products.html';
+})
 
 
 });

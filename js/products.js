@@ -2,17 +2,17 @@
 let minCount = undefined;
 let maxCount = undefined;
 let buscar = undefined;
-
 // funcion para tomar la id con onclick
-    function setCatID(id) {
-        localStorage.setItem("catID", id);
+    function setProdID(id) {
+        localStorage.setItem("prodID", id);
         window.location = "product-info.html";
     }
 
     fetch(PRODUCTS_URL) //llamo la url con el Fetch
     .then((resp) => resp.json()) //convierto el json a objeto js.
     .then((datos) => {
-            
+        //Cambio pie de titulo segun la categoria.
+            document.getElementById('h2-pie').innerHTML = "Verás aquí todos los productos de la categoria "+ datos.catName +".";
         //Declaro Funcion mostrar para poder utilizar Filtros
             function mostrar(){
             let htmlContentToAppend = "";
@@ -26,7 +26,7 @@ let buscar = undefined;
                     if (category.name.toLowerCase().includes(buscar) || buscar == undefined || category.description.toLowerCase().includes(buscar)){
                     //agrego todo al html
                         htmlContentToAppend += `
-                        <div onclick="setCatID(` + category.id + `)" class="list-group-item list-group-item-action cursor-active">
+                        <div onclick="setProdID(` + category.id + `)" class="list-group-item list-group-item-action cursor-active">
                             <div class="row">
                                 <div class="col-3">
                                     <img src="` + category.image + `" alt="` + category.description + `" class="img-thumbnail">
