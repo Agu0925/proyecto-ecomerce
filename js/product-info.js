@@ -140,12 +140,16 @@ fetch(PRODUCT_INFO_COMMENTS_URL)
     }
 })
 //Comentar
+//hora
+let today = new Date().toLocaleString();
 
 document.getElementById('btn-com').addEventListener('click', function() {
     //Valoracion con Estrellas
     let estrellas = '';
+    let puntaje = '';
     function valoracion(){
         if(document.getElementById('1').checked == true){
+            puntaje = 1;
             estrellas =
                 `<i style="color: red;" class="fa fa-star cursor-active str"></i>
                 <i class="fa fa-star cursor-active str"></i>
@@ -153,6 +157,7 @@ document.getElementById('btn-com').addEventListener('click', function() {
                 <i class="fa fa-star cursor-active str"></i>
                 <i class="fa fa-star cursor-active str"></i>`;
         }else if(document.getElementById('2').checked == true){
+            puntaje = 2;
             estrellas =
                 `<i style="color: red;" class="fa fa-star cursor-active str"></i>
                 <i style="color: red;" class="fa fa-star cursor-active str"></i>
@@ -160,6 +165,7 @@ document.getElementById('btn-com').addEventListener('click', function() {
                 <i class="fa fa-star cursor-active str"></i>
                 <i class="fa fa-star cursor-active str"></i>`;
         }else if(document.getElementById('3').checked == true){
+            puntaje = 3;
             estrellas =
                 `<i style="color: red;" class="fa fa-star cursor-active str"></i>
                 <i style="color: red;" class="fa fa-star cursor-active str"></i>
@@ -167,6 +173,7 @@ document.getElementById('btn-com').addEventListener('click', function() {
                 <i class="fa fa-star cursor-active str"></i>
                 <i class="fa fa-star cursor-active str"></i>`;
         }else if(document.getElementById('4').checked == true){
+            puntaje = 4;
             estrellas =
                 `<i style="color: red;" class="fa fa-star cursor-active str"></i>
                 <i style="color: red;" class="fa fa-star cursor-active str"></i>
@@ -174,6 +181,7 @@ document.getElementById('btn-com').addEventListener('click', function() {
                 <i style="color: red;" class="fa fa-star cursor-active str"></i>
                 <i class="fa fa-star cursor-active str"></i>`;
         }else if(document.getElementById('5').checked == true){
+            puntaje = 5;
             estrellas = `<i style="color: red;" class="fa fa-star cursor-active str"></i>
                 <i style="color: red;" class="fa fa-star cursor-active str"></i>
                 <i style="color: red;" class="fa fa-star cursor-active str"></i>
@@ -191,13 +199,15 @@ document.getElementById('btn-com').addEventListener('click', function() {
       if(document.getElementById('1').checked == true || document.getElementById('2').checked == true || document.getElementById('3').checked == true || document.getElementById('4').checked == true || document.getElementById('5').checked == true){
         document.getElementById('coment-error').style.color = 'green';
         document.getElementById('coment-error').innerHTML = 'Gracias por contarnos tu experiencia';
+        //llamo la funcion de arriba
         valoracion();
+        //--------------------------
         comentar = `
             <div class="list-group-item list-group-item-action">
                              <div class="row">
                                  <div class="col">
                                      <div class="d-flex w-100 justify-content-between">
-                                         <p class="mb-1"> `+ `<b>` + cuentas.nombre + `</b>`  + ` - ` +  + ` - ` + estrellas + `</p>
+                                         <p class="mb-1"> `+ `<b>` + cuentas.nombre + `</b>`  + ` - ` + today + ` - ` + estrellas + `</p>
                                      </div>
                                      <p class="mb-1" id="des-product">` + document.getElementById('comentario').value + `</p>
                                  </div>
@@ -205,8 +215,7 @@ document.getElementById('btn-com').addEventListener('click', function() {
             </div>
                          `;
         document.getElementById('caja-comentarios').innerHTML += comentar;
-        console.log(comentar);
-        console.log(estrellas);
+        localStorage.setItem(window.localStorage.getItem('prodID'), JSON.stringify(comentar))
     }else{
         document.getElementById('coment-error').style.color = 'red';
         document.getElementById('coment-error').innerHTML = 'No puede enviar un comentario sin valoracion';
@@ -216,5 +225,11 @@ document.getElementById('btn-com').addEventListener('click', function() {
         document.getElementById('coment-error').innerHTML = 'No puede enviar un comentario vacio';
     }
 })
-
+//Guardar Comentarios para cada producto en Local Storage utilizando el prodID
+if ((window.localStorage.getItem(window.localStorage.getItem('prodID')) != undefined
+)) {
+    let coment = localStorage.getItem(window.localStorage.getItem('prodID'));
+    let comentarios = JSON.parse(coment);
+    document.getElementById('caja-comentarios').innerHTML += comentarios;
+    }
 });
