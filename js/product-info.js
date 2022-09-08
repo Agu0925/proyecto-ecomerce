@@ -224,6 +224,10 @@ document.getElementById('btn-com').addEventListener('click', function() {
         document.getElementById('coment-error').style.color = 'red';
         document.getElementById('coment-error').innerHTML = 'No puede enviar un comentario vacio';
     }
+    //limpio inputs 
+    document.getElementById('comentario').value = "";
+    estGris();
+    puntaje = '';
 })
 //Guardar Comentarios para cada producto en Local Storage utilizando el prodID
 if ((window.localStorage.getItem(window.localStorage.getItem('prodID')) != undefined
