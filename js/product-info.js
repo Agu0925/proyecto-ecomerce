@@ -1,8 +1,13 @@
+//Cambiar de imagen
 function change_image(image){
    let container = document.getElementById("main-image");
    container.src = image.src;
 }
-
+//id
+function setProdID(id) {
+    localStorage.setItem("prodID", id);
+    window.location = "product-info.html";
+}
 document.addEventListener("DOMContentLoaded", function(event) {
 
 document.getElementById('btn-back').addEventListener('click', function(){
@@ -28,7 +33,22 @@ fetch(PRODUCT_INFO_URL)
     document.getElementById('price-product').innerHTML = datos.currency + ' ' + datos.cost;
     //Descripcion
     document.getElementById('desc-product').innerHTML = datos.description;
+    //Productos Relacionados
+    let htmlrelacionados = '';
+    for (let a = 0; a < datos.relatedProducts.length; a++) {
+        const element = datos.relatedProducts[a];
 
+        htmlrelacionados = `
+                                 <div class="col-2 border-end cursor-active" onclick="setProdID(${element.id})">
+                                    <p class="text-center"> ${element.name} </p>
+                                     <div class="d-flex w-100 justify-content-between">
+                                        <img class="img-fluid" src="${element.image}" alt="${element.name}">
+                                     </div>
+                                 </div>
+                         `;
+
+        document.getElementById('relacionados').innerHTML += htmlrelacionados;
+    }
 })
 
 //Estrellas para Comentarios------------------------------------------------

@@ -17,7 +17,7 @@ Nusuario[i].innerHTML = `
       ${cuentas.nombre}
       </a>
       <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-        <!-- Redirigo con href y utilizo una funcion con onclick en cerrar sesion -->
+        <!-- Redirigo con href y utilizo una funcion con onclick en cerrar sesion ------------------------------------------ -->
         <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
         <li><a class='dropdown-item' href='my-profile.html'>  Mi perfil </a></li>
         <li><a class="dropdown-item" href="index.html" onclick="cerrarS()" id='cerrar-sesion'> Cerrar sesion </a></li>
