@@ -161,7 +161,16 @@ fetch(PRODUCT_INFO_COMMENTS_URL)
 })
 //Comentar
 //hora
-let today = new Date().toLocaleString();
+let anio = new Date().getFullYear();
+let mes = new Date().getMonth() + 1;
+let dia = new Date().getDate();
+let hora = new Date().getHours();
+let minutos = '';
+//if para agregar un 0 cuando minutos no tiene 2 digitos
+if(new Date().getMinutes() < 10){
+    minutos = '0' + new Date().getMinutes();
+}
+let segundos = new Date().getSeconds();
 
 document.getElementById('btn-com').addEventListener('click', function() {
     //Valoracion con Estrellas
@@ -227,7 +236,7 @@ document.getElementById('btn-com').addEventListener('click', function() {
                              <div class="row">
                                  <div class="col">
                                      <div class="d-flex w-100 justify-content-between">
-                                         <p class="mb-1"> `+ `<b>` + cuentas.nombre + `</b>`  + ` - ` + today + ` - ` + estrellas + `</p>
+                                         <p class="mb-1"> `+ `<b>` + cuentas.nombre + `</b>`  + ` - ` + anio + `-` + mes + `-` + dia + ` ` + hora + `:` + minutos + `:` + segundos + ` - ` + estrellas + `</p>
                                      </div>
                                      <p class="mb-1" id="des-product">` + document.getElementById('comentario').value + `</p>
                                  </div>
@@ -254,6 +263,6 @@ if ((window.localStorage.getItem(window.localStorage.getItem('prodID')) != undef
 )) {
     let coment = localStorage.getItem(window.localStorage.getItem('prodID'));
     let comentarios = JSON.parse(coment);
-    document.getElementById('caja-comentarios').innerHTML += comentarios;
+        document.getElementById('caja-comentarios').innerHTML += comentarios;
     }
 });
