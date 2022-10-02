@@ -165,12 +165,16 @@ let anio = new Date().getFullYear();
 let mes = new Date().getMonth() + 1;
 let dia = new Date().getDate();
 let hora = new Date().getHours();
-let minutos = '';
+let minutos = new Date().getMinutes();
 //if para agregar un 0 cuando minutos no tiene 2 digitos
 if(new Date().getMinutes() < 10){
     minutos = '0' + new Date().getMinutes();
 }
+//Segundos
 let segundos = new Date().getSeconds();
+if(new Date().getSeconds() < 10){
+    segundos = '0' + new Date().getSeconds();
+}
 
 document.getElementById('btn-com').addEventListener('click', function() {
     //Valoracion con Estrellas
