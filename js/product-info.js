@@ -166,16 +166,30 @@ let mes = new Date().getMonth() + 1;
 let dia = new Date().getDate();
 let hora = new Date().getHours();
 let minutos = new Date().getMinutes();
-//if para agregar un 0 cuando minutos no tiene 2 digitos
+let segundos = new Date().getSeconds();
+//ifs para agregar un 0 cuando el dato no tiene 2 digitos
+//Mes
+if(new Date().getMonth() < 10){
+    mes = '0' + new Date().getMonth();
+}
+//Dia
+if(new Date().getDate() < 10){
+    dia = '0' + new Date().getDate();
+}
+//Hora
+if(new Date().getHours() < 10){
+    hora = '0' + new Date().getHours();
+}
+//Minutos
 if(new Date().getMinutes() < 10){
     minutos = '0' + new Date().getMinutes();
 }
 //Segundos
-let segundos = new Date().getSeconds();
 if(new Date().getSeconds() < 10){
     segundos = '0' + new Date().getSeconds();
 }
-
+// Fecha Completa
+let fecha = anio + "-" + mes + "-" + dia + " " + hora + ":" + minutos + ":" + segundos;
 document.getElementById('btn-com').addEventListener('click', function() {
     //Valoracion con Estrellas
     let estrellas = '';
@@ -240,7 +254,7 @@ document.getElementById('btn-com').addEventListener('click', function() {
                              <div class="row">
                                  <div class="col">
                                      <div class="d-flex w-100 justify-content-between">
-                                         <p class="mb-1"> `+ `<b>` + cuentas.nombre + `</b>`  + ` - ` + anio + `-` + mes + `-` + dia + ` ` + hora + `:` + minutos + `:` + segundos + ` - ` + estrellas + `</p>
+                                         <p class="mb-1"> `+ `<b>` + cuentas.nombre + `</b>`  + ` - ` + fecha + ` - ` + estrellas + `</p>
                                      </div>
                                      <p class="mb-1" id="des-product">` + document.getElementById('comentario').value + `</p>
                                  </div>
