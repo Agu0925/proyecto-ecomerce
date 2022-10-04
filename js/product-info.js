@@ -169,27 +169,28 @@ let minutos = new Date().getMinutes();
 let segundos = new Date().getSeconds();
 //ifs para agregar un 0 cuando el dato no tiene 2 digitos
 //Mes
-if(new Date().getMonth() < 10){
-    mes = '0' + new Date().getMonth();
+if(mes < 10){
+    mes = '0' + mes;
 }
 //Dia
-if(new Date().getDate() < 10){
-    dia = '0' + new Date().getDate();
+if(dia < 10){
+    dia = '0' + dia;
 }
 //Hora
-if(new Date().getHours() < 10){
-    hora = '0' + new Date().getHours();
+if(hora < 10){
+    hora = '0' + hora;
 }
 //Minutos
-if(new Date().getMinutes() < 10){
-    minutos = '0' + new Date().getMinutes();
+if(minutos < 10){
+    minutos = '0' + minutos;
 }
 //Segundos
-if(new Date().getSeconds() < 10){
-    segundos = '0' + new Date().getSeconds();
+if(segundos < 10){
+    segundos = '0' + segundos;
 }
 // Fecha Completa
 let fecha = anio + "-" + mes + "-" + dia + " " + hora + ":" + minutos + ":" + segundos;
+
 document.getElementById('btn-com').addEventListener('click', function() {
     //Valoracion con Estrellas
     let estrellas = '';
