@@ -36,9 +36,26 @@ fetch(urlpaises)
       let paises = "";
       for (const iterator of datos.countries) {
          paises += `
-            <option value="">${iterator.name_es}</option>
+            <option value="${iterator.name_en}">${iterator.name_es}</option>
         `
          document.getElementById("pais").innerHTML = `<option value="" disabled selected hidden>Pais</option>` + paises
       }
    })
-
+   //pruebassss
+document.getElementById("pais").addEventListener("change", function () {
+   let urlciudad = "https://raw.githubusercontent.com/russ666/all-countries-and-cities-json/master/countries.json";
+   fetch(urlciudad)
+      .then((resp) => resp.json())
+      .then((datos) => {
+         let paises = "";
+         for (const iterator of datos.document.getElementById("pais").value) {
+            paises += `
+            <option value="${iterator}">${iterator}</option>
+        `
+        console.log(iterator)
+            document.getElementById("ciudad").innerHTML = `<option value="" disabled selected hidden>Ciudad</option>` + paises
+         }
+      })
+      
+   console.log(document.getElementById("pais").value)
+})
