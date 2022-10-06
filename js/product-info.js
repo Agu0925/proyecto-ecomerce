@@ -17,6 +17,36 @@ document.getElementById('btn-back').addEventListener('click', function(){
 fetch(PRODUCT_INFO_URL)
 .then((resp) => resp.json())
 .then((datos) => {
+    //Enviando datos al carrito
+    function datoscarrito(){
+        let D = '';
+        //si ya existe algo en el carrito que se sume a la nueva informacion
+        if(window.localStorage.getItem('Carrito') != undefined){
+            let nprod = localStorage.getItem('Carrito');
+            let nuevoP = JSON.parse(nprod);
+            D += nuevoP;
+        }
+        D += `
+        <div class="row align-items-center border-bottom pb-4 pt-4">
+                                 <div class="col-2 text-center">
+                                        <img class="img-fluid" src="${datos.images[0]}" alt="${datos.name}">
+                                 </div>
+                                 <div class="col text-center">
+                                        <p>${datos.name}</p>
+                                 </div>
+                                 <div class="col text-center">
+                                        <p>${datos.currency} ${datos.cost}</p>
+                                 </div>
+                                 <div class="col-1 text-center">
+                                    <input type="number" name="" class="w-100" min="1" value="1">
+                                 </div>
+                                 <div class="col text-center">
+                                        <b>${datos.currency} ${datos.cost * 1}</b>
+                                 </div> 
+                              </div>
+        `
+        localStorage.setItem("Carrito", JSON.stringify(D));
+    }
     //Imagenes
     document.getElementById('main-image').src = datos.images[0];
     document.getElementById('mini-image2').src = datos.images[1];
@@ -49,6 +79,12 @@ fetch(PRODUCT_INFO_URL)
 
         document.getElementById('relacionados').innerHTML += htmlrelacionados;
     }
+    //Agregar al carrito -----------------------------------------
+    document.getElementById('agregar-alcarrito').addEventListener('click', function(){
+        datoscarrito()
+        document.getElementById('alerta-carrito').style.color = 'green';
+        document.getElementById('alerta-carrito').innerHTML = 'El producto se agrego correctamente'
+    })
 })
 
 //Estrellas para Comentarios------------------------------------------------

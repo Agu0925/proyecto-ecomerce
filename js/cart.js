@@ -23,7 +23,7 @@ function mostrar() {
                                  </div> 
                               </div>
                          `;
-            document.getElementById("carrito").innerHTML = articulos;
+            document.getElementById("carrito").innerHTML += articulos;
          }
       })
 }
@@ -41,21 +41,33 @@ fetch(urlpaises)
          document.getElementById("pais").innerHTML = `<option value="" disabled selected hidden>Pais</option>` + paises
       }
    })
-   //pruebassss
-document.getElementById("pais").addEventListener("change", function () {
-   let urlciudad = "https://raw.githubusercontent.com/russ666/all-countries-and-cities-json/master/countries.json";
-   fetch(urlciudad)
+   //Ciudades
+   let pais = '';
+   let urlciudad = "https://raw.githubusercontent.com/mmejiadeveloper/uruguay-departamentos-y-localidades-json/master/uruguay.json";
+   function mostrarCiudad(){
+      fetch(urlciudad)
       .then((resp) => resp.json())
       .then((datos) => {
          let paises = "";
-         for (const iterator of datos.document.getElementById("pais").value) {
+         for (const iterator of datos) {
             paises += `
-            <option value="${iterator}">${iterator}</option>
-        `
-        console.log(iterator)
+            <option value="${iterator.departamento}">${iterator.departamento}</option>
+            `
             document.getElementById("ciudad").innerHTML = `<option value="" disabled selected hidden>Ciudad</option>` + paises
          }
       })
-      
-   console.log(document.getElementById("pais").value)
+   }
+document.getElementById("pais").addEventListener("change", function () {
+   pais = document.getElementById("pais").value;
+   if(pais == 'Uruguay'){
+   mostrarCiudad();
+   }else{
+      alert('actualmente solo funcionamos en Uruguay')
+   }
 })
+//Agregar Nuevos Productos
+if ((window.localStorage.getItem('Carrito') != undefined)) {
+      let nprod = localStorage.getItem('Carrito');
+      let nuevoP = JSON.parse(nprod);
+      document.getElementById('carrito').innerHTML += nuevoP;
+    }
