@@ -4,6 +4,14 @@ function mostrar() {
       .then((datos) => {
          let articulos = "";
          for (const iterator of datos.articles) {
+            //Paso todos los precios a pesos en el subtotal
+            let moneda = "UYU";
+            let pesos = "";
+            if(iterator.currency == "USD"){
+               pesos = iterator.unitCost * 42; 
+            }else{
+               pesos = iterator.unitCost;
+            }
             articulos += `
                               <div class="row align-items-center border-bottom pb-4 pt-4">
                                  <div class="col-2 text-center">
@@ -21,7 +29,7 @@ function mostrar() {
                                     <input type="number" name="" class="w-100 inputSubtotal" min="0" value="1">
                                  </div>
                                  <div class="col text-center">
-                                        <b>${iterator.currency} <span class='subtotal'>${iterator.unitCost
+                                        <b>${moneda} <span class='subtotal'>${pesos
                }</span></b>
                                  </div> 
                               </div>

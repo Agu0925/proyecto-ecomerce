@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
     document.getElementById("btn-back").addEventListener("click", function () {
         window.location.href = "products.html";
     });
-    //fetch comentado en products.js
     fetch(PRODUCT_INFO_URL)
         .then((resp) => resp.json())
         .then((datos) => {
@@ -24,6 +23,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     let nprod = localStorage.getItem("Carrito");
                     let nuevoP = JSON.parse(nprod);
                     D += nuevoP;
+                }
+                //Paso todos los precios a pesos en el subtotal
+                let moneda = "UYU";
+                let pesos = "";
+                if (datos.currency == "USD") {
+                    pesos = datos.cost * 42;
+                } else {
+                    pesos = datos.cost;
                 }
                 D += `
         <div class="row align-items-center border-bottom pb-4 pt-4">
@@ -41,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                                     <input type="number" name="" class="w-100 inputSubtotal" min="0" value="1">
                                  </div>
                                  <div class="col text-center">
-                                        <b>${datos.currency} <span class='subtotal'>${datos.cost
+                                        <b>${moneda} <span class='subtotal'>${pesos
                     }</span></b>
                                  </div> 
                               </div>
