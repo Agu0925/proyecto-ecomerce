@@ -8,10 +8,6 @@ function setProdID(id) {
     localStorage.setItem("prodID", id);
     window.location = "product-info.html";
 }
-//id carrito
-function carritoID(id) {
-    localStorage.setItem("carritoID", id);
- }
 document.addEventListener("DOMContentLoaded", function (event) {
     document.getElementById("btn-back").addEventListener("click", function () {
         window.location.href = "products.html";
@@ -30,8 +26,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 } else {
                     pesos = datos.cost;
                 }
+
                 D += `
-            <div onclick="carritoID${datos.id}" class="row align-items-center border-bottom pb-4 pt-4 cursor-active">
+            <div class="row align-items-center border-bottom pb-4 pt-4 cursor-active">
                      <div class="col-2 text-center">
                             <img class="img-fluid" src="${datos.images[0]
                     }" alt="${datos.name}">
@@ -40,13 +37,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
                             <p>${datos.name}</p>
                      </div>
                      <div class="col text-center">
-                            <p>${datos.currency} <span class='precio'>${datos.cost}</span></p>
+                            <p>${datos.currency} <span id="${"precio" + datos.id}">${datos.cost}</span></p>
                      </div>
                      <div class="col-1 text-center">
                         <input type="number" name="" id="${datos.id}" class="w-100" min="0" value="1">
                      </div>
                      <div class="col text-center">
-                            <b>${moneda} <span id="${datos.name}">${pesos
+                            <b>${moneda} <span id="${"pesos" + datos.id}">${pesos
                     }</span></b>
                      </div> 
             </div>
