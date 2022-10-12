@@ -18,43 +18,68 @@ document.addEventListener("DOMContentLoaded", function (event) {
             //Funcion para guardar datos en el carrito
             function datoscarrito() {
                 let D = "";
-                //si ya existe algo en el carrito que se sume a la nueva informacion
-                if (window.localStorage.getItem("Carrito") != undefined) {
-                    let nprod = localStorage.getItem("Carrito");
-                    let nuevoP = JSON.parse(nprod);
-                    D += nuevoP;
-                }
-                //Paso todos los precios a pesos en el subtotal
                 let moneda = "UYU";
                 let pesos = "";
+                //Paso todos los precios a pesos en el subtotal
                 if (datos.currency == "USD") {
                     pesos = datos.cost * 42;
                 } else {
                     pesos = datos.cost;
                 }
                 D += `
-        <div class="row align-items-center border-bottom pb-4 pt-4">
-                                 <div class="col-2 text-center">
-                                        <img class="img-fluid" src="${datos.images[0]
+            <div class="row align-items-center border-bottom pb-4 pt-4">
+                     <div class="col-2 text-center">
+                            <img class="img-fluid" src="${datos.images[0]
                     }" alt="${datos.name}">
-                                 </div>
-                                 <div class="col text-center">
-                                        <p>${datos.name}</p>
-                                 </div>
-                                 <div class="col text-center">
-                                        <p>${datos.currency} <span class='precio'>${datos.cost}</span></p>
-                                 </div>
-                                 <div class="col-1 text-center">
-                                    <input type="number" name="" class="w-100 inputSubtotal" min="0" value="1">
-                                 </div>
-                                 <div class="col text-center">
-                                        <b>${moneda} <span class='subtotal'>${pesos
+                     </div>
+                     <div class="col text-center">
+                            <p>${datos.name}</p>
+                     </div>
+                     <div class="col text-center">
+                            <p>${datos.currency} <span class='precio'>${datos.cost}</span></p>
+                     </div>
+                     <div class="col-1 text-center">
+                        <input type="number" name="" class="w-100 inputSubtotal" min="0" value="1">
+                     </div>
+                     <div class="col text-center">
+                            <b>${moneda} <span class='subtotal'>${pesos
                     }</span></b>
-                                 </div> 
-                              </div>
+                     </div> 
+            </div>
         `;
-                localStorage.setItem("Carrito", JSON.stringify(D));
+                //Filtros para carrito---------------------------
+                //si existe carrito sumarle a la info existente
+                if (window.localStorage.getItem("Carrito") != undefined) {
+                    let nprod = localStorage.getItem("Carrito");
+                    let nuevoP = JSON.parse(nprod);
+                    D += nuevoP;
+                    //si existe un producto no repetirlo
+                    if (window.localStorage.getItem('Carrito').includes(datos.name)) {
+                        document.getElementById("alerta-carrito").style.color = "red";
+                        document.getElementById("alerta-carrito").innerHTML =
+                            "El producto ya existe en el carrito";
+                    }
+                    //si no existe el producto agregarlo
+                    else {
+                        localStorage.setItem("Carrito", JSON.stringify(D));
+                        document.getElementById("alerta-carrito").style.color = "green";
+                        document.getElementById("alerta-carrito").innerHTML =
+                            "El producto se agrego correctamente";
+                    }
+                    //si no existe carrito crearlo y sumarle la informacion
+                } else {
+                    localStorage.setItem("Carrito", JSON.stringify(D));
+                    document.getElementById("alerta-carrito").style.color = "green";
+                    document.getElementById("alerta-carrito").innerHTML =
+                        "El producto se agrego correctamente";
+                }
             }
+            //Agregar al carrito -----------------------------------------
+            document
+                .getElementById("agregar-alcarrito")
+                .addEventListener("click", function () {
+                    datoscarrito()
+                });
             //Imagenes
             document.getElementById("main-image").src = datos.images[0];
             document.getElementById("mini-image2").src = datos.images[1];
@@ -89,15 +114,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
                 document.getElementById("relacionados").innerHTML += htmlrelacionados;
             }
-            //Agregar al carrito -----------------------------------------
-            document
-                .getElementById("agregar-alcarrito")
-                .addEventListener("click", function () {
-                    datoscarrito();
-                    document.getElementById("alerta-carrito").style.color = "green";
-                    document.getElementById("alerta-carrito").innerHTML =
-                        "El producto se agrego correctamente";
-                });
         });
 
     //Estrellas para Comentarios------------------------------------------------
