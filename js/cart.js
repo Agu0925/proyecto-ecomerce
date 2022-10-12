@@ -1,3 +1,6 @@
+function carritoID(id) {
+   localStorage.setItem("carritoID", id);
+}
 function mostrar() {
    fetch(CART_INFO_URL)
       .then((resp) => resp.json())
@@ -13,7 +16,7 @@ function mostrar() {
                pesos = iterator.unitCost;
             }
             articulos += `
-                              <div class="row align-items-center border-bottom pb-4 pt-4">
+                              <div onclick="carritoID(${iterator.id})"class="row align-items-center border-bottom pb-4 pt-4 cursor-active">
                                  <div class="col-2 text-center">
                                         <img class="img-fluid" src="${iterator.image
                }" alt="${iterator.name}">
@@ -26,10 +29,10 @@ function mostrar() {
                }</span></p>
                                  </div>
                                  <div class="col-1 text-center">
-                                    <input type="number" name="" class="w-100 inputSubtotal" min="0" value="1">
+                                    <input type="number" name="" id="${iterator.id}" class="w-100" min="0" value="1">
                                  </div>
                                  <div class="col text-center">
-                                        <b>${moneda} <span class='subtotal'>${pesos
+                                        <b>${moneda} <span id="${iterator.name}">${pesos
                }</span></b>
                                  </div> 
                               </div>
@@ -51,19 +54,10 @@ if (window.localStorage.getItem("Carrito") != undefined) {
 }
 //Multiplicando con los inputs numbers identificados por clases
 document.addEventListener('DOMContentLoaded', () => {
-   let precio = document.getElementsByClassName('precio');
-   let subtotal = document.getElementsByClassName('subtotal');
-   let inputSubtotal = document.getElementsByClassName('inputSubtotal');
-
-   for (const iterator of inputSubtotal) {
-      iterator.addEventListener("input", (e) => {
-         for (const iterator2 of subtotal) {
-            for (const iterator3 of precio) {
-               iterator2.innerHTML = iterator3.innerHTML * iterator.value
-            }
-         }
+      let carritoID = localStorage.getItem("carritoID");
+      document.getElementById(carritoID).addEventListener("input", (e) => {
+         alert('sirve')
       })
-   }
 })
 //Paises
 let urlpaises =
