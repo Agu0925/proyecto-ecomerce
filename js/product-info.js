@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         .then((datos) => {
             //Funcion para guardar datos en el carrito
             function datoscarrito() {
-                let D = "";
+                let D = '';
                 let moneda = "UYU";
                 let pesos = "";
                 //Paso todos los precios a pesos en el subtotal
@@ -34,10 +34,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     }" alt="${datos.name}">
                      </div>
                      <div class="col text-center">
-                            <p>${datos.name}</p>
+                            <p class='m-0'>${datos.name}</p>
                      </div>
                      <div class="col text-center">
-                            <p>${datos.currency} <span id="${"precio" + datos.id}">${datos.cost}</span></p>
+                            <p class='m-0'><span id="${"moneda" + datos.id}">${datos.currency}</span> <span id="${"precio" + datos.id}">${datos.cost}</span></p>
                      </div>
                      <div class="col-1 text-center">
                         <input type="number" name="" id="${datos.id}" class="w-100" min="0" value="1">
@@ -74,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     document.getElementById("alerta-carrito").innerHTML =
                         "El producto se agrego correctamente";
                 }
+                localStorage.setItem("carritoID", datos.id);
             }
             //Agregar al carrito -----------------------------------------
             document

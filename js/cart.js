@@ -1,7 +1,7 @@
 function carritoID(id) {
    localStorage.setItem("carritoID", id);
 }
-function mostrar() {
+window.addEventListener('DOMContentLoaded', (event) => {
    fetch(CART_INFO_URL)
       .then((resp) => resp.json())
       .then((datos) => {
@@ -16,16 +16,16 @@ function mostrar() {
                pesos = iterator.unitCost;
             }
             articulos += `
-                              <div class="row align-items-center border-bottom pb-4 pt-4 cursor-active">
+                              <div onclick='carritoID(${iterator.id})'class="row align-items-center border-bottom pb-4 pt-4 cursor-active">
                                  <div class="col-2 text-center">
                                         <img class="img-fluid" src="${iterator.image
                }" alt="${iterator.name}">
                                  </div>
                                  <div class="col text-center">
-                                        <p>${iterator.name}</p>
+                                        <p class='m-0'>${iterator.name}</p>
                                  </div>
                                  <div class="col text-center">
-                                        <p>${iterator.currency} <span id="${"precio" + iterator.id}">${iterator.unitCost
+                                        <p class='m-0'><span id="${"moneda" + iterator.id}">${iterator.currency}</span> <span id="${"precio" + iterator.id}">${iterator.unitCost
                }</span></p>
                                  </div>
                                  <div class="col-1 text-center">
@@ -38,11 +38,9 @@ function mostrar() {
                               </div>
                          `;
             window.localStorage.setItem("carritoInicial", JSON.stringify(articulos))
-            localStorage.setItem("carritoID", iterator.id);
          }
       });
-} mostrar();
-document.addEventListener('DOMContentLoaded', () => {
+
    //Agregar Nuevos Productos
    if (window.localStorage.getItem("Carrito") != undefined) {
       let nprod = localStorage.getItem("Carrito");
@@ -55,53 +53,60 @@ document.addEventListener('DOMContentLoaded', () => {
    }
    //Multiplicando con los inputs numbers identificados por id
    document.getElementById(localStorage.getItem("carritoID")).addEventListener("input", (e) => {
+      //si es en dolares hacer la conversion a pesos en un futuro puede ser dinamico
+      if(document.getElementById("moneda" + localStorage.getItem("carritoID")).innerHTML == 'USD'){
       document.getElementById("pesos" + localStorage.getItem("carritoID")).innerHTML =
          document.getElementById(localStorage.getItem("carritoID")).value *
          (document.getElementById("precio" + localStorage.getItem("carritoID")).innerHTML * 42);
+      //sino solo multiplicar   
+      }else{
+         document.getElementById("pesos" + localStorage.getItem("carritoID")).innerHTML =
+         document.getElementById(localStorage.getItem("carritoID")).value *
+         document.getElementById("precio" + localStorage.getItem("carritoID")).innerHTML;
+      }
    })
 
-})
-//Paises
-let urlpaises =
-   "https://gist.githubusercontent.com/Yizack/bbfce31e0217a3689c8d961a356cb10d/raw/107e0bdf27918adea625410af0d340e8fc1cd5bf/countries.json";
-fetch(urlpaises)
-   .then((resp) => resp.json())
-   .then((datos) => {
-      let paises = "";
-      for (const iterator of datos.countries) {
-         paises += `
-            <option value="${iterator.name_en}">${iterator.name_es}</option>
-        `;
-         document.getElementById("pais").innerHTML =
-            `<option value="" disabled selected hidden>Pais</option>` + paises;
-      }
-   });
-//Ciudades
-let pais = "";
-let urlciudad =
-   "https://raw.githubusercontent.com/mmejiadeveloper/uruguay-departamentos-y-localidades-json/master/uruguay.json";
-function mostrarCiudad() {
-   fetch(urlciudad)
+   //Paises
+   let urlpaises =
+      "https://gist.githubusercontent.com/Yizack/bbfce31e0217a3689c8d961a356cb10d/raw/107e0bdf27918adea625410af0d340e8fc1cd5bf/countries.json";
+   fetch(urlpaises)
       .then((resp) => resp.json())
       .then((datos) => {
          let paises = "";
-         for (const iterator of datos) {
+         for (const iterator of datos.countries) {
             paises += `
-            <option value="${iterator.departamento}">${iterator.departamento}</option>
-            `;
-            document.getElementById("ciudad").innerHTML =
-               `<option value="" disabled selected hidden>Ciudad</option>` + paises;
+            <option value="${iterator.name_en}">${iterator.name_es}</option>
+        `;
+            document.getElementById("pais").innerHTML =
+               `<option value="" disabled selected hidden>Pais</option>` + paises;
          }
       });
-}
-document.getElementById("pais").addEventListener("change", function () {
-   pais = document.getElementById("pais").value;
-   if (pais == "Uruguay") {
-      mostrarCiudad();
-   } else {
-      alert("actualmente solo funcionamos en Uruguay");
-      document.getElementById("ciudad").innerHTML =
-         `<option value="" disabled selected hidden>Ciudad</option>`;
+   //Ciudades
+   let pais = "";
+   let urlciudad =
+      "https://raw.githubusercontent.com/mmejiadeveloper/uruguay-departamentos-y-localidades-json/master/uruguay.json";
+   function mostrarCiudad() {
+      fetch(urlciudad)
+         .then((resp) => resp.json())
+         .then((datos) => {
+            let paises = "";
+            for (const iterator of datos) {
+               paises += `
+            <option value="${iterator.departamento}">${iterator.departamento}</option>
+            `;
+               document.getElementById("ciudad").innerHTML =
+                  `<option value="" disabled selected hidden>Ciudad</option>` + paises;
+            }
+         });
    }
+   document.getElementById("pais").addEventListener("change", function () {
+      pais = document.getElementById("pais").value;
+      if (pais == "Uruguay") {
+         mostrarCiudad();
+      } else {
+         alert("actualmente solo funcionamos en Uruguay");
+         document.getElementById("ciudad").innerHTML =
+            `<option value="" disabled selected hidden>Ciudad</option>`;
+      }
+   });
 });
-
