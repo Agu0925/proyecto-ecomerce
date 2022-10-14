@@ -1,9 +1,9 @@
 let carritoid = '';
-
 function carritoID(id) {
    
    //Multiplicando con los inputs numbers identificados por id
       carritoid = id;
+      
       //si es en dolares hacer la conversion a pesos en un futuro puede ser dinamico
       if (document.getElementById("moneda" + carritoid).innerHTML == 'USD') {
          document.getElementById("pesos" + carritoid).innerHTML =
@@ -15,8 +15,6 @@ function carritoID(id) {
             document.getElementById(carritoid).value *
             document.getElementById("precio" + carritoid).innerHTML;
       }
-   //Guardar Nuevo Carrito
-
 }
 
 function mostrarCarrito() {
@@ -36,7 +34,7 @@ function mostrarCarrito() {
                pesos = iterator.unitCost;
             }
             articulos += `
-                              <div onclick='carritoID(${iterator.id})'class="row align-items-center border-bottom pb-4 pt-4 cursor-active">
+                              <div class="row align-items-center border-bottom pb-4 pt-4 cursor-active">
                                  <div class="col-2 text-center">
                                         <img class="img-fluid" src="${iterator.image
                }" alt="${iterator.name}">
@@ -49,7 +47,7 @@ function mostrarCarrito() {
                }</span></p>
                                  </div>
                                  <div class="col-1 text-center">
-                                    <input type="number" name="" id="${iterator.id}" class="w-100" min="0" value="1">
+                                    <input type="number" name="" id="${iterator.id}" oninput='carritoID(${iterator.id})' class="w-100" min="0" value="1">
                                  </div>
                                  <div class="col text-center">
                                         <b>${moneda} <span id="${"pesos" + iterator.id}">${pesos
@@ -57,17 +55,17 @@ function mostrarCarrito() {
                                  </div> 
                               </div>
                          `;
-            localStorage.setItem("carritoInicial", JSON.stringify(articulos))
+            localStorage.setItem("carritoInicial", JSON.stringify(articulos));
 
          //Agregar Nuevos Productos
          if (localStorage.getItem("Carrito")) {
             let nprod = localStorage.getItem("Carrito");
             let nuevoP = JSON.parse(nprod);
-            let carritoini = JSON.parse(localStorage.getItem('carritoInicial'))
-            document.getElementById("carrito").innerHTML += nuevoP + carritoini;
+            let carritoini = JSON.parse(localStorage.getItem('carritoInicial'));
+            document.getElementById("carrito").innerHTML = nuevoP + carritoini;
          } else {
             //sino existe carrito que cargue el por defecto
-            document.getElementById("carrito").innerHTML += JSON.parse(localStorage.getItem('carritoInicial'));
+            document.getElementById("carrito").innerHTML = JSON.parse(localStorage.getItem('carritoInicial'));
          }
          
       });
