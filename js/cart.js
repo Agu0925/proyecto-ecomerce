@@ -1,12 +1,32 @@
+let carritoid = '';
+
 function carritoID(id) {
-   localStorage.setItem("carritoID", id);
+   
+   //Multiplicando con los inputs numbers identificados por id
+      carritoid = id;
+      //si es en dolares hacer la conversion a pesos en un futuro puede ser dinamico
+      if (document.getElementById("moneda" + carritoid).innerHTML == 'USD') {
+         document.getElementById("pesos" + carritoid).innerHTML =
+            document.getElementById(carritoid).value *
+            (document.getElementById("precio" + carritoid).innerHTML * 42);
+         //sino solo multiplicar   
+      } else {
+         document.getElementById("pesos" + carritoid).innerHTML =
+            document.getElementById(carritoid).value *
+            document.getElementById("precio" + carritoid).innerHTML;
+      }
+   //Guardar Nuevo Carrito
+
 }
-window.addEventListener('DOMContentLoaded', (event) => {
+
+function mostrarCarrito() {
    fetch(CART_INFO_URL)
       .then((resp) => resp.json())
       .then((datos) => {
+
+         iterator = datos.articles[0];
+
          let articulos = "";
-         for (const iterator of datos.articles) {
             //Paso todos los precios a pesos en el subtotal
             let moneda = "UYU";
             let pesos = "";
@@ -37,34 +57,24 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                  </div> 
                               </div>
                          `;
-            window.localStorage.setItem("carritoInicial", JSON.stringify(articulos))
-         }
-      });
+            localStorage.setItem("carritoInicial", JSON.stringify(articulos))
 
-   //Agregar Nuevos Productos
-   if (window.localStorage.getItem("Carrito") != undefined) {
-      let nprod = localStorage.getItem("Carrito");
-      let nuevoP = JSON.parse(nprod);
-      let carritoini = JSON.parse(localStorage.getItem('carritoInicial'))
-      document.getElementById("carrito").innerHTML += nuevoP + carritoini;
-   } else {
-      //sino existe carrito que cargue el por defecto
-      document.getElementById("carrito").innerHTML += JSON.parse(localStorage.getItem('carritoInicial'));
-   }
-   //Multiplicando con los inputs numbers identificados por id
-   document.getElementById(localStorage.getItem("carritoID")).addEventListener("input", (e) => {
-      //si es en dolares hacer la conversion a pesos en un futuro puede ser dinamico
-      if(document.getElementById("moneda" + localStorage.getItem("carritoID")).innerHTML == 'USD'){
-      document.getElementById("pesos" + localStorage.getItem("carritoID")).innerHTML =
-         document.getElementById(localStorage.getItem("carritoID")).value *
-         (document.getElementById("precio" + localStorage.getItem("carritoID")).innerHTML * 42);
-      //sino solo multiplicar   
-      }else{
-         document.getElementById("pesos" + localStorage.getItem("carritoID")).innerHTML =
-         document.getElementById(localStorage.getItem("carritoID")).value *
-         document.getElementById("precio" + localStorage.getItem("carritoID")).innerHTML;
-      }
-   })
+         //Agregar Nuevos Productos
+         if (localStorage.getItem("Carrito")) {
+            let nprod = localStorage.getItem("Carrito");
+            let nuevoP = JSON.parse(nprod);
+            let carritoini = JSON.parse(localStorage.getItem('carritoInicial'))
+            document.getElementById("carrito").innerHTML += nuevoP + carritoini;
+         } else {
+            //sino existe carrito que cargue el por defecto
+            document.getElementById("carrito").innerHTML += JSON.parse(localStorage.getItem('carritoInicial'));
+         }
+         
+      });
+}
+window.addEventListener('DOMContentLoaded', (event) => {
+
+   mostrarCarrito();
 
    //Paises
    let urlpaises =

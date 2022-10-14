@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     document.getElementById("btn-back").addEventListener("click", function () {
         window.location.href = "products.html";
     });
+    
     fetch(PRODUCT_INFO_URL)
         .then((resp) => resp.json())
         .then((datos) => {
@@ -28,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 }
 
                 D += `
-            <div class="row align-items-center border-bottom pb-4 pt-4 cursor-active">
+            <div onclick='carritoID(${datos.id})' class="row align-items-center border-bottom pb-4 pt-4 cursor-active">
                      <div class="col-2 text-center">
                             <img class="img-fluid" src="${datos.images[0]
                     }" alt="${datos.name}">
@@ -50,12 +51,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
         `;
                 //Filtros para carrito---------------------------
                 //si existe carrito sumarle a la info existente
-                if (window.localStorage.getItem("Carrito") != undefined) {
+                if (localStorage.getItem("Carrito")) {
                     let nprod = localStorage.getItem("Carrito");
                     let nuevoP = JSON.parse(nprod);
                     D += nuevoP;
                     //si existe un producto no repetirlo
-                    if (window.localStorage.getItem('Carrito').includes(datos.name)) {
+                    if (localStorage.getItem('Carrito').includes(datos.name)) {
                         document.getElementById("alerta-carrito").style.color = "red";
                         document.getElementById("alerta-carrito").innerHTML =
                             "El producto ya existe en el carrito";
@@ -74,14 +75,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     document.getElementById("alerta-carrito").innerHTML =
                         "El producto se agrego correctamente";
                 }
-                localStorage.setItem("carritoID", datos.id);
             }
             //Agregar al carrito -----------------------------------------
             document
                 .getElementById("agregar-alcarrito")
-                .addEventListener("click", function () {
-                    datoscarrito()
-                });
+                .addEventListener("click", datoscarrito);
             //Imagenes
             document.getElementById("main-image").src = datos.images[0];
             document.getElementById("mini-image2").src = datos.images[1];
