@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     document.getElementById("btn-back").addEventListener("click", function () {
         window.location.href = "products.html";
     });
-    
+
     fetch(PRODUCT_INFO_URL)
         .then((resp) => resp.json())
         .then((datos) => {
@@ -29,12 +29,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 }
 
                 D += `
-            <div class="row align-items-center border-bottom pb-4 pt-4 cursor-active">
-                     <div class="col-2 text-center">
+            <div id="${'div' + datos.id}"class="row align-items-center border-bottom pb-4 pt-4">
+                     <div onclick="setProdID(${datos.id})" class="col-2 text-center cursor-active">
                             <img class="img-fluid" src="${datos.images[0]
                     }" alt="${datos.name}">
                      </div>
-                     <div class="col text-center">
+                     <div onclick="setProdID(${datos.id})" class="col text-center cursor-active">
                             <p class='m-0'>${datos.name}</p>
                      </div>
                      <div class="col text-center">
@@ -46,6 +46,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
                      <div class="col text-center">
                             <b>${moneda} <span id="${"pesos" + datos.id}">${pesos
                     }</span></b>
+                     </div>
+                     <div class="col-1 text-center">
+                        <i onclick="borrarProd(${datos.id})" class="fa fa-trash text-danger cursor-active display-6" aria-hidden="true"></i>
                      </div> 
             </div>
         `;

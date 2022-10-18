@@ -1,20 +1,29 @@
-let carritoid = '';
+function setProdID(id) {
+   localStorage.setItem("prodID", id);
+   window.location = "product-info.html";
+}
+
 function carritoID(id) {
-   
    //Multiplicando con los inputs numbers identificados por id
-      carritoid = id;
-      
-      //si es en dolares hacer la conversion a pesos en un futuro puede ser dinamico
-      if (document.getElementById("moneda" + carritoid).innerHTML == 'USD') {
-         document.getElementById("pesos" + carritoid).innerHTML =
-            document.getElementById(carritoid).value *
-            (document.getElementById("precio" + carritoid).innerHTML * 42);
-         //sino solo multiplicar   
-      } else {
-         document.getElementById("pesos" + carritoid).innerHTML =
-            document.getElementById(carritoid).value *
-            document.getElementById("precio" + carritoid).innerHTML;
-      }
+
+   //si es en dolares hacer la conversion a pesos en un futuro puede ser dinamico
+   if (document.getElementById("moneda" + id).innerHTML == 'USD') {
+      document.getElementById("pesos" + id).innerHTML =
+         document.getElementById(id).value *
+         (document.getElementById("precio" + id).innerHTML * 42);
+      //sino solo multiplicar   
+   } else {
+      document.getElementById("pesos" + id).innerHTML =
+         document.getElementById(id).value *
+         document.getElementById("precio" + id).innerHTML;
+   }
+}
+//Borrar productos del carrito y guardar carrito
+function borrarProd(id) {
+   //Borro div con removeChild
+   document.getElementById("carrito").removeChild(document.getElementById("div" + id));
+   //Guardo el nuevo carrito
+   localStorage.setItem("Carrito", JSON.stringify(document.getElementById("carrito").innerHTML));
 }
 
 function mostrarCarrito() {
@@ -25,49 +34,56 @@ function mostrarCarrito() {
          iterator = datos.articles[0];
 
          let articulos = "";
-            //Paso todos los precios a pesos en el subtotal
-            let moneda = "UYU";
-            let pesos = "";
-            if (iterator.currency == "USD") {
-               pesos = iterator.unitCost * 42;
-            } else {
-               pesos = iterator.unitCost;
-            }
-            articulos += `
-                              <div class="row align-items-center border-bottom pb-4 pt-4 cursor-active">
-                                 <div class="col-2 text-center">
+         //Paso todos los precios a pesos en el subtotal
+         let moneda = "UYU";
+         let pesos = "";
+         if (iterator.currency == "USD") {
+            pesos = iterator.unitCost * 42;
+         } else {
+            pesos = iterator.unitCost;
+         }
+         articulos += `
+                              <div class="row align-items-center border-bottom pb-4 pt-4">
+                                 <div onclick="setProdID(${iterator.id})" class="col-2 text-center cursor-active">
                                         <img class="img-fluid" src="${iterator.image
-               }" alt="${iterator.name}">
+            }" alt="${iterator.name}">
                                  </div>
-                                 <div class="col text-center">
+                                 <div onclick="setProdID(${iterator.id})" class="col text-center cursor-active">
                                         <p class='m-0'>${iterator.name}</p>
                                  </div>
                                  <div class="col text-center">
                                         <p class='m-0'><span id="${"moneda" + iterator.id}">${iterator.currency}</span> <span id="${"precio" + iterator.id}">${iterator.unitCost
-               }</span></p>
+            }</span></p>
                                  </div>
                                  <div class="col-1 text-center">
                                     <input type="number" name="" id="${iterator.id}" oninput='carritoID(${iterator.id})' class="w-100" min="0" value="1">
                                  </div>
                                  <div class="col text-center">
                                         <b>${moneda} <span id="${"pesos" + iterator.id}">${pesos
-               }</span></b>
-                                 </div> 
+            }</span></b>
+                                 </div>
+                                 <div class="col-1 text-center">
+                                    <i class="fa fa-trash text-danger cursor-active display-6" aria-hidden="true"></i>
+                                 </div>
                               </div>
                          `;
-            localStorage.setItem("carritoInicial", JSON.stringify(articulos));
+         localStorage.setItem("carritoInicial", JSON.stringify(articulos));
 
          //Agregar Nuevos Productos
          if (localStorage.getItem("Carrito")) {
             let nprod = localStorage.getItem("Carrito");
             let nuevoP = JSON.parse(nprod);
             let carritoini = JSON.parse(localStorage.getItem('carritoInicial'));
-            document.getElementById("carrito").innerHTML = nuevoP + carritoini;
+            //No repetir producto por defecto
+            if (nuevoP.includes(iterator.name)) {
+               document.getElementById("carrito").innerHTML = nuevoP;
+            } else { document.getElementById("carrito").innerHTML = nuevoP + carritoini; }
+
          } else {
             //sino existe carrito que cargue el por defecto
             document.getElementById("carrito").innerHTML = JSON.parse(localStorage.getItem('carritoInicial'));
          }
-         
+
       });
 }
 window.addEventListener('DOMContentLoaded', (event) => {
