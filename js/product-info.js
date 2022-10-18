@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                         <input type="number" name="" id="${datos.id}" oninput='carritoID(${datos.id})' class="w-100" min="0" value="1">
                      </div>
                      <div class="col text-center">
-                            <b>${moneda} <span id="${"dolares" + datos.id}">${dolares}</span></b>
+                            <b>${moneda} <span class="subt" id="${"dolares" + datos.id}">${dolares}</span></b>
                      </div>
                      <div class="col-1 text-center">
                         <i onclick="borrarProd(${datos.id})" class="fa fa-trash text-danger cursor-active display-6" aria-hidden="true"></i>

@@ -5,7 +5,6 @@ function setProdID(id) {
 
 function carritoID(id) {
    //Multiplicando con los inputs numbers identificados por id
-
    //si es en pesos hacer la conversion a dolares en un futuro puede ser dinamico
    if (document.getElementById("moneda" + id).innerHTML == 'UYU') {
       document.getElementById("dolares" + id).innerHTML =
@@ -17,6 +16,15 @@ function carritoID(id) {
          document.getElementById(id).value *
          document.getElementById("precio" + id).innerHTML;
    }
+   //Repito codigo en esta funcion para modificar el subotal dinamicamente cuando cambio la cantidad de un producto
+   //creo el array numeros para agregar todos los subtotales traidos de el array de clases
+   let numeros = [];
+   for (const suma of document.getElementsByClassName("subt")) {
+      //sumo los subtotales al array numeros
+      numeros.push(parseInt(suma.innerHTML));
+      //Modifico el innerHTML del subtotal y realizo la suma de el array numeros
+      document.getElementById("subtotal").innerHTML = numeros.reduce((a, b) => a + b, 0);
+   }
 }
 //Borrar productos del carrito y guardar carrito
 function borrarProd(id) {
@@ -24,6 +32,15 @@ function borrarProd(id) {
    document.getElementById("carrito").removeChild(document.getElementById("div" + id));
    //Guardo el nuevo carrito
    localStorage.setItem("Carrito", JSON.stringify(document.getElementById("carrito").innerHTML));
+   //Repito codigo en esta funcion para modificar el subotal dinamicamente cuando borre un producto
+   //creo el array numeros para agregar todos los subtotales traidos de el array de clases
+   let numeros = [];
+   for (const suma of document.getElementsByClassName("subt")) {
+      //sumo los subtotales al array numeros
+      numeros.push(parseInt(suma.innerHTML));
+      //Modifico el innerHTML del subtotal y realizo la suma de el array numeros
+      document.getElementById("subtotal").innerHTML = numeros.reduce((a, b) => a + b, 0);
+   }
 }
 
 function mostrarCarrito() {
@@ -57,7 +74,7 @@ function mostrarCarrito() {
                                     <input type="number" name="" id="${iterator.id}" oninput='carritoID(${iterator.id})' class="w-100" min="0" value="1">
                                  </div>
                                  <div class="col text-center">
-                                        <b>${moneda} <span id="${"dolares" + iterator.id}">${dolares}</span></b>
+                                        <b>${moneda} <span class="subt" id="${"dolares" + iterator.id}">${dolares}</span></b>
                                  </div>
                                  <div class="col-1 text-center">
                                     <i class="fa fa-trash text-danger cursor-active display-6" aria-hidden="true"></i>
@@ -80,7 +97,14 @@ function mostrarCarrito() {
             //sino existe carrito que cargue el por defecto
             document.getElementById("carrito").innerHTML = JSON.parse(localStorage.getItem('carritoInicial'));
          }
-
+         //creo el array numeros para agregar todos los subtotales traidos de el array de clases
+         let numeros = [];
+         for (const suma of document.getElementsByClassName("subt")) {
+            //sumo los subtotales al array numeros
+            numeros.push(parseInt(suma.innerHTML));
+            //Modifico el innerHTML del subtotal y realizo la suma de el array numeros
+            document.getElementById("subtotal").innerHTML = numeros.reduce((a, b) => a + b, 0);
+         }
       });
 }
 window.addEventListener('DOMContentLoaded', (event) => {
