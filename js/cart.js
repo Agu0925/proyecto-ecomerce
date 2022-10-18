@@ -6,14 +6,14 @@ function setProdID(id) {
 function carritoID(id) {
    //Multiplicando con los inputs numbers identificados por id
 
-   //si es en dolares hacer la conversion a pesos en un futuro puede ser dinamico
-   if (document.getElementById("moneda" + id).innerHTML == 'USD') {
-      document.getElementById("pesos" + id).innerHTML =
+   //si es en pesos hacer la conversion a dolares en un futuro puede ser dinamico
+   if (document.getElementById("moneda" + id).innerHTML == 'UYU') {
+      document.getElementById("dolares" + id).innerHTML =
          document.getElementById(id).value *
-         (document.getElementById("precio" + id).innerHTML * 42);
+         (Math.trunc(document.getElementById("precio" + id).innerHTML / 42));
       //sino solo multiplicar   
    } else {
-      document.getElementById("pesos" + id).innerHTML =
+      document.getElementById("dolares" + id).innerHTML =
          document.getElementById(id).value *
          document.getElementById("precio" + id).innerHTML;
    }
@@ -34,33 +34,30 @@ function mostrarCarrito() {
          iterator = datos.articles[0];
 
          let articulos = "";
-         //Paso todos los precios a pesos en el subtotal
-         let moneda = "UYU";
-         let pesos = "";
-         if (iterator.currency == "USD") {
-            pesos = iterator.unitCost * 42;
+         //Paso todos los precios a dolares en el subtotal
+         let moneda = "USD";
+         let dolares = "";
+         if (iterator.currency == "UYU") {
+            dolares = Math.trunc(iterator.unitCost / 42);
          } else {
-            pesos = iterator.unitCost;
+            dolares = iterator.unitCost;
          }
          articulos += `
                               <div class="row align-items-center border-bottom pb-4 pt-4">
                                  <div onclick="setProdID(${iterator.id})" class="col-2 text-center cursor-active">
-                                        <img class="img-fluid" src="${iterator.image
-            }" alt="${iterator.name}">
+                                        <img class="img-fluid" src="${iterator.image}" alt="${iterator.name}">
                                  </div>
                                  <div onclick="setProdID(${iterator.id})" class="col text-center cursor-active">
                                         <p class='m-0'>${iterator.name}</p>
                                  </div>
                                  <div class="col text-center">
-                                        <p class='m-0'><span id="${"moneda" + iterator.id}">${iterator.currency}</span> <span id="${"precio" + iterator.id}">${iterator.unitCost
-            }</span></p>
+                                        <p class='m-0'><span id="${"moneda" + iterator.id}">${iterator.currency}</span> <span id="${"precio" + iterator.id}">${iterator.unitCost}</span></p>
                                  </div>
                                  <div class="col-1 text-center">
                                     <input type="number" name="" id="${iterator.id}" oninput='carritoID(${iterator.id})' class="w-100" min="0" value="1">
                                  </div>
                                  <div class="col text-center">
-                                        <b>${moneda} <span id="${"pesos" + iterator.id}">${pesos
-            }</span></b>
+                                        <b>${moneda} <span id="${"dolares" + iterator.id}">${dolares}</span></b>
                                  </div>
                                  <div class="col-1 text-center">
                                     <i class="fa fa-trash text-danger cursor-active display-6" aria-hidden="true"></i>

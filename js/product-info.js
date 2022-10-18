@@ -18,17 +18,17 @@ document.addEventListener("DOMContentLoaded", function (event) {
         .then((datos) => {
             //Funcion para guardar datos en el carrito
             function datoscarrito() {
-                let D = '';
-                let moneda = "UYU";
-                let pesos = "";
-                //Paso todos los precios a pesos en el subtotal
-                if (datos.currency == "USD") {
-                    pesos = datos.cost * 42;
+                let produ = '';
+                let moneda = "USD";
+                let dolares = "";
+                //Paso todos los precios a dolares en el subtotal
+                if (datos.currency == "UYU") {
+                    dolares = Math.trunc(datos.cost / 42);
                 } else {
-                    pesos = datos.cost;
+                    dolares = datos.cost;
                 }
 
-                D += `
+                produ += `
             <div id="${'div' + datos.id}"class="row align-items-center border-bottom pb-4 pt-4">
                      <div onclick="setProdID(${datos.id})" class="col-2 text-center cursor-active">
                             <img class="img-fluid" src="${datos.images[0]
@@ -44,8 +44,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                         <input type="number" name="" id="${datos.id}" oninput='carritoID(${datos.id})' class="w-100" min="0" value="1">
                      </div>
                      <div class="col text-center">
-                            <b>${moneda} <span id="${"pesos" + datos.id}">${pesos
-                    }</span></b>
+                            <b>${moneda} <span id="${"dolares" + datos.id}">${dolares}</span></b>
                      </div>
                      <div class="col-1 text-center">
                         <i onclick="borrarProd(${datos.id})" class="fa fa-trash text-danger cursor-active display-6" aria-hidden="true"></i>
@@ -57,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 if (localStorage.getItem("Carrito")) {
                     let nprod = localStorage.getItem("Carrito");
                     let nuevoP = JSON.parse(nprod);
-                    D += nuevoP;
+                    produ += nuevoP;
                     //si existe un producto no repetirlo
                     if (localStorage.getItem('Carrito').includes(datos.name)) {
                         document.getElementById("alerta-carrito").style.color = "red";
@@ -66,14 +65,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     }
                     //si no existe el producto agregarlo
                     else {
-                        localStorage.setItem("Carrito", JSON.stringify(D));
+                        localStorage.setItem("Carrito", JSON.stringify(produ));
                         document.getElementById("alerta-carrito").style.color = "green";
                         document.getElementById("alerta-carrito").innerHTML =
                             "El producto se agrego correctamente";
                     }
                     //si no existe carrito crearlo y sumarle la informacion
                 } else {
-                    localStorage.setItem("Carrito", JSON.stringify(D));
+                    localStorage.setItem("Carrito", JSON.stringify(produ));
                     document.getElementById("alerta-carrito").style.color = "green";
                     document.getElementById("alerta-carrito").innerHTML =
                         "El producto se agrego correctamente";

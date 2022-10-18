@@ -1,128 +1,190 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>eMercado - Todo lo que busques está aquí</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i"
+      rel="stylesheet"
+    />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+  </head>
 
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <title>eMercado - Todo lo que busques está aquí</title>
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
-  <link href="css/bootstrap.min.css" rel="stylesheet" />
-  <link href="css/font-awesome.min.css" rel="stylesheet" />
-  <link href="css/styles.css" rel="stylesheet" />
-</head>
-
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link" href="inicio.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item Nusuario"></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <main>
-    <div class="container">
-      <h2 class="text-center m-5">Carrito de Compras</h2>
-      <h4 class="mb-4">Articulos a comprar</h4>
-      <div class="row border-bottom border-dark">
-        <div class="col-2"></div>
-        <div class="col text-center"><b>Nombre</b></div>
-        <div class="col text-center"><b>Costo</b></div>
-        <div class="col-1 text-center"><b>Cantidad</b></div>
-        <div class="col text-center"><b>Subtotal</b></div>
-        <div class="col-1"></div>
-      </div>
-      <div id="carrito"></div>
-      <!-- TIPO DE ENVIO -->
-      <div class="mb-4 border-top border-dark row"></div>
-      <h4 class="mb-3">Tipo de Envio</h4>
-      <div class="d-block my-3">
-        <div class="custom-control custom-radio">
-          <input id="premium" name="publicationType" type="radio" class="custom-control-input" checked="" required="" />
-          <label class="custom-control-label" for="premium">Premium 2 a 5 dias (15%)</label>
-        </div>
-        <div class="custom-control custom-radio">
-          <input id="express" name="publicationType" type="radio" class="custom-control-input" required="" />
-          <label class="custom-control-label" for="express">Express 5 a 8 dias (7%)</label>
-        </div>
-        <div class="custom-control custom-radio">
-          <input id="standard" name="publicationType" type="radio" class="custom-control-input" required="" />
-          <label class="custom-control-label" for="standard">Standard de 12 a 15 dias (5%)</label>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+      <div class="container">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav w-100 justify-content-between">
+            <li class="nav-item">
+              <a class="nav-link" href="inicio.html">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="categories.html">Categorías</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="sell.html">Vender</a>
+            </li>
+            <li class="nav-item Nusuario"></li>
+          </ul>
         </div>
       </div>
-      <!-- DIRECCION DE ENVIO -->
-      <h4 class="mb-3">Direccion de envio</h4>
-      <div class="row">
-        <div class="col-6">
-          <p class="mb-0">Calle</p>
-          <input class="w-100" type="text" name="calle" id="calle" required>
+    </nav>
+    <main>
+      <div class="container">
+        <h2 class="text-center m-5">Carrito de Compras</h2>
+        <h4 class="mb-4">Articulos a comprar</h4>
+        <div class="row border-bottom border-dark">
+          <div class="col-2"></div>
+          <div class="col text-center"><b>Nombre</b></div>
+          <div class="col text-center"><b>Costo</b></div>
+          <div class="col-1 text-center"><b>Cantidad</b></div>
+          <div class="col text-center"><b>Subtotal</b></div>
+          <div class="col-1"></div>
         </div>
-        <div class="col-6">
-          <p class="mb-0">Numero</p>
-          <input type="text" name="numero" id="numero" required>
+        <div id="carrito"></div>
+        <!-- TIPO DE ENVIO -->
+        <div class="mb-4 border-top border-dark row"></div>
+        <h4 class="mb-3">Tipo de Envio</h4>
+        <div class="d-block my-3">
+          <div class="custom-control custom-radio">
+            <input
+              id="premium"
+              name="publicationType"
+              type="radio"
+              class="custom-control-input"
+              checked=""
+              required=""
+            />
+            <label class="custom-control-label" for="premium"
+              >Premium 2 a 5 dias (15%)</label
+            >
+          </div>
+          <div class="custom-control custom-radio">
+            <input
+              id="express"
+              name="publicationType"
+              type="radio"
+              class="custom-control-input"
+              required=""
+            />
+            <label class="custom-control-label" for="express"
+              >Express 5 a 8 dias (7%)</label
+            >
+          </div>
+          <div class="custom-control custom-radio">
+            <input
+              id="standard"
+              name="publicationType"
+              type="radio"
+              class="custom-control-input"
+              required=""
+            />
+            <label class="custom-control-label" for="standard"
+              >Standard de 12 a 15 dias (5%)</label
+            >
+          </div>
         </div>
-        <div class="col-6">
-          <p class="mb-0">Esquina</p>
-          <input class="w-100" type="text" name="esquina" id="esquina">
+        <!-- DIRECCION DE ENVIO -->
+        <h4 class="mb-3">Direccion de envio</h4>
+        <div class="row">
+          <div class="col-6">
+            <p class="mb-0">Calle</p>
+            <input class="w-100" type="text" name="calle" id="calle" required />
+          </div>
+          <div class="col-6">
+            <p class="mb-0">Numero</p>
+            <input type="text" name="numero" id="numero" required />
+          </div>
+          <div class="col-6">
+            <p class="mb-0">Esquina</p>
+            <input class="w-100" type="text" name="esquina" id="esquina" />
+          </div>
+          <div class="col-6"></div>
+          <div class="col-2">
+            <p class="mb-0">Pais</p>
+            <select class="w-100" id="pais" name="pais" required></select>
+          </div>
+          <div class="col-2">
+            <p class="mb-0">Ciudad</p>
+            <select class="w-100" id="ciudad" name="ciudad" required>
+              <option value="" disabled selected hidden>Ciudad</option>
+            </select>
+          </div>
         </div>
-        <div class="col-6">
+        <div class="my-4 border-top border-dark row"></div>
+        <h4 class="mb-3">Costos</h4>
+        <div class="row align-items-center border w-50 pb-4 pt-4">
+          <div class="col-6 cursor-active">
+            <p class="m-0">Subtotal</p>
+          </div>
+          <div class="col-6 text-end">
+            <p class="m-0">USD <span id="subtotal">1000</span></p>
+          </div>
         </div>
-        <div class="col-2">
-          <p class="mb-0">Pais</p>
-          <select class="w-100" id="pais" name="pais" required>
-          </select>
+        <div class="row align-items-center border w-50 pb-4 pt-4">
+          <div class="col-6 cursor-active">
+            <p class="m-0">Costo de envio</p>
+          </div>
+          <div class="col-6 text-end">
+            <p class="m-0">USD <span id="envio">1000</span></p>
+          </div>
         </div>
-        <div class="col-2">
-          <p class="mb-0">Ciudad</p>
-          <select class="w-100" id="ciudad" name="ciudad" required>
-            <option value="" disabled selected hidden>Ciudad</option>
-          </select>
+        <div class="row align-items-center border w-50 pb-4 pt-4">
+          <div class="col-6 cursor-active">
+            <p class="m-0">Total</p>
+          </div>
+          <div class="col-6 text-end">
+            <b class="m-0">USD <span id="total">1000</span></b>
+          </div>
         </div>
       </div>
+    </main>
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-end">
+          <a href="#">Volver arriba</a>
+        </p>
+        <p>
+          Este sitio forma parte de
+          <a href="https://jovenesaprogramar.edu.uy/" target="_blank"
+            >Jovenes a Programar</a
+          >
+          - 2022
+        </p>
+        <p>
+          Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la
+          letra del obligatorio.
+        </p>
+      </div>
+    </footer>
+    <div id="spinner-wrapper">
+      <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
-  </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>
-        Este sitio forma parte de
-        <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
-        - 2022
-      </p>
-      <p>
-        Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la
-        letra del obligatorio.
-      </p>
-    </div>
-  </footer>
-  <div id="spinner-wrapper">
-    <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/cart.js"></script>
-  <script src="js/my-profile.js"></script>
-</body>
-
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/my-profile.js"></script>
+  </body>
 </html>
