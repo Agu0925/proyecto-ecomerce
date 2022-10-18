@@ -25,6 +25,22 @@ function carritoID(id) {
       //Modifico el innerHTML del subtotal y realizo la suma de el array numeros
       document.getElementById("subtotal").innerHTML = numeros.reduce((a, b) => a + b, 0);
    }
+   //Precio Envio
+   //Standar
+   if (document.getElementById("standard").checked == true) {
+      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.05);
+   }
+   //Express
+   else if (document.getElementById("express").checked == true) {
+      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.07);
+   }
+   //Premium
+   else if (document.getElementById("premium").checked == true) {
+      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.15);
+   }
+   //Precio Total
+   //Precio Total al cargar pagina
+   document.getElementById("total").innerHTML = parseInt(document.getElementById("subtotal").innerHTML) + parseInt(document.getElementById("envio").innerHTML);
 }
 //Borrar productos del carrito y guardar carrito
 function borrarProd(id) {
@@ -41,6 +57,22 @@ function borrarProd(id) {
       //Modifico el innerHTML del subtotal y realizo la suma de el array numeros
       document.getElementById("subtotal").innerHTML = numeros.reduce((a, b) => a + b, 0);
    }
+   //Precio Envio
+   //Standar
+   if (document.getElementById("standard").checked == true) {
+      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.05);
+   }
+   //Express
+   else if (document.getElementById("express").checked == true) {
+      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.07);
+   }
+   //Premium
+   else if (document.getElementById("premium").checked == true) {
+      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.15);
+   }
+   //Precio Total
+   //Precio Total al cargar pagina
+   document.getElementById("total").innerHTML = parseInt(document.getElementById("subtotal").innerHTML) + parseInt(document.getElementById("envio").innerHTML);
 }
 
 function mostrarCarrito() {
@@ -104,12 +136,37 @@ function mostrarCarrito() {
             numeros.push(parseInt(suma.innerHTML));
             //Modifico el innerHTML del subtotal y realizo la suma de el array numeros
             document.getElementById("subtotal").innerHTML = numeros.reduce((a, b) => a + b, 0);
+            //Al cargar la pagina dar valor a el envio 
+            document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.15);
+            //Precio Total al cargar pagina
+            document.getElementById("total").innerHTML = parseInt(document.getElementById("subtotal").innerHTML) + parseInt(document.getElementById("envio").innerHTML);
          }
       });
 }
+
 window.addEventListener('DOMContentLoaded', (event) => {
 
    mostrarCarrito();
+
+   //Sumar el costo de envio
+   //Standar
+   document.getElementById("standard").addEventListener('input', (event) => {
+      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.05);
+      //Actualizo Total
+      document.getElementById("total").innerHTML = parseInt(document.getElementById("subtotal").innerHTML) + parseInt(document.getElementById("envio").innerHTML);
+   });
+   //Express
+   document.getElementById("express").addEventListener('input', (event) => {
+      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.07);
+      //Actualizo Total
+      document.getElementById("total").innerHTML = parseInt(document.getElementById("subtotal").innerHTML) + parseInt(document.getElementById("envio").innerHTML);
+   });
+   //Premium
+   document.getElementById("premium").addEventListener('input', (event) => {
+      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.15);
+      //Actualizo Total
+      document.getElementById("total").innerHTML = parseInt(document.getElementById("subtotal").innerHTML) + parseInt(document.getElementById("envio").innerHTML);
+   });
 
    //Paises
    let urlpaises =
