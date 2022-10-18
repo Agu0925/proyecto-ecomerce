@@ -3,6 +3,32 @@ function setProdID(id) {
    window.location = "product-info.html";
 }
 
+function totales() {
+   //creo el array numeros para agregar todos los subtotales traidos de el array de clases
+   let numeros = [];
+   for (const suma of document.getElementsByClassName("subt")) {
+      //sumo los subtotales al array numeros
+      numeros.push(parseInt(suma.innerHTML));
+      //Modifico el innerHTML del subtotal y realizo la suma de el array numeros
+      document.getElementById("subtotal").innerHTML = numeros.reduce((a, b) => a + b, 0);
+   }
+   //Precio Envio
+   //Standar
+   if (document.getElementById("standard").checked == true) {
+      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.05);
+   }
+   //Express
+   else if (document.getElementById("express").checked == true) {
+      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.07);
+   }
+   //Premium
+   else if (document.getElementById("premium").checked == true) {
+      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.15);
+   }
+   //Precio Total
+   document.getElementById("total").innerHTML = parseInt(document.getElementById("subtotal").innerHTML) + parseInt(document.getElementById("envio").innerHTML);
+}
+
 function carritoID(id) {
    //Multiplicando con los inputs numbers identificados por id
    //si es en pesos hacer la conversion a dolares en un futuro puede ser dinamico
@@ -16,31 +42,8 @@ function carritoID(id) {
          document.getElementById(id).value *
          document.getElementById("precio" + id).innerHTML;
    }
-   //Repito codigo en esta funcion para modificar el subotal dinamicamente cuando cambio la cantidad de un producto
-   //creo el array numeros para agregar todos los subtotales traidos de el array de clases
-   let numeros = [];
-   for (const suma of document.getElementsByClassName("subt")) {
-      //sumo los subtotales al array numeros
-      numeros.push(parseInt(suma.innerHTML));
-      //Modifico el innerHTML del subtotal y realizo la suma de el array numeros
-      document.getElementById("subtotal").innerHTML = numeros.reduce((a, b) => a + b, 0);
-   }
-   //Precio Envio
-   //Standar
-   if (document.getElementById("standard").checked == true) {
-      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.05);
-   }
-   //Express
-   else if (document.getElementById("express").checked == true) {
-      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.07);
-   }
-   //Premium
-   else if (document.getElementById("premium").checked == true) {
-      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.15);
-   }
-   //Precio Total
-   //Precio Total al cargar pagina
-   document.getElementById("total").innerHTML = parseInt(document.getElementById("subtotal").innerHTML) + parseInt(document.getElementById("envio").innerHTML);
+   //LLamo la funcion para actualizar en tiempo real los totales
+   totales();
 }
 //Borrar productos del carrito y guardar carrito
 function borrarProd(id) {
@@ -48,31 +51,8 @@ function borrarProd(id) {
    document.getElementById("carrito").removeChild(document.getElementById("div" + id));
    //Guardo el nuevo carrito
    localStorage.setItem("Carrito", JSON.stringify(document.getElementById("carrito").innerHTML));
-   //Repito codigo en esta funcion para modificar el subotal dinamicamente cuando borre un producto
-   //creo el array numeros para agregar todos los subtotales traidos de el array de clases
-   let numeros = [];
-   for (const suma of document.getElementsByClassName("subt")) {
-      //sumo los subtotales al array numeros
-      numeros.push(parseInt(suma.innerHTML));
-      //Modifico el innerHTML del subtotal y realizo la suma de el array numeros
-      document.getElementById("subtotal").innerHTML = numeros.reduce((a, b) => a + b, 0);
-   }
-   //Precio Envio
-   //Standar
-   if (document.getElementById("standard").checked == true) {
-      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.05);
-   }
-   //Express
-   else if (document.getElementById("express").checked == true) {
-      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.07);
-   }
-   //Premium
-   else if (document.getElementById("premium").checked == true) {
-      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.15);
-   }
-   //Precio Total
-   //Precio Total al cargar pagina
-   document.getElementById("total").innerHTML = parseInt(document.getElementById("subtotal").innerHTML) + parseInt(document.getElementById("envio").innerHTML);
+   //LLamo la funcion para actualizar en tiempo real los totales
+   totales();
 }
 
 function mostrarCarrito() {
@@ -129,18 +109,8 @@ function mostrarCarrito() {
             //sino existe carrito que cargue el por defecto
             document.getElementById("carrito").innerHTML = JSON.parse(localStorage.getItem('carritoInicial'));
          }
-         //creo el array numeros para agregar todos los subtotales traidos de el array de clases
-         let numeros = [];
-         for (const suma of document.getElementsByClassName("subt")) {
-            //sumo los subtotales al array numeros
-            numeros.push(parseInt(suma.innerHTML));
-            //Modifico el innerHTML del subtotal y realizo la suma de el array numeros
-            document.getElementById("subtotal").innerHTML = numeros.reduce((a, b) => a + b, 0);
-            //Al cargar la pagina dar valor a el envio 
-            document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.15);
-            //Precio Total al cargar pagina
-            document.getElementById("total").innerHTML = parseInt(document.getElementById("subtotal").innerHTML) + parseInt(document.getElementById("envio").innerHTML);
-         }
+         //LLamo la funcion para actualizar en tiempo real los totales
+         totales();
       });
 }
 
