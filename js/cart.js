@@ -118,24 +118,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
    mostrarCarrito();
 
-   //Sumar el costo de envio
+   //Sumar el costo al cambiar tipo de envio
    //Standar
    document.getElementById("standard").addEventListener('input', (event) => {
-      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.05);
-      //Actualizo Total
-      document.getElementById("total").innerHTML = parseInt(document.getElementById("subtotal").innerHTML) + parseInt(document.getElementById("envio").innerHTML);
+      totales();
    });
    //Express
    document.getElementById("express").addEventListener('input', (event) => {
-      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.07);
-      //Actualizo Total
-      document.getElementById("total").innerHTML = parseInt(document.getElementById("subtotal").innerHTML) + parseInt(document.getElementById("envio").innerHTML);
+     totales();
    });
    //Premium
    document.getElementById("premium").addEventListener('input', (event) => {
-      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.15);
-      //Actualizo Total
-      document.getElementById("total").innerHTML = parseInt(document.getElementById("subtotal").innerHTML) + parseInt(document.getElementById("envio").innerHTML);
+      totales();
    });
 
    //Paises
