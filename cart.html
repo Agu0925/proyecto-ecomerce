@@ -46,7 +46,7 @@
         </div>
       </div>
     </nav>
-    <main>
+    <main id="main">
       <div class="container">
         <h2 class="text-center m-5">Carrito de Compras</h2>
         <h4 class="mb-4">Articulos a comprar</h4>
@@ -64,25 +64,25 @@
         <h4 class="mb-3">Direccion de envio</h4>
         <div class="row">
           <div class="col-6">
-            <p class="mb-0">Calle</p>
-            <input class="w-100" type="text" name="calle" id="calle" required />
+            <label class="mb-0" for="calle">Calle</label>
+            <input class="form-control mb-1" type="text" name="calle" id="calle" required />
+          </div>
+          <div class="col-2">
+            <label class="mb-0" for="numero">Numero</label>
+            <input class="form-control mb-1" type="text" name="numero" id="numero" required />
           </div>
           <div class="col-6">
-            <p class="mb-0">Numero</p>
-            <input type="text" name="numero" id="numero" required />
-          </div>
-          <div class="col-6">
-            <p class="mb-0">Esquina</p>
-            <input class="w-100" type="text" name="esquina" id="esquina" />
+            <label class="mb-0" for="esquina">Esquina</label>
+            <input class="form-control mb-1" type="text" name="esquina" id="esquina" />
           </div>
           <div class="col-6"></div>
           <div class="col-2">
-            <p class="mb-0">Pais</p>
-            <select class="w-100" id="pais" name="pais" required></select>
+            <label class="mb-0" for="pais">Pais</label>
+            <select class="form-control mb-1" id="pais" name="pais" required></select>
           </div>
           <div class="col-2">
-            <p class="mb-0">Ciudad</p>
-            <select class="w-100" id="ciudad" name="ciudad" required>
+            <label class="mb-0" for="ciudad">Ciudad</label>
+            <select class="form-control mb-1" id="ciudad" name="ciudad" required>
               <option value="" disabled selected hidden>Ciudad</option>
             </select>
           </div>
@@ -156,18 +156,25 @@
         </div>
         <div class="my-4 border-top border-dark row"></div>
         <h4>Forma de pago</h4>
-        <p>
-          <span id="pagoSelec">No seleccionada</span> 
+        <div class="row">
+          <p class="col-md-3 col-lg-2">
+            <span id="pagoSelec">No seleccionada</span>
+          </p>
           <a
             id="formaPago"
-            class="ms-5 cursor-active"
+            class="cursor-active col"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
             >Seleccionar</a
           >
-        </p>
-        <input type="button" class="btn btn-primary w-50 mt-5" id="finCompra" value="Finalizar compra">
-        <!-- Modal -->
+        </div>
+        <input
+          type="button"
+          class="btn btn-primary w-50 mt-5"
+          id="finCompra"
+          value="Finalizar compra"
+        />
+        <!-- Modal forma de pago-->
         <div
           class="modal fade"
           id="exampleModal"
@@ -240,13 +247,13 @@
                   Numero de cuenta
                 </label>
                 <div class="col-5">
-                <input
-                  type="text"
-                  name="numCuenta"
-                  class="form-control"
-                  id="numCuenta"
-                />
-              </div>
+                  <input
+                    type="text"
+                    name="numCuenta"
+                    class="form-control"
+                    id="numCuenta"
+                  />
+                </div>
               </div>
               <div class="modal-footer">
                 <button
@@ -263,6 +270,35 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <!-- Alerta de compra exitosa -->
+        <div
+          class="alert alert-success alert-dismissible show fade w-50 d-none"
+          id="compraExito"
+          role="alert"
+        >
+          <strong>Su compra se realizo con exito!</strong> Gracias por su
+          preferencia.
+          <button
+          id="cerrarExito"
+          type="button"
+          class="btn-close"
+          ></button>
+        </div>
+        <!-- Alerta de compra fallida -->
+        <div
+          id="compraError"
+          class="alert alert-danger alert-dismissible show fade w-50 d-none"
+          role="alert"
+        >
+          <strong>Hubo un error!</strong> Verifique sus datos y intente
+          nuevamente.
+          <button
+            id="cerrarError"
+            type="button"
+            class="btn-close"
+          ></button>
         </div>
       </div>
     </main>

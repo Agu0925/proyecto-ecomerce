@@ -202,4 +202,20 @@ window.addEventListener('DOMContentLoaded', (event) => {
       document.getElementById("tarjeta").checked = false;
       document.getElementById("pagoSelec").innerHTML = "No seleccionada";
    });
+   document.getElementById("guardarMod").addEventListener("click", () => {
+      alert('s');
+   });
+   //Boton Finalizar Compra
+   document.getElementById("finCompra").addEventListener("click", () => {
+      document.getElementById('compraExito').classList.remove('d-none');
+      document.getElementById('compraError').classList.remove('d-none');
+   });
+   //Cerrar alert exitosa
+   document.getElementById("cerrarExito").addEventListener("click", () => {
+      document.getElementById('compraExito').classList.add('d-none');
+   });
+   //Cerrar alert error
+   document.getElementById("cerrarError").addEventListener("click", () => {
+      document.getElementById('compraError').classList.add('d-none');
+   });
 });
