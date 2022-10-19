@@ -16,7 +16,7 @@
     <link href="css/styles.css" rel="stylesheet" />
   </head>
 
-  <body class="bg-secondary">
+  <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
       <div class="container">
         <button
@@ -157,7 +157,7 @@
         <div class="my-4 border-top border-dark row"></div>
         <h4>Forma de pago</h4>
         <p>
-          No seleccionada
+          <span id="pagoSelec">No seleccionada</span> 
           <a
             id="formaPago"
             class="ms-5 cursor-active"
@@ -188,11 +188,13 @@
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="modal-body">
-                <input type="radio" name="tarjeta" id="tarjeta" />
-                <label class="custom-control-label" for="tarjeta"
-                  >Tarjeta de credito</label
-                >
+              <div class="modal-body row">
+                <div>
+                  <input type="radio" name="formadepago" id="tarjeta" />
+                  <label class="custom-control-label" for="tarjeta"
+                    >Tarjeta de credito</label
+                  >
+                </div>
                 <div class="border-top my-3"></div>
                 <label class="custom-text-label col-5 me-4" for="nroTarjeta">
                   Numero de tarjeta
@@ -200,53 +202,62 @@
                 <label class="custom-text-label col" for="codTarjeta">
                   Codigo de seguridad
                 </label>
-                <input
-                  type="text"
-                  name="nroTarjeta"
-                  class="col-5 me-4"
-                  id="nroTarjeta"
-                />
-                <input
-                  type="text"
-                  name="codTarjeta"
-                  class="col-3"
-                  id="codTarjeta"
-                />
-                <div class="my-3"></div>
-                <label class="custom-text-label col-12" for="vencimiento">
-                  Vencimiento (MM/AA)
-                </label>
-                <input
-                  type="text"
-                  name="vencimiento"
-                  class="col-5"
-                  id="vencimiento"
-                />
-                <div class="my-3"></div>
-                <input type="radio" name="transferencia" id="transferencia" />
-                <label class="custom-control-label" for="transferencia"
-                  >Transferencia bancaria</label
-                >
+                <div class="col-5 me-4">
+                  <input
+                    type="text"
+                    name="nroTarjeta"
+                    class="form-control"
+                    id="nroTarjeta"
+                  />
+                </div>
+                <div class="col-3">
+                  <input
+                    type="text"
+                    name="codTarjeta"
+                    class="form-control"
+                    id="codTarjeta"
+                  />
+                </div>
+                <div class="col-5 my-3">
+                  <label class="custom-text-label col-12" for="vencimiento">
+                    Vencimiento (MM/AA)
+                  </label>
+                  <input
+                    type="text"
+                    name="vencimiento"
+                    class="form-control"
+                    id="vencimiento"
+                  />
+                </div>
+                <div>
+                  <input type="radio" name="formadepago" id="transferencia" />
+                  <label class="custom-control-label" for="transferencia"
+                    >Transferencia bancaria</label
+                  >
+                </div>
                 <div class="border-top my-3"></div>
                 <label class="custom-text-label col-12" for="numCuenta">
                   Numero de cuenta
                 </label>
+                <div class="col-5">
                 <input
                   type="text"
                   name="numCuenta"
-                  class="col-5"
+                  class="form-control"
                   id="numCuenta"
                 />
+              </div>
               </div>
               <div class="modal-footer">
                 <button
                   type="button"
+                  id="cerrarMod"
                   class="btn btn-secondary"
                   data-bs-dismiss="modal"
                 >
                   Cerrar
                 </button>
-                <button type="button" id="modalSave" class="btn btn-primary">
+                <button type="button" id="guardarMod" class="btn btn-primary">
                   Guardar
                 </button>
               </div>

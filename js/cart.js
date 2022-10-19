@@ -120,17 +120,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
    //Sumar el costo al cambiar tipo de envio
    //Standar
-   document.getElementById("standard").addEventListener('input', (event) => {
-      totales();
-   });
+   document.getElementById("standard").addEventListener('input', totales);
    //Express
-   document.getElementById("express").addEventListener('input', (event) => {
-      totales();
-   });
+   document.getElementById("express").addEventListener('input', totales);
    //Premium
-   document.getElementById("premium").addEventListener('input', (event) => {
-      totales();
-   });
+   document.getElementById("premium").addEventListener('input', totales);
 
    //Paises
    let urlpaises =
@@ -174,5 +168,38 @@ window.addEventListener('DOMContentLoaded', (event) => {
          document.getElementById("ciudad").innerHTML =
             `<option value="" disabled selected hidden>Ciudad</option>`;
       }
+   });
+
+   // Formulario de Pagos ---------------------------------------------------------------------
+   // Formulario desactivado al iniciar
+   document.getElementById("nroTarjeta").disabled = true;
+   document.getElementById("codTarjeta").disabled = true;
+   document.getElementById("vencimiento").disabled = true;
+   document.getElementById("numCuenta").disabled = true;
+   // Tarjeta de credito
+   document.getElementById("tarjeta").addEventListener("input", () => {
+      document.getElementById("pagoSelec").innerHTML = "Tarjeta de credito";
+      document.getElementById("nroTarjeta").disabled = false;
+      document.getElementById("codTarjeta").disabled = false;
+      document.getElementById("vencimiento").disabled = false;
+      document.getElementById("numCuenta").disabled = true;
+   });
+   // Transferencia Bancaria
+   document.getElementById("transferencia").addEventListener("input", () => {
+      document.getElementById("nroTarjeta").disabled = true;
+      document.getElementById("codTarjeta").disabled = true;
+      document.getElementById("vencimiento").disabled = true;
+      document.getElementById("numCuenta").disabled = false;
+      document.getElementById("pagoSelec").innerHTML = "Cuenta Bancaria";
+   });
+   // Cerrar/Guardar - Modal
+   document.getElementById("cerrarMod").addEventListener("click", () => {
+      document.getElementById("nroTarjeta").disabled = true;
+      document.getElementById("codTarjeta").disabled = true;
+      document.getElementById("vencimiento").disabled = true;
+      document.getElementById("numCuenta").disabled = true;
+      document.getElementById("transferencia").checked = false;
+      document.getElementById("tarjeta").checked = false;
+      document.getElementById("pagoSelec").innerHTML = "No seleccionada";
    });
 });
