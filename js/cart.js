@@ -125,7 +125,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
    });
    //Express
    document.getElementById("express").addEventListener('input', (event) => {
-     totales();
+      totales();
    });
    //Premium
    document.getElementById("premium").addEventListener('input', (event) => {

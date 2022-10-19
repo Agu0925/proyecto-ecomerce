@@ -16,7 +16,7 @@
     <link href="css/styles.css" rel="stylesheet" />
   </head>
 
-  <body>
+  <body class="bg-secondary">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
       <div class="container">
         <button
@@ -152,6 +152,105 @@
           </div>
           <div class="col-6 text-end">
             <b class="m-0">USD <span id="total">0</span></b>
+          </div>
+        </div>
+        <div class="my-4 border-top border-dark row"></div>
+        <h4>Forma de pago</h4>
+        <p>
+          No seleccionada
+          <a
+            id="formaPago"
+            class="ms-5 cursor-active"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            >Seleccionar</a
+          >
+        </p>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">
+                  Forma de pago
+                </h4>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <input type="radio" name="tarjeta" id="tarjeta" />
+                <label class="custom-control-label" for="tarjeta"
+                  >Tarjeta de credito</label
+                >
+                <div class="border-top my-3"></div>
+                <label class="custom-text-label col-5 me-4" for="nroTarjeta">
+                  Numero de tarjeta
+                </label>
+                <label class="custom-text-label col" for="codTarjeta">
+                  Codigo de seguridad
+                </label>
+                <input
+                  type="text"
+                  name="nroTarjeta"
+                  class="col-5 me-4"
+                  id="nroTarjeta"
+                />
+                <input
+                  type="text"
+                  name="codTarjeta"
+                  class="col-3"
+                  id="codTarjeta"
+                />
+                <div class="my-3"></div>
+                <label class="custom-text-label col-12" for="vencimiento">
+                  Vencimiento (MM/AA)
+                </label>
+                <input
+                  type="text"
+                  name="vencimiento"
+                  class="col-5"
+                  id="vencimiento"
+                />
+                <div class="my-3"></div>
+                <input type="radio" name="transferencia" id="transferencia" />
+                <label class="custom-control-label" for="transferencia"
+                  >Transferencia bancaria</label
+                >
+                <div class="border-top my-3"></div>
+                <label class="custom-text-label col-12" for="numCuenta">
+                  Numero de cuenta
+                </label>
+                <input
+                  type="text"
+                  name="numCuenta"
+                  class="col-5"
+                  id="numCuenta"
+                />
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Cerrar
+                </button>
+                <button type="button" id="modalSave" class="btn btn-primary">
+                  Guardar
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
