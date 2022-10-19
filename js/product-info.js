@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                             <p class='m-0'><span id="${"moneda" + datos.id}">${datos.currency}</span> <span id="${"precio" + datos.id}">${datos.cost}</span></p>
                      </div>
                      <div class="col-1 text-center">
-                        <input type="number" name="" id="${datos.id}" oninput='carritoID(${datos.id})' class="w-100" min="0" value="1">
+                        <input type="number" name="" id="${datos.id}" oninput='carritoID(${datos.id})' class="w-100" min="1" value="1">
                      </div>
                      <div class="col text-center">
                             <b>${moneda} <span class="subt" id="${"dolares" + datos.id}">${dolares}</span></b>

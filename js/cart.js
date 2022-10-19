@@ -2,7 +2,7 @@ function setProdID(id) {
    localStorage.setItem("prodID", id);
    window.location = "product-info.html";
 }
-
+//Funcion para actualizar en tiempo real
 function totales() {
    //creo el array numeros para agregar todos los subtotales traidos de el array de clases
    let numeros = [];
@@ -28,7 +28,7 @@ function totales() {
    //Precio Total
    document.getElementById("total").innerHTML = parseInt(document.getElementById("subtotal").innerHTML) + parseInt(document.getElementById("envio").innerHTML);
 }
-
+//Funcion para multiplicar precio por cantidad de producto
 function carritoID(id) {
    //Multiplicando con los inputs numbers identificados por id
    //si es en pesos hacer la conversion a dolares en un futuro puede ser dinamico
@@ -83,7 +83,7 @@ function mostrarCarrito() {
                                         <p class='m-0'><span id="${"moneda" + iterator.id}">${iterator.currency}</span> <span id="${"precio" + iterator.id}">${iterator.unitCost}</span></p>
                                  </div>
                                  <div class="col-1 text-center">
-                                    <input type="number" name="" id="${iterator.id}" oninput='carritoID(${iterator.id})' class="w-100" min="0" value="1">
+                                    <input type="number" name="" id="${iterator.id}" oninput='carritoID(${iterator.id})' class="w-100" min="1" value="1">
                                  </div>
                                  <div class="col text-center">
                                         <b>${moneda} <span class="subt" id="${"dolares" + iterator.id}">${dolares}</span></b>
