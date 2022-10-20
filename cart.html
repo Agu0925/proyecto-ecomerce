@@ -65,20 +65,44 @@
         <form class="row">
           <div class="col-6">
             <label class="mb-0" for="calle">Calle</label>
-            <input class="form-control mb-1" type="text" name="calle" id="calle" required />
+            <input
+              class="form-control mb-1"
+              type="text"
+              name="calle"
+              id="calle"
+              required
+            />
           </div>
           <div class="col-2">
             <label class="mb-0" for="numero">Numero</label>
-            <input class="form-control mb-1" type="text" name="numero" id="numero" required />
+            <input
+              class="form-control mb-1"
+              type="text"
+              onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+              name="numero"
+              id="numero"
+              required
+            />
           </div>
           <div class="col-6">
             <label class="mb-0" for="esquina">Esquina</label>
-            <input class="form-control mb-1" type="text" name="esquina" id="esquina" required/>
+            <input
+              class="form-control mb-1"
+              type="text"
+              name="esquina"
+              id="esquina"
+              required
+            />
           </div>
           <div class="col-6"></div>
           <div class="col-2">
             <label class="mb-0" for="pais">Pais</label>
-            <select class="form-select mb-1" id="pais" name="pais" required></select>
+            <select
+              class="form-select mb-1"
+              id="pais"
+              name="pais"
+              required
+            ></select>
           </div>
           <div class="col-2">
             <label class="mb-0" for="ciudad">Ciudad</label>
@@ -174,7 +198,7 @@
           id="finCompra"
           value="Finalizar compra"
         />
-        
+
         <!-- Modal forma de pago-->
         <div
           class="modal fade"
@@ -198,7 +222,12 @@
               </div>
               <div class="modal-body row">
                 <div>
-                  <input class="form-check-input" type="radio" name="formadepago" id="tarjeta" />
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="formadepago"
+                    id="tarjeta"
+                  />
                   <label class="custom-control-label ms-1" for="tarjeta"
                     >Tarjeta de credito</label
                   >
@@ -216,6 +245,7 @@
                     name="nroTarjeta"
                     class="form-control"
                     id="nroTarjeta"
+                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
                   />
                 </div>
                 <div class="col-3">
@@ -224,6 +254,7 @@
                     name="codTarjeta"
                     class="form-control"
                     id="codTarjeta"
+                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
                   />
                 </div>
                 <div class="col-5 my-3">
@@ -235,10 +266,16 @@
                     name="vencimiento"
                     class="form-control"
                     id="vencimiento"
+                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
                   />
                 </div>
                 <div>
-                  <input class="form-check-input" type="radio" name="formadepago" id="transferencia" />
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="formadepago"
+                    id="transferencia"
+                  />
                   <label class="custom-control-label ms-1" for="transferencia"
                     >Transferencia bancaria</label
                   >
@@ -253,6 +290,7 @@
                     name="numCuenta"
                     class="form-control"
                     id="numCuenta"
+                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
                   />
                 </div>
               </div>
@@ -281,11 +319,7 @@
         >
           <strong>Su compra se realizo con exito!</strong> Gracias por su
           preferencia.
-          <button
-          id="cerrarExito"
-          type="button"
-          class="btn-close"
-          ></button>
+          <button id="cerrarExito" type="button" class="btn-close"></button>
         </div>
         <!-- Alerta de compra fallida -->
         <div
@@ -295,11 +329,7 @@
         >
           <strong>Hubo un error!</strong> Verifique sus datos y intente
           nuevamente.
-          <button
-            id="cerrarError"
-            type="button"
-            class="btn-close"
-          ></button>
+          <button id="cerrarError" type="button" class="btn-close"></button>
         </div>
       </div>
     </main>
