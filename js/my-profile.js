@@ -10,7 +10,6 @@ function cerrarS(){
 //Recorro todas las clases Nusuario y las modifico
 for (i = 0; i < Nusuario.length; i++){
 Nusuario[i].innerHTML = `
-<div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
   <ul class="navbar-nav">
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -23,6 +22,5 @@ Nusuario[i].innerHTML = `
         <li><a class="dropdown-item" href="index.html" onclick="cerrarS()" id='cerrar-sesion'> Cerrar sesion </a></li>
       </ul>
     </li>
-  </ul>
-</div>`;
+  </ul>`;
 }

@@ -82,6 +82,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             document
                 .getElementById("agregar-alcarrito")
                 .addEventListener("click", datoscarrito);
+            //--------------------fin carrito-------------------------
             //Imagenes
             document.getElementById("main-image").src = datos.images[0];
             document.getElementById("mini-image2").src = datos.images[1];

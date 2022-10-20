@@ -149,13 +149,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
       fetch(urlciudad)
          .then((resp) => resp.json())
          .then((datos) => {
-            let paises = "";
+            let ciudades = "";
             for (const iterator of datos) {
-               paises += `
+               ciudades += `
             <option value="${iterator.departamento}">${iterator.departamento}</option>
             `;
                document.getElementById("ciudad").innerHTML =
-                  `<option value="" disabled selected hidden>Ciudad</option>` + paises;
+                  `<option value="" disabled selected hidden>Ciudad</option>` + ciudades;
             }
          });
    }
@@ -194,6 +194,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
    });
    // Cerrar/Guardar - Modal
    document.getElementById("cerrarMod").addEventListener("click", () => {
+      document.getElementById("nroTarjeta").value = "";
+      document.getElementById("codTarjeta").value = "";
+      document.getElementById("vencimiento").value = "";
+      document.getElementById("numCuenta").value = "";
       document.getElementById("nroTarjeta").disabled = true;
       document.getElementById("codTarjeta").disabled = true;
       document.getElementById("vencimiento").disabled = true;
@@ -209,6 +213,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
    document.getElementById("finCompra").addEventListener("click", () => {
       document.getElementById('compraExito').classList.remove('d-none');
       document.getElementById('compraError').classList.remove('d-none');
+      validar();
    });
    //Cerrar alert exitosa
    document.getElementById("cerrarExito").addEventListener("click", () => {
@@ -219,3 +224,24 @@ window.addEventListener('DOMContentLoaded', (event) => {
       document.getElementById('compraError').classList.add('d-none');
    });
 });
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+function validar() {
+   //Inputs select
+   //Pais
+   if(document.getElementById("pais").value == "Uruguay"){
+      document.getElementById("pais").classList.remove("is-invalid")
+      document.getElementById("pais").classList.add("is-valid");
+   }else{
+      document.getElementById("pais").classList.remove("is-valid")
+      document.getElementById("pais").classList.add("is-invalid")
+   }
+   //Ciudad
+   if(document.getElementById("ciudad").value != ""){
+      document.getElementById("ciudad").classList.remove("is-invalid")
+      document.getElementById("ciudad").classList.add("is-valid");
+   }else{
+      document.getElementById("ciudad").classList.remove("is-valid")
+      document.getElementById("ciudad").classList.add("is-invalid")
+   }
+   //
+ }

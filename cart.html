@@ -62,7 +62,7 @@
         <div class="mb-4 border-top border-dark row"></div>
         <!-- DIRECCION DE ENVIO -->
         <h4 class="mb-3">Direccion de envio</h4>
-        <div class="row">
+        <form class="row">
           <div class="col-6">
             <label class="mb-0" for="calle">Calle</label>
             <input class="form-control mb-1" type="text" name="calle" id="calle" required />
@@ -73,20 +73,20 @@
           </div>
           <div class="col-6">
             <label class="mb-0" for="esquina">Esquina</label>
-            <input class="form-control mb-1" type="text" name="esquina" id="esquina" />
+            <input class="form-control mb-1" type="text" name="esquina" id="esquina" required/>
           </div>
           <div class="col-6"></div>
           <div class="col-2">
             <label class="mb-0" for="pais">Pais</label>
-            <select class="form-control mb-1" id="pais" name="pais" required></select>
+            <select class="form-select mb-1" id="pais" name="pais" required></select>
           </div>
           <div class="col-2">
             <label class="mb-0" for="ciudad">Ciudad</label>
-            <select class="form-control mb-1" id="ciudad" name="ciudad" required>
+            <select class="form-select mb-1" id="ciudad" name="ciudad" required>
               <option value="" disabled selected hidden>Ciudad</option>
             </select>
           </div>
-        </div>
+        </form>
         <!-- TIPO DE ENVIO -->
         <h4 class="mb-3 mt-4">Tipo de Envio</h4>
         <div class="d-block my-3">
@@ -130,7 +130,7 @@
         </div>
         <div class="my-4 border-top border-dark row"></div>
         <h4 class="mb-3">Costos</h4>
-        <div class="row align-items-center border w-50 pb-4 pt-4">
+        <div class="row align-items-center border w-50 py-4 ms-1">
           <div class="col-6 cursor-active">
             <p class="m-0">Subtotal</p>
           </div>
@@ -138,7 +138,7 @@
             <p class="m-0">USD <span id="subtotal">0</span></p>
           </div>
         </div>
-        <div class="row align-items-center border w-50 pb-4 pt-4">
+        <div class="row align-items-center border w-50 py-4 ms-1">
           <div class="col-6 cursor-active">
             <p class="m-0">Costo de envio</p>
           </div>
@@ -146,7 +146,7 @@
             <p class="m-0">USD <span id="envio">0</span></p>
           </div>
         </div>
-        <div class="row align-items-center border w-50 pb-4 pt-4">
+        <div class="row align-items-center border w-50 py-4 ms-1">
           <div class="col-6 cursor-active">
             <p class="m-0">Total</p>
           </div>
@@ -174,6 +174,7 @@
           id="finCompra"
           value="Finalizar compra"
         />
+        
         <!-- Modal forma de pago-->
         <div
           class="modal fade"
@@ -197,8 +198,8 @@
               </div>
               <div class="modal-body row">
                 <div>
-                  <input type="radio" name="formadepago" id="tarjeta" />
-                  <label class="custom-control-label" for="tarjeta"
+                  <input class="form-check-input" type="radio" name="formadepago" id="tarjeta" />
+                  <label class="custom-control-label ms-1" for="tarjeta"
                     >Tarjeta de credito</label
                   >
                 </div>
@@ -237,8 +238,8 @@
                   />
                 </div>
                 <div>
-                  <input type="radio" name="formadepago" id="transferencia" />
-                  <label class="custom-control-label" for="transferencia"
+                  <input class="form-check-input" type="radio" name="formadepago" id="transferencia" />
+                  <label class="custom-control-label ms-1" for="transferencia"
                     >Transferencia bancaria</label
                   >
                 </div>
