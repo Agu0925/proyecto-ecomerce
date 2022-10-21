@@ -229,12 +229,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
       document.getElementById("pagoSelec").innerHTML = "No seleccionada";
    });
    document.getElementById("guardarMod").addEventListener("click", () => {
-      alert('s');
+      
    });
    //Boton Finalizar Compra
-   document.getElementById("finCompra").addEventListener("click", () => {
-      validar();
-   });
+   document.getElementById("finCompra").addEventListener("click", validar);
    //Cerrar alert exitosa
    document.getElementById("cerrarExito").addEventListener("click", () => {
       document.getElementById('compraExito').classList.add('d-none');
