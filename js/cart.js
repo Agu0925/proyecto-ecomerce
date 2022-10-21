@@ -233,8 +233,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
    });
    //Boton Finalizar Compra
    document.getElementById("finCompra").addEventListener("click", () => {
-      document.getElementById('compraExito').classList.remove('d-none');
-      document.getElementById('compraError').classList.remove('d-none');
       validar();
    });
    //Cerrar alert exitosa
@@ -248,96 +246,23 @@ window.addEventListener('DOMContentLoaded', (event) => {
 });
 // Validacion formulario
 function validar() {
-   //Input select
-   //Pais
-   if (document.getElementById("pais").value == "Uruguay") {
-      document.getElementById("pais").classList.remove("is-invalid");
-      document.getElementById("pais").classList.add("is-valid");
-   } else {
-      document.getElementById("pais").classList.remove("is-valid");
-      document.getElementById("pais").classList.add("is-invalid");
-   }
-   //Ciudad
-   if (document.getElementById("ciudad").value != "") {
-      document.getElementById("ciudad").classList.remove("is-invalid");
-      document.getElementById("ciudad").classList.add("is-valid");
-   } else {
-      document.getElementById("ciudad").classList.remove("is-valid");
-      document.getElementById("ciudad").classList.add("is-invalid");
-   }
-   //Input radio
-   if (document.getElementById("tarjeta").checked == true) {
-      document.getElementById("tarjeta").classList.remove("is-invalid");
-      document.getElementById("transferencia").classList.remove("is-invalid");
-      //Input Text modal
-      if (document.getElementById("nroTarjeta").value != "" &&
-         document.getElementById("codTarjeta").value != "" &&
-         document.getElementById("vencimiento").value != "") {
-         document.getElementById("pagoSelec").classList.remove("text-danger");
-      }else{
-         document.getElementById("pagoSelec").classList.add("text-danger");
-      }
-      if (document.getElementById("nroTarjeta").value != "") {
-         document.getElementById("nroTarjeta").classList.remove("is-invalid");
-         document.getElementById("nroTarjeta").classList.add("is-valid");
-      } else {
-         document.getElementById("nroTarjeta").classList.add("is-invalid");
-         document.getElementById("nroTarjeta").classList.remove("is-valid");
-      }
-      if (document.getElementById("codTarjeta").value != "") {
-         document.getElementById("codTarjeta").classList.remove("is-invalid");
-         document.getElementById("codTarjeta").classList.add("is-valid");
-      } else {
-         document.getElementById("codTarjeta").classList.add("is-invalid");
-         document.getElementById("codTarjeta").classList.remove("is-valid");
-      }
-      if (document.getElementById("vencimiento").value != "") {
-         document.getElementById("vencimiento").classList.remove("is-invalid");
-         document.getElementById("vencimiento").classList.add("is-valid");
-      } else {
-         document.getElementById("vencimiento").classList.add("is-invalid");
-         document.getElementById("vencimiento").classList.remove("is-valid");
-      }
+   // Example starter JavaScript for disabling form submissions if there are invalid fields
 
-   } else if (document.getElementById("transferencia").checked == true) {
-      document.getElementById("tarjeta").classList.remove("is-invalid");
-      document.getElementById("transferencia").classList.remove("is-invalid");
-      //Input Text modal
-      if (document.getElementById("numCuenta").value != "") {
-         document.getElementById("pagoSelec").classList.remove("text-danger");
-         document.getElementById("numCuenta").classList.remove("is-invalid");
-         document.getElementById("numCuenta").classList.add("is-valid");
-      } else {
-         document.getElementById("numCuenta").classList.add("is-invalid");
-      }
-   } else {
-      document.getElementById("tarjeta").classList.add("is-invalid");
-      document.getElementById("transferencia").classList.add("is-invalid");
-      document.getElementById("pagoSelec").classList.add("text-danger");
-   };
-   //Input text
-   if (document.getElementById("calle").value != "") {
-      document.getElementById("calle").classList.remove("is-invalid");
-      document.getElementById("calle").classList.add("is-valid");
-   } else {
-      document.getElementById("calle").classList.remove("is-valid");
-      document.getElementById("calle").classList.add("is-invalid");
-   };
-
-   if (document.getElementById("numero").value != "") {
-      document.getElementById("numero").classList.remove("is-invalid");
-      document.getElementById("numero").classList.add("is-valid");
-   } else {
-      document.getElementById("numero").classList.remove("is-valid");
-      document.getElementById("numero").classList.add("is-invalid");
-   };
-
-   if (document.getElementById("esquina").value != "") {
-      document.getElementById("esquina").classList.remove("is-invalid");
-      document.getElementById("esquina").classList.add("is-valid");
-   } else {
-      document.getElementById("esquina").classList.remove("is-valid");
-      document.getElementById("esquina").classList.add("is-invalid");
-   };
-
+   'use strict'
+ 
+   // Fetch all the forms we want to apply custom Bootstrap validation styles to
+   var forms = document.querySelectorAll('.needs-validation')
+ 
+   // Loop over them and prevent submission
+   Array.prototype.slice.call(forms)
+     .forEach(function (form) {
+       form.addEventListener('submit', function (event) {
+         if (!form.checkValidity()) {
+           event.preventDefault()
+           event.stopPropagation()
+         }
+ 
+         form.classList.add('was-validated')
+       }, false)
+     })
 }

@@ -62,7 +62,7 @@
         <div class="mb-4 border-top border-dark row"></div>
         <!-- DIRECCION DE ENVIO -->
         <h4 class="mb-3">Direccion de envio</h4>
-        <form class="row">
+        <form class="row needs-validation" novalidate>
           <div class="col-6">
             <label class="mb-0" for="calle">Calle</label>
             <input
@@ -110,227 +110,234 @@
               <option value="" disabled selected hidden>Ciudad</option>
             </select>
           </div>
-        </form>
-        <!-- TIPO DE ENVIO -->
-        <h4 class="mb-3 mt-4">Tipo de Envio</h4>
-        <div class="d-block my-3">
-          <div class="custom-control custom-radio">
-            <input
-              id="premium"
-              name="publicationType"
-              type="radio"
-              class="custom-control-input"
-              checked=""
-              required=""
-            />
-            <label class="custom-control-label" for="premium"
-              >Premium 2 a 5 dias (15%)</label
-            >
-          </div>
-          <div class="custom-control custom-radio">
-            <input
-              id="express"
-              name="publicationType"
-              type="radio"
-              class="custom-control-input"
-              required=""
-            />
-            <label class="custom-control-label" for="express"
-              >Express 5 a 8 dias (7%)</label
-            >
-          </div>
-          <div class="custom-control custom-radio">
-            <input
-              id="standard"
-              name="publicationType"
-              type="radio"
-              class="custom-control-input"
-              required=""
-            />
-            <label class="custom-control-label" for="standard"
-              >Standard de 12 a 15 dias (5%)</label
-            >
-          </div>
-        </div>
-        <div class="my-4 border-top border-dark row"></div>
-        <h4 class="mb-3">Costos</h4>
-        <div class="row align-items-center border w-50 py-4 ms-1">
-          <div class="col-6 cursor-active">
-            <p class="m-0">Subtotal</p>
-          </div>
-          <div class="col-6 text-end">
-            <p class="m-0">USD <span id="subtotal">0</span></p>
-          </div>
-        </div>
-        <div class="row align-items-center border w-50 py-4 ms-1">
-          <div class="col-6 cursor-active">
-            <p class="m-0">Costo de envio</p>
-          </div>
-          <div class="col-6 text-end">
-            <p class="m-0">USD <span id="envio">0</span></p>
-          </div>
-        </div>
-        <div class="row align-items-center border w-50 py-4 ms-1">
-          <div class="col-6 cursor-active">
-            <p class="m-0">Total</p>
-          </div>
-          <div class="col-6 text-end">
-            <b class="m-0">USD <span id="total">0</span></b>
-          </div>
-        </div>
-        <div class="my-4 border-top border-dark row"></div>
-        <h4>Forma de pago</h4>
-        <div class="row">
-          <p class="col-md-3 col-lg-2">
-            <span id="pagoSelec">No seleccionada</span>
-          </p>
-          <a
-            id="formaPago"
-            class="cursor-active col"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-            >Seleccionar</a
-          >
-        </div>
-        <input
-          type="button"
-          class="btn btn-primary w-50 mt-5"
-          id="finCompra"
-          value="Finalizar compra"
-        />
 
-        <!-- Modal forma de pago-->
-        <div
-          class="modal fade"
-          id="exampleModal"
-          tabindex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel">
-                  Forma de pago
-                </h4>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body row">
-                <div>
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="formadepago"
-                    id="tarjeta"
-                  />
-                  <label class="custom-control-label ms-1" for="tarjeta"
-                    >Tarjeta de credito</label
-                  >
+          <!-- TIPO DE ENVIO -->
+          <h4 class="mb-3 mt-4">Tipo de Envio</h4>
+          <div class="d-block my-3">
+            <div class="custom-control custom-radio">
+              <input
+                id="premium"
+                name="publicationType"
+                type="radio"
+                class="custom-control-input"
+                checked=""
+                required=""
+              />
+              <label class="custom-control-label" for="premium"
+                >Premium 2 a 5 dias (15%)</label
+              >
+            </div>
+            <div class="custom-control custom-radio">
+              <input
+                id="express"
+                name="publicationType"
+                type="radio"
+                class="custom-control-input"
+                required=""
+              />
+              <label class="custom-control-label" for="express"
+                >Express 5 a 8 dias (7%)</label
+              >
+            </div>
+            <div class="custom-control custom-radio">
+              <input
+                id="standard"
+                name="publicationType"
+                type="radio"
+                class="custom-control-input"
+                required=""
+              />
+              <label class="custom-control-label" for="standard"
+                >Standard de 12 a 15 dias (5%)</label
+              >
+            </div>
+          </div>
+          <div class="my-4 border-top border-dark row"></div>
+          <h4 class="mb-3">Costos</h4>
+          <div class="row align-items-center border w-50 py-4 ms-1">
+            <div class="col-6 cursor-active">
+              <p class="m-0">Subtotal</p>
+            </div>
+            <div class="col-6 text-end">
+              <p class="m-0">USD <span id="subtotal">0</span></p>
+            </div>
+          </div>
+          <div class="row align-items-center border w-50 py-4 ms-1">
+            <div class="col-6 cursor-active">
+              <p class="m-0">Costo de envio</p>
+            </div>
+            <div class="col-6 text-end">
+              <p class="m-0">USD <span id="envio">0</span></p>
+            </div>
+          </div>
+          <div class="row align-items-center border w-50 py-4 ms-1">
+            <div class="col-6 cursor-active">
+              <p class="m-0">Total</p>
+            </div>
+            <div class="col-6 text-end">
+              <b class="m-0">USD <span id="total">0</span></b>
+            </div>
+          </div>
+          <div class="my-4 border-top border-dark row"></div>
+          <h4>Forma de pago</h4>
+          <div class="row">
+            <p class="col-md-3 col-lg-2">
+              <span id="pagoSelec">No seleccionada</span>
+            </p>
+            <a
+              id="formaPago"
+              class="cursor-active col"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              >Seleccionar</a
+            >
+          </div>
+          <input
+            type="submit"
+            class="btn btn-primary w-50 mt-5"
+            id="finCompra"
+            value="Finalizar compra"
+          />
+
+          <!-- Modal forma de pago-->
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="exampleModalLabel">
+                    Forma de pago
+                  </h4>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
                 </div>
-                <div class="border-top my-3"></div>
-                <label class="custom-text-label col-5 me-4" for="nroTarjeta">
-                  Numero de tarjeta
-                </label>
-                <label class="custom-text-label col" for="codTarjeta">
-                  Codigo de seguridad
-                </label>
-                <div class="col-5 me-4">
-                  <input
-                    type="text"
-                    name="nroTarjeta"
-                    class="form-control"
-                    id="nroTarjeta"
-                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
-                  />
-                </div>
-                <div class="col-3">
-                  <input
-                    type="text"
-                    name="codTarjeta"
-                    class="form-control"
-                    id="codTarjeta"
-                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
-                  />
-                </div>
-                <div class="col-5 my-3">
-                  <label class="custom-text-label col-12" for="vencimiento">
-                    Vencimiento (MM/AA)
+                <div class="modal-body row">
+                  <div>
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="formadepago"
+                      id="tarjeta"
+                      required
+                    />
+                    <label class="custom-control-label ms-1" for="tarjeta"
+                      >Tarjeta de credito</label
+                    >
+                  </div>
+                  <div class="border-top my-3"></div>
+                  <label class="custom-text-label col-5 me-4" for="nroTarjeta">
+                    Numero de tarjeta
                   </label>
-                  <input
-                    type="text"
-                    name="vencimiento"
-                    class="form-control"
-                    id="vencimiento"
-                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
-                  />
+                  <label class="custom-text-label col" for="codTarjeta">
+                    Codigo de seguridad
+                  </label>
+                  <div class="col-5 me-4">
+                    <input
+                      required
+                      type="text"
+                      name="nroTarjeta"
+                      class="form-control"
+                      id="nroTarjeta"
+                      onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                    />
+                  </div>
+                  <div class="col-3">
+                    <input
+                      required
+                      type="text"
+                      name="codTarjeta"
+                      class="form-control"
+                      id="codTarjeta"
+                      onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                    />
+                  </div>
+                  <div class="col-5 my-3">
+                    <label class="custom-text-label col-12" for="vencimiento">
+                      Vencimiento (MM/AA)
+                    </label>
+                    <input
+                      required
+                      type="text"
+                      name="vencimiento"
+                      class="form-control"
+                      id="vencimiento"
+                      onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      required
+                      class="form-check-input"
+                      type="radio"
+                      name="formadepago"
+                      id="transferencia"
+                    />
+                    <label class="custom-control-label ms-1" for="transferencia"
+                      >Transferencia bancaria</label
+                    >
+                  </div>
+                  <div class="border-top my-3"></div>
+                  <label class="custom-text-label col-12" for="numCuenta">
+                    Numero de cuenta
+                  </label>
+                  <div class="col-5">
+                    <input
+                      required
+                      type="text"
+                      name="numCuenta"
+                      class="form-control"
+                      id="numCuenta"
+                      onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                    />
+                  </div>
                 </div>
-                <div>
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="formadepago"
-                    id="transferencia"
-                  />
-                  <label class="custom-control-label ms-1" for="transferencia"
-                    >Transferencia bancaria</label
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    id="cerrarMod"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
                   >
+                    Cerrar
+                  </button>
+                  <button type="button" id="guardarMod" class="btn btn-primary">
+                    Guardar
+                  </button>
                 </div>
-                <div class="border-top my-3"></div>
-                <label class="custom-text-label col-12" for="numCuenta">
-                  Numero de cuenta
-                </label>
-                <div class="col-5">
-                  <input
-                    type="text"
-                    name="numCuenta"
-                    class="form-control"
-                    id="numCuenta"
-                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
-                  />
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  id="cerrarMod"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Cerrar
-                </button>
-                <button type="button" id="guardarMod" class="btn btn-primary">
-                  Guardar
-                </button>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Alerta de compra exitosa -->
-        <div
-          class="alert alert-success alert-dismissible show fade w-50 d-none"
-          id="compraExito"
-          role="alert"
-        >
-          <strong>Su compra se realizo con exito!</strong> Gracias por su
-          preferencia.
-          <button id="cerrarExito" type="button" class="btn-close"></button>
-        </div>
-        <!-- Alerta de compra fallida -->
-        <div
-          id="compraError"
-          class="alert alert-danger alert-dismissible show fade w-50 d-none"
-          role="alert"
-        >
-          <strong>Hubo un error!</strong> Verifique sus datos y intente
-          nuevamente.
-          <button id="cerrarError" type="button" class="btn-close"></button>
-        </div>
+          <!-- Alerta de compra exitosa -->
+          <div
+            class="alert alert-success alert-dismissible show fade w-50 d-none"
+            id="compraExito"
+            role="alert"
+          >
+            <strong>Su compra se realizo con exito!</strong> Gracias por su
+            preferencia.
+            <button id="cerrarExito" type="button" class="btn-close"></button>
+          </div>
+          <!-- Alerta de compra fallida -->
+          <div
+            id="compraError"
+            class="alert alert-danger alert-dismissible show fade w-50 d-none"
+            role="alert"
+          >
+            <strong>Hubo un error!</strong> Verifique sus datos y intente
+            nuevamente.
+            <button id="cerrarError" type="button" class="btn-close"></button>
+          </div>
+        </form>
       </div>
     </main>
     <footer class="text-muted">
