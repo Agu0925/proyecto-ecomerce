@@ -163,7 +163,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
       pais = document.getElementById("pais").value;
       if (pais == "Uruguay") {
          mostrarCiudad();
+         document.getElementById("pais").setCustomValidity("");
       } else {
+         document.getElementById("pais").setCustomValidity("error");
          alert("actualmente solo funcionamos en Uruguay");
          document.getElementById("ciudad").innerHTML =
             `<option value="" disabled selected hidden>Ciudad</option>`;
@@ -171,7 +173,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
    });
 
    // Formulario de Pagos ---------------------------------------------------------------------
-   // Formulario desactivado al iniciar
+   // Formulario Modal desactivado al iniciar
    document.getElementById("nroTarjeta").disabled = true;
    document.getElementById("codTarjeta").disabled = true;
    document.getElementById("vencimiento").disabled = true;
@@ -183,8 +185,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
       document.getElementById("codTarjeta").disabled = false;
       document.getElementById("vencimiento").disabled = false;
       document.getElementById("numCuenta").disabled = true;
-      document.getElementById("numCuenta").classList.remove("is-invalid");
-      document.getElementById("numCuenta").classList.remove("is-valid");
       document.getElementById("numCuenta").value = "";
    });
    // Transferencia Bancaria
@@ -196,15 +196,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
       document.getElementById("nroTarjeta").value = "";
       document.getElementById("codTarjeta").value = "";
       document.getElementById("vencimiento").value = "";
-      document.getElementById("vencimiento").classList.remove("is-invalid");
-      document.getElementById("nroTarjeta").classList.remove("is-invalid");
-      document.getElementById("codTarjeta").classList.remove("is-invalid");
-      document.getElementById("vencimiento").classList.remove("is-valid");
-      document.getElementById("nroTarjeta").classList.remove("is-valid");
-      document.getElementById("codTarjeta").classList.remove("is-valid");
       document.getElementById("pagoSelec").innerHTML = "Cuenta Bancaria";
    });
-   // Cerrar/Guardar - Modal
+   // Cerrar y Limpiar inputs - Modal
    document.getElementById("cerrarMod").addEventListener("click", () => {
       //vaciar inputs
       document.getElementById("nroTarjeta").value = "";
@@ -217,19 +211,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
       document.getElementById("numCuenta").disabled = true;
       document.getElementById("transferencia").checked = false;
       document.getElementById("tarjeta").checked = false;
-      //Remover clases
-      document.getElementById("vencimiento").classList.remove("is-invalid");
-      document.getElementById("nroTarjeta").classList.remove("is-invalid");
-      document.getElementById("codTarjeta").classList.remove("is-invalid");
-      document.getElementById("vencimiento").classList.remove("is-valid");
-      document.getElementById("nroTarjeta").classList.remove("is-valid");
-      document.getElementById("codTarjeta").classList.remove("is-valid");
-      document.getElementById("numCuenta").classList.remove("is-invalid");
-      document.getElementById("numCuenta").classList.remove("is-valid");
       document.getElementById("pagoSelec").innerHTML = "No seleccionada";
-   });
-   document.getElementById("guardarMod").addEventListener("click", () => {
-      
    });
    //Boton Finalizar Compra
    document.getElementById("finCompra").addEventListener("click", validar);
@@ -245,22 +227,46 @@ window.addEventListener('DOMContentLoaded', (event) => {
 // Validacion formulario
 function validar() {
    // Example starter JavaScript for disabling form submissions if there are invalid fields
-
    'use strict'
- 
    // Fetch all the forms we want to apply custom Bootstrap validation styles to
    var forms = document.querySelectorAll('.needs-validation')
- 
    // Loop over them and prevent submission
    Array.prototype.slice.call(forms)
-     .forEach(function (form) {
-       form.addEventListener('submit', function (event) {
-         if (!form.checkValidity()) {
-           event.preventDefault()
-           event.stopPropagation()
-         }
- 
-         form.classList.add('was-validated')
-       }, false)
-     })
+      .forEach(function (form) {
+         form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+               event.preventDefault()
+               event.stopPropagation()
+               //Muestro alerta
+               document.getElementById('compraError').classList.remove('d-none');
+            } else {
+               document.getElementById('compraExito').classList.remove('d-none');
+               //Borrar carrito al finalizar compra
+               localStorage.removeItem("Carrito");
+            }
+
+            form.classList.add('was-validated')
+         }, false)
+      })
+      if(document.getElementById("pais").value != "Uruguay"){
+         document.getElementById("pais").setCustomValidity("error");
+      }else{document.getElementById("pais").setCustomValidity("");}
+   //Mostrar error en el modal-----------
+   if (document.getElementById("tarjeta").checked == false && document.getElementById("transferencia").checked == false) {
+      document.getElementById("errorPago").classList.remove("d-none");
+   }
+   //Si Tarjeta esta seleccionada 
+   else if (document.getElementById("tarjeta").checked == true) {
+      if (document.getElementById("nroTarjeta").value == "" ||
+         document.getElementById("codTarjeta").value == "" ||
+         document.getElementById("vencimiento").value == "") {
+         document.getElementById("errorPago").classList.remove("d-none");
+      } else { document.getElementById("errorPago").classList.add("d-none"); }
+   }
+   //Si transferencia esta seleccionada
+   else if (document.getElementById("transferencia").checked == true) {
+      if (document.getElementById("numCuenta").value == "") {
+         document.getElementById("errorPago").classList.remove("d-none");
+      } else { document.getElementById("errorPago").classList.add("d-none"); }
+   } else { document.getElementById("errorPago").classList.add("d-none"); }
 }
