@@ -12,8 +12,7 @@ function totales() {
       //Modifico el innerHTML del subtotal y realizo la suma de el array numeros
       document.getElementById("subtotal").innerHTML = numeros.reduce((a, b) => a + b, 0);
    }
-
-   if (document.getElementById("subtotal").innerHTML)
+   
       //Precio Envio
       //Standar
       if (document.getElementById("standard").checked == true) {
