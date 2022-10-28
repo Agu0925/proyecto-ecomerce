@@ -12,19 +12,21 @@ function totales() {
       //Modifico el innerHTML del subtotal y realizo la suma de el array numeros
       document.getElementById("subtotal").innerHTML = numeros.reduce((a, b) => a + b, 0);
    }
-   //Precio Envio
-   //Standar
-   if (document.getElementById("standard").checked == true) {
-      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.05);
-   }
-   //Express
-   else if (document.getElementById("express").checked == true) {
-      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.07);
-   }
-   //Premium
-   else if (document.getElementById("premium").checked == true) {
-      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.15);
-   }
+
+   if (document.getElementById("subtotal").innerHTML)
+      //Precio Envio
+      //Standar
+      if (document.getElementById("standard").checked == true) {
+         document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.05);
+      }
+      //Express
+      else if (document.getElementById("express").checked == true) {
+         document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.07);
+      }
+      //Premium
+      else if (document.getElementById("premium").checked == true) {
+         document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.15);
+      }
    //Precio Total
    document.getElementById("total").innerHTML = parseInt(document.getElementById("subtotal").innerHTML) + parseInt(document.getElementById("envio").innerHTML);
 }
@@ -72,7 +74,7 @@ function mostrarCarrito() {
             dolares = iterator.unitCost;
          }
          articulos += `
-                              <div class="row align-items-center border-bottom pb-4 pt-4">
+                              <div id="${'div' + iterator.id}" class="row align-items-center border-bottom pb-4 pt-4">
                                  <div onclick="setProdID(${iterator.id})" class="col-2 text-center cursor-active">
                                         <img class="img-fluid" src="${iterator.image}" alt="${iterator.name}">
                                  </div>
@@ -215,6 +217,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
    });
    //Boton Finalizar Compra
    document.getElementById("finCompra").addEventListener("click", validar);
+   //Boton guardar Compra // Valida solo dentro del modal
+   document.getElementById("guardarMod").addEventListener("click", validar);
    //Cerrar alert exitosa
    document.getElementById("cerrarExito").addEventListener("click", () => {
       document.getElementById('compraExito').classList.add('d-none');
@@ -248,9 +252,9 @@ function validar() {
             form.classList.add('was-validated')
          }, false)
       })
-      if(document.getElementById("pais").value != "Uruguay"){
-         document.getElementById("pais").setCustomValidity("error");
-      }else{document.getElementById("pais").setCustomValidity("");}
+   if (document.getElementById("pais").value != "Uruguay") {
+      document.getElementById("pais").setCustomValidity("error");
+   } else { document.getElementById("pais").setCustomValidity(""); }
    //Mostrar error en el modal-----------
    if (document.getElementById("tarjeta").checked == false && document.getElementById("transferencia").checked == false) {
       document.getElementById("errorPago").classList.remove("d-none");
