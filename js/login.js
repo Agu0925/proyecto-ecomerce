@@ -61,8 +61,8 @@ btn.addEventListener("click", function (event) {
     } else if (intentos > 0) {
       alert(
         "Mail o Contraseñas no son correctos, Le quedan " +
-          intentos +
-          " intentos"
+        intentos +
+        " intentos"
       );
       intentos--;
       localStorage.removeItem("logueado?");
@@ -202,16 +202,37 @@ btnregistrarse.addEventListener("click", function (event) {
     regname.value.length >= 5 &&
     regemail.value.length >= 5
   ) {
-    // Array Usuario ---------------
-    let cuentas = {
-      nombre: [regname.value],
-      email: [regemail.value],
-      pass: [regpsw.value],
-    };
-    // Guardar el array en el localStorage
-    localStorage.setItem("Cuentas", JSON.stringify(cuentas));
-    // Array Usuario ---------------
-
+    if (localStorage.getItem("Cuentas")) {
+      for (const iterator of localStorage.getItem("Cuentas")) {
+        if (!iterator.email.includes(regemail.value)) {
+          let cuentas = [{
+            "nombre": regname.value,
+            "email": regemail.value,
+            "pass": regpsw.value,
+            "nombre2": "",
+            "apellido": "",
+            "apellido2": "",
+            "tel": ""
+          }];
+          cuentas.push(JSON.parse(localStorage.getItem("Cuentas")));
+          localStorage.setItem("Cuentas", JSON.stringify(cuentas));
+        }else{alert("Ya existe el correo");}
+      }
+    } else {
+      // Array Usuario ---------------
+      let cuentas = [{
+        "nombre": regname.value,
+        "email": regemail.value,
+        "pass": regpsw.value,
+        "nombre2": "",
+        "apellido": "",
+        "apellido2": "",
+        "tel": ""
+      }];
+      // Guardar el array en el localStorage
+      localStorage.setItem("Cuentas", JSON.stringify(cuentas));
+      // Array Usuario ---------------
+    }
     formlogin.style.display = "block";
     formreg.style.display = "none";
     check.checked = false;
@@ -224,7 +245,7 @@ btnregistrarse.addEventListener("click", function (event) {
     showAlertError();
   }
 });
-//Si ya estoy logueado con entre directamente al inicio
+//Si ya estoy logueado que entre directamente al inicio
 if (window.localStorage.getItem("logueado?") != undefined) {
   window.location.href = "inicio.html";
 }
