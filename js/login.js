@@ -208,8 +208,13 @@ btnregistrarse.addEventListener("click", function (event) {
   ) {
     //Cambio el codigo de registro pusheo los datos a un array para poder registrar muchas cuentas.
     if (localStorage.getItem("Cuentas")) {
+      // Declaro cuentasCont para enviar todos los correos registrados en cuentas para hacer mas tarde una consulta con includes
+      let cuentasCont = '';
       for (const iterator of JSON.parse(localStorage.getItem("Cuentas"))) {
-        if (!iterator.email.includes(regemail.value)) {
+        cuentasCont += iterator.email;
+      }
+      //Consulto si no esta el correo introducido y sino muestro alert de que ya existe el correo
+        if (cuentasCont.includes(regemail.value) != true) {
           let cuenta = {
             "nombre": regname.value,
             "email": regemail.value,
@@ -231,8 +236,10 @@ btnregistrarse.addEventListener("click", function (event) {
           regpsw2.value = "";
           alert("Se registro Correctamente");
         } else { alert("Ya existe el correo"); }
-      }
-    } else {
+      
+    }
+    //Si no existe registro en local storage lo creo 
+    else {
       // Array Usuario ---------------
       let cuenta = {
         "nombre": regname.value,
