@@ -1,50 +1,58 @@
-let Nusuario = document.getElementsByClassName('Nusuario');
-// Llamo el objeto de local storage y lo modifico
-let arrayCuentas = localStorage.getItem('Cuentas');
-let cuentas = JSON.parse(arrayCuentas);
-// ----------------------------------------------------
-// Funcion Cerrar Sesion
-function cerrarS() {
-  localStorage.removeItem('logueado?');
-}
-//Mostrar nombre en navbar
-//Recorro todas las clases Nusuario y las modifico
-for (i = 0; i < Nusuario.length; i++) {
-  Nusuario[i].innerHTML = `
-  <ul class="navbar-nav">
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-      ${cuentas[0].nombre}
-      </a>
-      <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-        <!-- Redirigo con href y utilizo una funcion con onclick en cerrar sesion ------------------------------------------ -->
-        <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
-        <li><a class='dropdown-item' href='my-profile.html'>  Mi perfil </a></li>
-        <li><a class="dropdown-item" href="index.html" onclick="cerrarS()" id='cerrar-sesion'> Cerrar sesion </a></li>
-      </ul>
-    </li>
-  </ul>`;
-}
+let cuenta = JSON.parse(localStorage.getItem('logueado?'));
+let usuario = JSON.parse(localStorage.getItem('usuario: ' + cuenta.email));
 //Configurar Perfil
-if(localStorage.getItem("Cuentas")){
-  document.getElementById("mail").value = cuentas[0].email;
-  document.getElementById("nombre").value = cuentas[0].nombre;
-  document.getElementById("nombre2").value = cuentas[0].nombre2;
-  document.getElementById("apellido").value = cuentas[0].apellido;
-  document.getElementById("apellido2").value = cuentas[0].apellido2;
-  document.getElementById("tel").value = cuentas[0].tel;
+//verifico si existe el objeto en el localStorage y relleno los campos
+if (localStorage.getItem('usuario: ' + cuenta.email)) {
+  document.getElementById("mail").value = usuario.email;
+  document.getElementById("nombre").value = usuario.nombre;
+  document.getElementById("nombre2").value = usuario.nombre2;
+  document.getElementById("apellido").value = usuario.apellido;
+  document.getElementById("apellido2").value = usuario.apellido2;
+  document.getElementById("tel").value = usuario.tel;
+  if (usuario.img != '') { document.getElementById("img").innerHTML = `<img src="${usuario.img}" alt="" width="150" height="150">`; }
+  else {
+    document.getElementById("img").innerHTML = ` <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="150"
+  height="150"
+  fill="currentColor"
+  class="bi bi-person-bounding-box text-secondary"
+  viewBox="0 0 16 16"
+>
+  <path
+    d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"
+  />
+  <path
+    d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"
+  />
+</svg>`}
+}
+//Sino traigo el objeto creado a partir del login y relleno los campos
+else {
+  document.getElementById("mail").value = cuenta.email;
+  document.getElementById("nombre").value = cuenta.nombre;
 };
+//Creo el on change afuera de el boton guardar porque sino no actualiza en tiempo real la imagen.
+let img = '';
+document.getElementById("imgperfil").addEventListener('change', () => {
+  let imagen = document.getElementById("imgperfil").files[0];
+  let leerImagen = new FileReader();
+  leerImagen.readAsDataURL(imagen);
+  leerImagen.onload = () => {
+    img = leerImagen.result;
+  }
+})
+//Creo un objeto nuevo con los valores de los campos y lo reescribo en el localStorage
 document.getElementById("guardar").addEventListener("click", () => {
-  // Array Usuario ---------------
-  let cuenta = [{
+  let guardarPerfil = {
     "nombre": document.getElementById("nombre").value,
-    "email": document.getElementById("mail").value,
-    "pass": cuentas.pass,
+    "email": cuenta.email,
     "nombre2": document.getElementById("nombre2").value,
     "apellido": document.getElementById("apellido").value,
     "apellido2": document.getElementById("apellido2").value,
-    "tel": document.getElementById("tel").value
-  }];
-  // Guardar el array en el localStorage
-  localStorage.setItem("Cuentas", JSON.stringify(cuenta));
+    "tel": document.getElementById("tel").value,
+    "img": img
+  };
+  document.getElementById("img").innerHTML = `<img src="${img}" alt="" width="150" height="150">`;
+  localStorage.setItem('usuario: ' + cuenta.email, JSON.stringify(guardarPerfil));
 });

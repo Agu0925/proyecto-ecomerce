@@ -42,34 +42,38 @@ btn.addEventListener("click", function (event) {
 
   //login con local storage
   if (correo.value != "" && pw.value != "") {
-    if (window.localStorage.getItem("Cuentas") == undefined) {
+    if (localStorage.getItem("Cuentas") == undefined) {
       lblpw.innerHTML =
         "Usted no tiene una cuenta, para ingresar debe registrarse.";
       lblpw.style.color = "red";
     }
-    // Obtener el arreglo de localStorage
-    let arrayCuentas = localStorage.getItem("Cuentas");
-    // Con parse puedo modificar usando js
-    let cuentas = JSON.parse(arrayCuentas);
-    //console.log(arrayCuentas)
     //------
-    if (correo.value == cuentas.email && pw.value == cuentas.pass) {
-      window.location.href = "inicio.html";
-      let logueado = 1;
-      localStorage.setItem("logueado?", JSON.stringify(logueado));
-      alert("Ingresaste Correctamente Bienvenido " + cuentas.nombre);
-    } else if (intentos > 0) {
-      alert(
-        "Mail o Contraseñas no son correctos, Le quedan " +
-        intentos +
-        " intentos"
-      );
-      intentos--;
-      localStorage.removeItem("logueado?");
-    } else {
-      btn.disabled = true;
-      localStorage.removeItem("logueado?");
-      alert("No te quedan intentos vuelve mas tarde");
+    //Cambio el codigo de registro pusheo los datos a un array para poder registrar muchas cuentats.
+    //Utilizo el for para filtrar por email y asi poder comparar los datos.
+    for (const iterator of JSON.parse(localStorage.getItem("Cuentas"))) {
+      if(iterator.email == correo.value) {
+        if (correo.value == iterator.email && pw.value == iterator.pass) {
+          window.location.href = "inicio.html";
+          let logueado = {
+            "nombre": iterator.nombre,
+            "email": iterator.email
+          };
+          localStorage.setItem("logueado?", JSON.stringify(logueado));
+          alert("Ingresaste Correctamente Bienvenido " + iterator.nombre);
+        } else if (intentos > 0) {
+          alert(
+            "Mail o Contraseñas no son correctos, Le quedan " +
+            intentos +
+            " intentos"
+          );
+          intentos--;
+          localStorage.removeItem("logueado?");
+        } else {
+          btn.disabled = true;
+          localStorage.removeItem("logueado?");
+          alert("No te quedan intentos vuelve mas tarde");
+        }
+      }
     }
   }
   //-------------------------------------------
@@ -202,10 +206,11 @@ btnregistrarse.addEventListener("click", function (event) {
     regname.value.length >= 5 &&
     regemail.value.length >= 5
   ) {
+    //Cambio el codigo de registro pusheo los datos a un array para poder registrar muchas cuentas.
     if (localStorage.getItem("Cuentas")) {
-      for (const iterator of localStorage.getItem("Cuentas")) {
+      for (const iterator of JSON.parse(localStorage.getItem("Cuentas"))) {
         if (!iterator.email.includes(regemail.value)) {
-          let cuentas = [{
+          let cuenta = {
             "nombre": regname.value,
             "email": regemail.value,
             "pass": regpsw.value,
@@ -213,14 +218,23 @@ btnregistrarse.addEventListener("click", function (event) {
             "apellido": "",
             "apellido2": "",
             "tel": ""
-          }];
-          cuentas.push(JSON.parse(localStorage.getItem("Cuentas")));
+          };
+          let cuentas = JSON.parse(localStorage.getItem("Cuentas"));
+          cuentas.push(cuenta);
           localStorage.setItem("Cuentas", JSON.stringify(cuentas));
-        }else{alert("Ya existe el correo");}
+          formlogin.style.display = "block";
+          formreg.style.display = "none";
+          check.checked = false;
+          regname.value = "";
+          regemail.value = "";
+          regpsw.value = "";
+          regpsw2.value = "";
+          alert("Se registro Correctamente");
+        } else { alert("Ya existe el correo"); }
       }
     } else {
       // Array Usuario ---------------
-      let cuentas = [{
+      let cuenta = {
         "nombre": regname.value,
         "email": regemail.value,
         "pass": regpsw.value,
@@ -228,19 +242,21 @@ btnregistrarse.addEventListener("click", function (event) {
         "apellido": "",
         "apellido2": "",
         "tel": ""
-      }];
+      };
+      let cuentas = [];
+      cuentas.push(cuenta);
       // Guardar el array en el localStorage
       localStorage.setItem("Cuentas", JSON.stringify(cuentas));
       // Array Usuario ---------------
+      formlogin.style.display = "block";
+      formreg.style.display = "none";
+      check.checked = false;
+      regname.value = "";
+      regemail.value = "";
+      regpsw.value = "";
+      regpsw2.value = "";
+      alert("Se registro Correctamente");
     }
-    formlogin.style.display = "block";
-    formreg.style.display = "none";
-    check.checked = false;
-    regname.value = "";
-    regemail.value = "";
-    regpsw.value = "";
-    regpsw2.value = "";
-    alert("Se registro Correctamente");
   } else {
     showAlertError();
   }
