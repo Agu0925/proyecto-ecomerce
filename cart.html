@@ -1,372 +1,241 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <title>eMercado - Todo lo que busques está aquí</title>
-    <link
-      href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i"
-      rel="stylesheet"
-    />
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/font-awesome.min.css" rel="stylesheet" />
-    <link href="css/styles.css" rel="stylesheet" />
-    <script src="js/VerificacionLogin.js"></script>
-  </head>
 
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-      <div class="container">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav w-100 justify-content-between">
-            <li class="nav-item">
-              <a class="nav-link" href="inicio.html">Inicio</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="categories.html">Categorías</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="sell.html">Vender</a>
-            </li>
-            <li class="nav-item Nusuario"></li>
-          </ul>
-        </div>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>eMercado - Todo lo que busques está aquí</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
+  <link href="css/bootstrap.min.css" rel="stylesheet" />
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <link href="css/styles.css" rel="stylesheet" />
+  <script src="js/VerificacionLogin.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav w-100 justify-content-between">
+          <li class="nav-item">
+            <a class="nav-link" href="inicio.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="categories.html">Categorías</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sell.html">Vender</a>
+          </li>
+          <li class="nav-item Nusuario"></li>
+        </ul>
       </div>
-    </nav>
-    <main id="main">
-      <div class="container">
-        <h2 class="text-center m-5">Carrito de Compras</h2>
-        <h4 class="mb-4">Articulos a comprar</h4>
-        <div class="row border-bottom border-dark">
-          <div class="col-2"></div>
-          <div class="col text-center"><b>Nombre</b></div>
-          <div class="col text-center"><b>Costo</b></div>
-          <div class="col-1 text-center"><b>Cantidad</b></div>
-          <div class="col text-center"><b>Subtotal</b></div>
-          <div class="col-1"></div>
+    </div>
+  </nav>
+  <main id="main">
+    <div class="container">
+      <h2 class="text-center m-5">Carrito de Compras</h2>
+      <h4 class="mb-4">Articulos a comprar</h4>
+      <div class="row border-bottom border-dark">
+        <div class="col-2"></div>
+        <div class="col text-center"><b>Nombre</b></div>
+        <div class="col text-center"><b>Costo</b></div>
+        <div class="col-1 text-center"><b>Cantidad</b></div>
+        <div class="col text-center"><b>Subtotal</b></div>
+        <div class="col-1"></div>
+      </div>
+      <div id="carrito"></div>
+      <div class="mb-4 border-top border-dark row"></div>
+
+      <!--         Formulario         -->
+      <h4 class="mb-3">Direccion de envio</h4>
+      <form class="row needs-validation" novalidate>
+        <div class="col-12 col-md-6">
+          <label class="mb-0" for="calle">Calle</label>
+          <input class="form-control mb-1" type="text" name="calle" id="calle" required />
         </div>
-        <div id="carrito"></div>
-        <div class="mb-4 border-top border-dark row"></div>
-        
-        <!--         Formulario         -->
-        <h4 class="mb-3">Direccion de envio</h4>
-        <form class="row needs-validation" novalidate>
-          <div class="col-6">
-            <label class="mb-0" for="calle">Calle</label>
-            <input
-              class="form-control mb-1"
-              type="text"
-              name="calle"
-              id="calle"
-              required
-            />
-          </div>
-          <div class="col-2">
-            <label class="mb-0" for="numero">Numero</label>
-            <input
-              class="form-control mb-1"
-              type="text"
-              onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
-              name="numero"
-              id="numero"
-              required
-            />
-          </div>
-          <div class="col-6">
-            <label class="mb-0" for="esquina">Esquina</label>
-            <input
-              class="form-control mb-1"
-              type="text"
-              name="esquina"
-              id="esquina"
-              required
-            />
-          </div>
-          <div class="col-6"></div>
-          <div class="col-2">
-            <label class="mb-0" for="pais">Pais</label>
-            <select
-              class="form-select mb-1"
-              id="pais"
-              name="pais"
-              required
-            ></select>
-          </div>
-          <div class="col-2">
-            <label class="mb-0" for="ciudad">Ciudad</label>
-            <select class="form-select mb-1" id="ciudad" name="ciudad" required>
-              <option value="" disabled selected hidden>Ciudad</option>
-            </select>
-          </div>
+        <div class="col-6 col-md-2">
+          <label class="mb-0" for="numero">Numero</label>
+          <input class="form-control mb-1" type="text"
+            onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" name="numero"
+            id="numero" required />
+        </div>
+        <div class="col-12 col-md-6">
+          <label class="mb-0" for="esquina">Esquina</label>
+          <input class="form-control mb-1" type="text" name="esquina" id="esquina" required />
+        </div>
+        <div class="col-6"></div>
+        <div class="col-12 col-md-2">
+          <label class="mb-0" for="pais">Pais</label>
+          <select class="form-select mb-1" id="pais" name="pais" required></select>
+        </div>
+        <div class="col-12 col-md-2">
+          <label class="mb-0" for="ciudad">Ciudad</label>
+          <select class="form-select mb-1" id="ciudad" name="ciudad" required>
+            <option value="" disabled selected hidden>Ciudad</option>
+          </select>
+        </div>
 
-          <!-- TIPO DE ENVIO -->
-          <h4 class="mb-3 mt-4">Tipo de Envio</h4>
-          <div class="d-block my-3">
-            <div class="custom-control custom-radio">
-              <input
-                id="premium"
-                name="publicationType"
-                type="radio"
-                class="custom-control-input"
-                checked=""
-                required=""
-              />
-              <label class="custom-control-label" for="premium"
-                >Premium 2 a 5 dias (15%)</label
-              >
-            </div>
-            <div class="custom-control custom-radio">
-              <input
-                id="express"
-                name="publicationType"
-                type="radio"
-                class="custom-control-input"
-                required=""
-              />
-              <label class="custom-control-label" for="express"
-                >Express 5 a 8 dias (7%)</label
-              >
-            </div>
-            <div class="custom-control custom-radio">
-              <input
-                id="standard"
-                name="publicationType"
-                type="radio"
-                class="custom-control-input"
-                required=""
-              />
-              <label class="custom-control-label" for="standard"
-                >Standard de 12 a 15 dias (5%)</label
-              >
-            </div>
+        <!-- TIPO DE ENVIO -->
+        <h4 class="mb-3 mt-4">Tipo de Envio</h4>
+        <div class="d-block my-3">
+          <div class="custom-control custom-radio">
+            <input id="premium" name="publicationType" type="radio" class="custom-control-input" checked=""
+              required="" />
+            <label class="custom-control-label" for="premium">Premium 2 a 5 dias (15%)</label>
           </div>
-          <div class="my-4 border-top border-dark"></div>
-          <h4 class="mb-3">Costos</h4>
-          <div class="col-12 align-items-center border w-50 py-4 ms-1">
-            <div class="row">
-              <p class="m-0 col">Subtotal</p>
-              <p class="m-0 col text-end">USD <span id="subtotal">0</span></p>
-            </div>
+          <div class="custom-control custom-radio">
+            <input id="express" name="publicationType" type="radio" class="custom-control-input" required="" />
+            <label class="custom-control-label" for="express">Express 5 a 8 dias (7%)</label>
           </div>
-          <div class="col-12 align-items-center border w-50 py-4 ms-1">
-            <div class="row">
-              <p class="m-0 col">Costo de envio</p>
-              <p class="m-0 col text-end">USD <span id="envio">0</span></p>
-            </div>
+          <div class="custom-control custom-radio">
+            <input id="standard" name="publicationType" type="radio" class="custom-control-input" required="" />
+            <label class="custom-control-label" for="standard">Standard de 12 a 15 dias (5%)</label>
           </div>
-          <div class="col-12 align-items-center border w-50 py-4 ms-1">
-            <div class="row">
-              <p class="m-0 col">Total</p>
-              <b class="m-0 col text-end">USD <span id="total">0</span></b>
-            </div>
-          </div>
-          <div class="my-4 border-top border-dark"></div>
-          <h4>Forma de pago</h4>
+        </div>
+        <div class="my-4 border-top border-dark"></div>
+        <h4 class="mb-3">Costos</h4>
+        <div class="col-12 align-items-center border w-md-50 py-4 ms-1">
           <div class="row">
-            <p class="col-md-3 col-lg-2">
-              <span id="pagoSelec">No seleccionada</span>
-            </p>
-            <a
-              id="formaPago"
-              class="cursor-active col"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-              >Seleccionar</a
-            >
+            <p class="m-0 col">Subtotal</p>
+            <p class="m-0 col text-end">USD <span id="subtotal">0</span></p>
           </div>
-          <div class="col-3 text-center">
-            <p id="errorPago" class="alert-danger d-none">Verifica la forma de pago</p>
+        </div>
+        <div class="col-12 align-items-center border w-md-50 py-4 ms-1">
+          <div class="row">
+            <p class="m-0 col">Costo de envio</p>
+            <p class="m-0 col text-end">USD <span id="envio">0</span></p>
           </div>
-          <div class="col-9"></div>
-          <input
-            type="submit"
-            class="btn btn-primary w-50 mt-5"
-            id="finCompra"
-            value="Finalizar compra"
-          />
+        </div>
+        <div class="col-12 align-items-center border w-md-50 py-4 ms-1">
+          <div class="row">
+            <p class="m-0 col">Total</p>
+            <b class="m-0 col text-end">USD <span id="total">0</span></b>
+          </div>
+        </div>
+        <div class="my-4 border-top border-dark"></div>
+        <h4>Forma de pago</h4>
+        <div class="row">
+          <p class="col-md-3 col-lg-2">
+            <span id="pagoSelec">No seleccionada</span>
+          </p>
+          <a id="formaPago" class="cursor-active col" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">Seleccionar</a>
+        </div>
+        <div class="col-3 text-center">
+          <p id="errorPago" class="alert-danger d-none">
+            Verifica la forma de pago
+          </p>
+        </div>
+        <div class="col-9"></div>
+        <input type="submit" class="btn btn-primary w-50 mt-5" id="finCompra" value="Finalizar compra" />
 
-          <!-- Modal forma de pago-->
-          <div
-            class="modal fade"
-            id="exampleModal"
-            tabindex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-          >
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title" id="exampleModalLabel">
-                    Forma de pago
-                  </h4>
+        <!-- Modal forma de pago-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">
+                  Forma de pago
+                </h4>
+              </div>
+              <div class="modal-body row">
+                <div>
+                  <input class="form-check-input" type="radio" name="formadepago" id="tarjeta" required />
+                  <label class="custom-control-label ms-1" for="tarjeta">Tarjeta de credito</label>
                 </div>
-                <div class="modal-body row">
-                  <div>
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="formadepago"
-                      id="tarjeta"
-                      required
-                    />
-                    <label class="custom-control-label ms-1" for="tarjeta"
-                      >Tarjeta de credito</label
-                    >
-                  </div>
-                  <div class="border-top my-3"></div>
-                  <label class="custom-text-label col-5 me-4" for="nroTarjeta">
-                    Numero de tarjeta
-                  </label>
-                  <label class="custom-text-label col" for="codTarjeta">
-                    Codigo de seguridad
-                  </label>
-                  <div class="col-5 me-4">
-                    <input
-                      required
-                      type="text"
-                      name="nroTarjeta"
-                      class="form-control"
-                      id="nroTarjeta"
-                      onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
-                    />
-                  </div>
-                  <div class="col-3">
-                    <input
-                      required
-                      type="text"
-                      name="codTarjeta"
-                      class="form-control"
-                      id="codTarjeta"
-                      onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
-                    />
-                  </div>
-                  <div class="col-5 my-3">
-                    <label class="custom-text-label col-12" for="vencimiento">
-                      Vencimiento (MM/AA)
-                    </label>
-                    <input
-                      required
-                      type="text"
-                      name="vencimiento"
-                      class="form-control"
-                      id="vencimiento"
-                      onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      required
-                      class="form-check-input"
-                      type="radio"
-                      name="formadepago"
-                      id="transferencia"
-                    />
-                    <label class="custom-control-label ms-1" for="transferencia"
-                      >Transferencia bancaria</label
-                    >
-                  </div>
-                  <div class="border-top my-3"></div>
-                  <label class="custom-text-label col-12" for="numCuenta">
-                    Numero de cuenta
-                  </label>
-                  <div class="col-5">
-                    <input
-                      required
-                      type="text"
-                      name="numCuenta"
-                      class="form-control"
-                      id="numCuenta"
-                      onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
-                    />
-                  </div>
+                <div class="border-top my-3"></div>
+                <label class="custom-text-label col-5 me-4" for="nroTarjeta">
+                  Numero de tarjeta
+                </label>
+                <label class="custom-text-label col" for="codTarjeta">
+                  Codigo de seguridad
+                </label>
+                <div class="col-6 me-md-4">
+                  <input required type="text" name="nroTarjeta" class="form-control" id="nroTarjeta"
+                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
                 </div>
-                <div class="modal-footer">
-                  <button
-                    type="button"
-                    id="cerrarMod"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                  >
-                    Cerrar
-                  </button>
-                  <button
-                    type="button"
-                    id="guardarMod"
-                    class="btn btn-primary"
-                    data-bs-dismiss="modal"
-                  >
-                    Guardar
-                  </button>
+                <div class="col-5 col-md-3">
+                  <input required type="text" name="codTarjeta" class="form-control" id="codTarjeta"
+                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
                 </div>
+                <div class="col-5 my-3">
+                  <label class="custom-text-label col-12" for="vencimiento">
+                    Vencimiento (MM/AA)
+                  </label>
+                  <input required type="text" name="vencimiento" class="form-control" id="vencimiento"
+                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
+                </div>
+                <div>
+                  <input required class="form-check-input" type="radio" name="formadepago" id="transferencia" />
+                  <label class="custom-control-label ms-1" for="transferencia">Transferencia bancaria</label>
+                </div>
+                <div class="border-top my-3"></div>
+                <label class="custom-text-label col-12" for="numCuenta">
+                  Numero de cuenta
+                </label>
+                <div class="col-5">
+                  <input required type="text" name="numCuenta" class="form-control" id="numCuenta"
+                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" id="cerrarMod" class="btn btn-secondary" data-bs-dismiss="modal">
+                  Cerrar
+                </button>
+                <button type="button" id="guardarMod" class="btn btn-primary" data-bs-dismiss="modal">
+                  Guardar
+                </button>
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Alerta de compra exitosa -->
-          <div
-            class="alert alert-success alert-dismissible show fade w-50 d-none"
-            id="compraExito"
-            role="alert"
-          >
-            <strong>Su compra se realizo con exito!</strong> Gracias por su
-            preferencia.
-            <button id="cerrarExito" type="button" class="btn-close"></button>
-          </div>
-          <!-- Alerta de compra fallida -->
-          <div
-            id="compraError"
-            class="alert alert-danger alert-dismissible show fade w-50 d-none"
-            role="alert"
-          >
-            <strong>Hubo un error!</strong> Verifique sus datos y intente
-            nuevamente.
-            <button id="cerrarError" type="button" class="btn-close"></button>
-          </div>
-        </form>
-      </div>
-    </main>
-    <footer class="text-muted">
-      <div class="container">
-        <p class="float-end">
-          <a href="#">Volver arriba</a>
-        </p>
-        <p>
-          Este sitio forma parte de
-          <a href="https://jovenesaprogramar.edu.uy/" target="_blank"
-            >Jovenes a Programar</a
-          >
-          - 2022
-        </p>
-        <p>
-          Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la
-          letra del obligatorio.
-        </p>
-      </div>
-    </footer>
-    <div id="spinner-wrapper">
-      <div class="lds-ring">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
+        <!-- Alerta de compra exitosa -->
+        <div class="alert alert-success alert-dismissible show fade w-50 d-none" id="compraExito" role="alert">
+          <strong>Su compra se realizo con exito!</strong> Gracias por su
+          preferencia.
+          <button id="cerrarExito" type="button" class="btn-close"></button>
+        </div>
+        <!-- Alerta de compra fallida -->
+        <div id="compraError" class="alert alert-danger alert-dismissible show fade w-50 d-none" role="alert">
+          <strong>Hubo un error!</strong> Verifique sus datos y intente
+          nuevamente.
+          <button id="cerrarError" type="button" class="btn-close"></button>
+        </div>
+      </form>
     </div>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/init.js"></script>
-    <script src="js/cart.js"></script>
-  </body>
+  </main>
+  <footer class="text-muted">
+    <div class="container">
+      <p class="float-end">
+        <a href="#">Volver arriba</a>
+      </p>
+      <p>
+        Este sitio forma parte de
+        <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
+        - 2022
+      </p>
+      <p>
+        Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la
+        letra del obligatorio.
+      </p>
+    </div>
+  </footer>
+  <div id="spinner-wrapper">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+
 </html>

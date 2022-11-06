@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 const element = datos.relatedProducts[a];
 
                 htmlrelacionados = `
-                                 <div class="col-2 border-end cursor-active" onclick="setProdID(${element.id})">
+                                 <div class="col-md-4 col-lg-2 col-6 border-end cursor-active" onclick="setProdID(${element.id})">
                                     <p class="text-center"> ${element.name} </p>
                                      <div class="d-flex w-100 justify-content-between">
                                         <img class="img-fluid" src="${element.image}" alt="${element.name}">
