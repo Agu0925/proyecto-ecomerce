@@ -51,28 +51,33 @@ document.addEventListener("DOMContentLoaded", function (event) {
                      </div> 
             </div>
         `;
-                //Filtros para carrito---------------------------
+                //Filtros para agregar producto al carrito---------------------------
+                let arrayCuentas = JSON.parse(localStorage.getItem("Cuentas"));
+                let cuenta = JSON.parse(localStorage.getItem("logueado"));
+                let iterator = arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == cuenta.email)]
                 //si existe carrito sumarle a la info existente
-                if (localStorage.getItem("Carrito")) {
-                    let nprod = localStorage.getItem("Carrito");
+                if (iterator.carrito != "") {
+                    let nprod = iterator.carrito;
                     let nuevoP = JSON.parse(nprod);
                     produ += nuevoP;
                     //si existe un producto no repetirlo
-                    if (localStorage.getItem('Carrito').includes(datos.name)) {
+                    if (iterator.carrito.includes(datos.name)) {
                         document.getElementById("alerta-carrito").style.color = "red";
                         document.getElementById("alerta-carrito").innerHTML =
                             "El producto ya existe en el carrito";
                     }
                     //si no existe el producto agregarlo
                     else {
-                        localStorage.setItem("Carrito", JSON.stringify(produ));
+                        iterator.carrito = JSON.stringify(produ);
+                        localStorage.setItem("Cuentas", JSON.stringify(arrayCuentas));
                         document.getElementById("alerta-carrito").style.color = "green";
                         document.getElementById("alerta-carrito").innerHTML =
                             "El producto se agrego correctamente";
                     }
                     //si no existe carrito crearlo y sumarle la informacion
                 } else {
-                    localStorage.setItem("Carrito", JSON.stringify(produ));
+                    iterator.carrito = JSON.stringify(produ);
+                    localStorage.setItem("Cuentas", JSON.stringify(arrayCuentas));
                     document.getElementById("alerta-carrito").style.color = "green";
                     document.getElementById("alerta-carrito").innerHTML =
                         "El producto se agrego correctamente";

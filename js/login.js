@@ -45,37 +45,40 @@ btn.addEventListener("click", function (event) {
     // Si existe en el local storage ejecutar sino mostrar error
     if (localStorage.getItem("Cuentas")) {
       //Cambio el codigo de registro pusheo los datos a un array para poder registrar muchas cuentats.
-      //Utilizo el for para filtrar por email y asi poder comparar los datos.
+      //Utilizo el findIndex para seleccionar el objeto en el array y asi poder comparar los datos.
+      //Traigo el array
       let arrayUsuarios = JSON.parse(localStorage.getItem("Cuentas"));
+      //Declaro el objeto ya encontrado con findIndex
       let iterator = arrayUsuarios[arrayUsuarios.findIndex(arrayUsuarios => arrayUsuarios.email == correo.value)];
-        if (iterator.email == correo.value) {
-          if (correo.value == iterator.email && pw.value == iterator.pass) {
-            window.location.href = "inicio.html";
-            let logueado = {
-              "nombre": iterator.nombre,
-              "email": iterator.email,
-              "nombre2": iterator.nombre2,
-              "apellido": iterator.apellido,
-              "apellido2": iterator.apellido2,
-              "tel": iterator.tel,
-              "img": iterator.img
-            };
-            localStorage.setItem("logueado", JSON.stringify(logueado));
-            alert("Ingresaste Correctamente Bienvenido " + iterator.nombre);
-          } else if (intentos > 0) {
-            alert(
-              "Mail o Contraseñas no son correctos, Le quedan " +
-              intentos +
-              " intentos"
-            );
-            intentos--;
-            localStorage.removeItem("logueado?");
-          } else {
-            btn.disabled = true;
-            localStorage.removeItem("logueado?");
-            alert("No te quedan intentos vuelve mas tarde");
-          }
+      //Utilizo la variable declarada
+        if (correo.value == iterator.email && pw.value == iterator.pass) {
+          window.location.href = "inicio.html";
+          let logueado = {
+            "nombre": iterator.nombre,
+            "email": iterator.email,
+            "nombre2": iterator.nombre2,
+            "apellido": iterator.apellido,
+            "apellido2": iterator.apellido2,
+            "tel": iterator.tel,
+            "img": iterator.img,
+            "carrito": ''
+          };
+          localStorage.setItem("logueado", JSON.stringify(logueado));
+          alert("Ingresaste Correctamente Bienvenido " + iterator.nombre);
+        } else if (intentos > 0) {
+          alert(
+            "Mail o Contraseñas no son correctos, Le quedan " +
+            intentos +
+            " intentos"
+          );
+          intentos--;
+          localStorage.removeItem("logueado");
+        } else {
+          btn.disabled = true;
+          localStorage.removeItem("logueado");
+          alert("No te quedan intentos vuelve mas tarde");
         }
+        //Muestro el error si no hay cuentas creadas
     } else {
       lblpw.innerHTML =
         "Todavia no tenemos usuarios sea el primero en registrarse!!!";
@@ -115,21 +118,7 @@ document.getElementById("sign-in").addEventListener("click", function (event) {
   regpsw2.style.borderColor = "grey";
   check.style.borderColor = "grey";
 });
-//  MUEVO ESTO A BOTON REGISTRAR PARA NO SOBRE ESCRIBIR
-//Objeto para intentar guardar datos en local storage.
-//    let cuentas = {
-//     nombre: [],
-//     email: [],
-//     pass: []
-//    };
-// Guardar el array en el localStorage
-//    localStorage.setItem('Cuentas', JSON.stringify(cuentas));
-//    //console.log(window.localStorage);
 
-//    // Obtener el arreglo de localStorage
-//    let arrayCuentas = localStorage.getItem('Cuentas');
-//     // Con parse puedo modificar usando js
-//     cuentas = JSON.parse(arrayCuentas);
 // //Validacion de Formulario y Errores ////// *Se puede simplificar con variable bandera ////////
 
 btnreg.addEventListener("click", function (event) {
@@ -219,7 +208,7 @@ btnregistrarse.addEventListener("click", function (event) {
       for (const iterator of JSON.parse(localStorage.getItem("Cuentas"))) {
         cuentasCont += iterator.email;
       }
-      //Consulto si no esta el correo introducido y sino muestro alert de que ya existe el correo
+      //Consulto si no esta el correo introducido sigo con el codigo y sino muestro alert de que ya existe el correo
       if (cuentasCont.includes(regemail.value) != true) {
         let cuenta = {
           "nombre": regname.value,
@@ -229,7 +218,8 @@ btnregistrarse.addEventListener("click", function (event) {
           "apellido": "",
           "apellido2": "",
           "tel": "",
-          "img": ""
+          "img": "",
+          "carrito": ""
         };
         // Traigo el array del localStorage
         let cuentas = JSON.parse(localStorage.getItem("Cuentas"));
@@ -246,7 +236,6 @@ btnregistrarse.addEventListener("click", function (event) {
         regpsw2.value = "";
         alert("Se registro Correctamente");
       } else { alert("Ya existe el correo"); }
-
     }
     //Si no existe registro en local storage lo creo 
     else {
@@ -259,7 +248,8 @@ btnregistrarse.addEventListener("click", function (event) {
         "apellido": "",
         "apellido2": "",
         "tel": "",
-        "img": ""
+        "img": "",
+        "carrito": ""
       };
       let cuentas = [];
       cuentas.push(cuenta);
@@ -280,7 +270,7 @@ btnregistrarse.addEventListener("click", function (event) {
   }
 });
 //Si ya estoy logueado que entre directamente al inicio
-if (window.localStorage.getItem("logueado?") != undefined) {
-  window.location.href = "inicio.html";
+if (localStorage.getItem("logueado")) {
+  location.href = "inicio.html";
 }
 //-------------------------------------------------------------------------------------------

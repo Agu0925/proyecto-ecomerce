@@ -1,9 +1,9 @@
 let cuenta = JSON.parse(localStorage.getItem('logueado'));
 //Funcion para imprimir imagen si se encuentra en local storage o imprimimr SVG
 function imgOsvg() {
-    if (cuenta.img != '') { document.getElementById("img").innerHTML = `<img src="${cuenta.img}" alt="" width="150" height="150">`; }
-    else {
-      document.getElementById("img").innerHTML = ` <svg
+  if (cuenta.img != '') { document.getElementById("img").innerHTML = `<img src="${cuenta.img}" alt="" width="150" height="150">`; }
+  else {
+    document.getElementById("img").innerHTML = ` <svg
   xmlns="http://www.w3.org/2000/svg"
   width="150"
   height="150"
@@ -18,15 +18,15 @@ function imgOsvg() {
     d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"
   />
 </svg>`}
-  }
+}
 //Relleno campos en Perfil
-  document.getElementById("mail").value = cuenta.email;
-  document.getElementById("nombre").value = cuenta.nombre;
-  document.getElementById("nombre2").value = cuenta.nombre2;
-  document.getElementById("apellido").value = cuenta.apellido;
-  document.getElementById("apellido2").value = cuenta.apellido2;
-  document.getElementById("tel").value = cuenta.tel;
-  imgOsvg();
+document.getElementById("mail").value = cuenta.email;
+document.getElementById("nombre").value = cuenta.nombre;
+document.getElementById("nombre2").value = cuenta.nombre2;
+document.getElementById("apellido").value = cuenta.apellido;
+document.getElementById("apellido2").value = cuenta.apellido2;
+document.getElementById("tel").value = cuenta.tel;
+imgOsvg();
 //Funcion para validar con BS5 y guardar datos.
 function validar() {
   // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -40,34 +40,34 @@ function validar() {
         if (!form.checkValidity()) {
           event.preventDefault()
           event.stopPropagation()
-          alert("Completa los campos obligatorios")
         } else {
           //Si se valida que introduzca este codigo
           // Traigo el array del localStorage
           let arrayCuentas = JSON.parse(localStorage.getItem('Cuentas'));
           //Modifico el array cuentas con el indice encontrado atraves de findIndex
-            arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == document.getElementById("mail").value)].nombre = document.getElementById("nombre").value;
-            arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == document.getElementById("mail").value)].nombre2 = document.getElementById("nombre2").value;
-            arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == document.getElementById("mail").value)].apellido = document.getElementById("apellido").value;
-            arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == document.getElementById("mail").value)].apellido2 = document.getElementById("apellido2").value;
-            arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == document.getElementById("mail").value)].tel = document.getElementById("tel").value;
-            if(img != ""){
-              arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == document.getElementById("mail").value)].img = img;
-            };
+          arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == cuenta.email)].nombre = document.getElementById("nombre").value;
+          arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == cuenta.email)].nombre2 = document.getElementById("nombre2").value;
+          arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == cuenta.email)].apellido = document.getElementById("apellido").value;
+          arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == cuenta.email)].apellido2 = document.getElementById("apellido2").value;
+          arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == cuenta.email)].tel = document.getElementById("tel").value;
+          if (img != "") {
+            arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == cuenta.email)].img = img;
+          };
           // Y lo actualizo ademas creo un objeto para actualizar tambien la cuenta logueada
           // Si inputFile no tiene ninguna imagen seleccionada enviar la informacion guardada en localStorage
-            let logueado = {
-              "email": document.getElementById("mail").value,
-              "nombre": document.getElementById("nombre").value,
-              "nombre2": document.getElementById("nombre2").value,
-              "apellido": document.getElementById("apellido").value,
-              "apellido2": document.getElementById("apellido2").value,
-              "tel": document.getElementById("tel").value,
-              "img": arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == document.getElementById("mail").value)].img
-              };
-            if(img != ""){logueado.img = img};
-            localStorage.setItem('logueado', JSON.stringify(logueado));
-            localStorage.setItem('Cuentas', JSON.stringify(arrayCuentas));
+          let logueado = {
+            "email": document.getElementById("mail").value,
+            "nombre": document.getElementById("nombre").value,
+            "nombre2": document.getElementById("nombre2").value,
+            "apellido": document.getElementById("apellido").value,
+            "apellido2": document.getElementById("apellido2").value,
+            "tel": document.getElementById("tel").value,
+            "img": arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == document.getElementById("mail").value)].img
+          };
+          // Si inputFile tiene imagen cambiar el objeto para enviar la informacion al localStorage
+          if (img != "") { logueado.img = img };
+          localStorage.setItem('logueado', JSON.stringify(logueado));
+          localStorage.setItem('Cuentas', JSON.stringify(arrayCuentas));
           //Cambiar imagen solamente si selecciono un archivo
           if (img != '') { document.getElementById("img").innerHTML = `<img src="${img}" alt="" width="150" height="150">`; }
         }

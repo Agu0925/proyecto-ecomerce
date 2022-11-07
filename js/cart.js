@@ -1,3 +1,8 @@
+//Cuenta
+let arrayCuentas = JSON.parse(localStorage.getItem("Cuentas"));
+let cuentaSelec = JSON.parse(localStorage.getItem("logueado"));
+let cuenta = arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == cuentaSelec.email)]
+//Cuenta
 function setProdID(id) {
    localStorage.setItem("prodID", id);
    window.location = "product-info.html";
@@ -12,20 +17,20 @@ function totales() {
       //Modifico el innerHTML del subtotal y realizo la suma de el array numeros
       document.getElementById("subtotal").innerHTML = numeros.reduce((a, b) => a + b, 0);
    }
-   
-      //Precio Envio
-      //Standar
-      if (document.getElementById("standard").checked == true) {
-         document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.05);
-      }
-      //Express
-      else if (document.getElementById("express").checked == true) {
-         document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.07);
-      }
-      //Premium
-      else if (document.getElementById("premium").checked == true) {
-         document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.15);
-      }
+
+   //Precio Envio
+   //Standar
+   if (document.getElementById("standard").checked == true) {
+      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.05);
+   }
+   //Express
+   else if (document.getElementById("express").checked == true) {
+      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.07);
+   }
+   //Premium
+   else if (document.getElementById("premium").checked == true) {
+      document.getElementById("envio").innerHTML = parseInt(parseInt(document.getElementById("subtotal").innerHTML) * 0.15);
+   }
    //Precio Total
    document.getElementById("total").innerHTML = parseInt(document.getElementById("subtotal").innerHTML) + parseInt(document.getElementById("envio").innerHTML);
 }
@@ -50,8 +55,9 @@ function carritoID(id) {
 function borrarProd(id) {
    //Borro div con removeChild
    document.getElementById("carrito").removeChild(document.getElementById("div" + id));
-   //Guardo el nuevo carrito
-   localStorage.setItem("Carrito", JSON.stringify(document.getElementById("carrito").innerHTML));
+   //Guardo el nuevo carrito en la cuenta logueada
+   cuenta.carrito = JSON.stringify(document.getElementById("carrito").innerHTML);
+   localStorage.setItem('Cuentas', JSON.stringify(arrayCuentas));
    //LLamo la funcion para actualizar en tiempo real los totales
    totales();
 }
@@ -97,8 +103,8 @@ function mostrarCarrito() {
          localStorage.setItem("carritoInicial", JSON.stringify(articulos));
 
          //Agregar Nuevos Productos
-         if (localStorage.getItem("Carrito")) {
-            let nprod = localStorage.getItem("Carrito");
+         if (cuenta.carrito != '') {
+            let nprod = cuenta.carrito;
             let nuevoP = JSON.parse(nprod);
             let carritoini = JSON.parse(localStorage.getItem('carritoInicial'));
             //No repetir producto por defecto
@@ -245,7 +251,8 @@ function validar() {
             } else {
                document.getElementById('compraExito').classList.remove('d-none');
                //Borrar carrito al finalizar compra
-               localStorage.removeItem("Carrito");
+               cuenta.carrito = "";
+               localStorage.setItem('Cuentas', JSON.stringify(arrayCuentas));
             }
 
             form.classList.add('was-validated')
