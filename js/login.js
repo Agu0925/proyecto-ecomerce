@@ -46,7 +46,8 @@ btn.addEventListener("click", function (event) {
     if (localStorage.getItem("Cuentas")) {
       //Cambio el codigo de registro pusheo los datos a un array para poder registrar muchas cuentats.
       //Utilizo el for para filtrar por email y asi poder comparar los datos.
-      for (const iterator of JSON.parse(localStorage.getItem("Cuentas"))) {
+      let arrayUsuarios = JSON.parse(localStorage.getItem("Cuentas"));
+      let iterator = arrayUsuarios[arrayUsuarios.findIndex(arrayUsuarios => arrayUsuarios.email == correo.value)];
         if (iterator.email == correo.value) {
           if (correo.value == iterator.email && pw.value == iterator.pass) {
             window.location.href = "inicio.html";
@@ -75,7 +76,6 @@ btn.addEventListener("click", function (event) {
             alert("No te quedan intentos vuelve mas tarde");
           }
         }
-      }
     } else {
       lblpw.innerHTML =
         "Todavia no tenemos usuarios sea el primero en registrarse!!!";

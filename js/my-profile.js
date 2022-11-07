@@ -40,8 +40,7 @@ function validar() {
         if (!form.checkValidity()) {
           event.preventDefault()
           event.stopPropagation()
-          //Muestro alerta
-          console.log("error")
+          alert("Completa los campos obligatorios")
         } else {
           //Si se valida que introduzca este codigo
           // Traigo el array del localStorage
@@ -52,23 +51,25 @@ function validar() {
             arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == document.getElementById("mail").value)].apellido = document.getElementById("apellido").value;
             arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == document.getElementById("mail").value)].apellido2 = document.getElementById("apellido2").value;
             arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == document.getElementById("mail").value)].tel = document.getElementById("tel").value;
-            arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == document.getElementById("mail").value)].img = img;
+            if(img != ""){
+              arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == document.getElementById("mail").value)].img = img;
+            };
           // Y lo actualizo ademas creo un objeto para actualizar tambien la cuenta logueada
+          // Si inputFile no tiene ninguna imagen seleccionada enviar la informacion guardada en localStorage
             let logueado = {
-              "nombre": document.getElementById("nombre").value,
               "email": document.getElementById("mail").value,
+              "nombre": document.getElementById("nombre").value,
               "nombre2": document.getElementById("nombre2").value,
               "apellido": document.getElementById("apellido").value,
               "apellido2": document.getElementById("apellido2").value,
               "tel": document.getElementById("tel").value,
-              "img": img
-            };
+              "img": arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == document.getElementById("mail").value)].img
+              };
+            if(img != ""){logueado.img = img};
             localStorage.setItem('logueado', JSON.stringify(logueado));
             localStorage.setItem('Cuentas', JSON.stringify(arrayCuentas));
           //Cambiar imagen solamente si selecciono un archivo
           if (img != '') { document.getElementById("img").innerHTML = `<img src="${img}" alt="" width="150" height="150">`; }
-          imgOsvg();
-          alert("Se valido correctamente")
         }
         form.classList.add('was-validated')
       }, false)
