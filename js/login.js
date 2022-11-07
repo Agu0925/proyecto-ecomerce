@@ -52,9 +52,14 @@ btn.addEventListener("click", function (event) {
             window.location.href = "inicio.html";
             let logueado = {
               "nombre": iterator.nombre,
-              "email": iterator.email
+              "email": iterator.email,
+              "nombre2": iterator.nombre2,
+              "apellido": iterator.apellido,
+              "apellido2": iterator.apellido2,
+              "tel": iterator.tel,
+              "img": iterator.img
             };
-            localStorage.setItem("logueado?", JSON.stringify(logueado));
+            localStorage.setItem("logueado", JSON.stringify(logueado));
             alert("Ingresaste Correctamente Bienvenido " + iterator.nombre);
           } else if (intentos > 0) {
             alert(
@@ -223,10 +228,14 @@ btnregistrarse.addEventListener("click", function (event) {
           "nombre2": "",
           "apellido": "",
           "apellido2": "",
-          "tel": ""
+          "tel": "",
+          "img": ""
         };
+        // Traigo el array del localStorage
         let cuentas = JSON.parse(localStorage.getItem("Cuentas"));
+        // Pusheo la nueva cuenta
         cuentas.push(cuenta);
+        // Y guardo el nuevo array
         localStorage.setItem("Cuentas", JSON.stringify(cuentas));
         formlogin.style.display = "block";
         formreg.style.display = "none";
@@ -249,7 +258,8 @@ btnregistrarse.addEventListener("click", function (event) {
         "nombre2": "",
         "apellido": "",
         "apellido2": "",
-        "tel": ""
+        "tel": "",
+        "img": ""
       };
       let cuentas = [];
       cuentas.push(cuenta);

@@ -1,9 +1,7 @@
-let cuenta = JSON.parse(localStorage.getItem('logueado?'));
-let usuario = JSON.parse(localStorage.getItem('usuario: ' + cuenta.email));
+let cuenta = JSON.parse(localStorage.getItem('logueado'));
 //Funcion para imprimir imagen si se encuentra en local storage o imprimimr SVG
 function imgOsvg() {
-  if (localStorage.getItem('usuario: ' + cuenta.email)) {
-    if (usuario.img != '') { document.getElementById("img").innerHTML = `<img src="${usuario.img}" alt="" width="150" height="150">`; }
+    if (cuenta.img != '') { document.getElementById("img").innerHTML = `<img src="${cuenta.img}" alt="" width="150" height="150">`; }
     else {
       document.getElementById("img").innerHTML = ` <svg
   xmlns="http://www.w3.org/2000/svg"
@@ -21,40 +19,14 @@ function imgOsvg() {
   />
 </svg>`}
   }
-  else {
-    document.getElementById("img").innerHTML = ` <svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="150"
-  height="150"
-  fill="currentColor"
-  class="bi bi-person-bounding-box text-secondary"
-  viewBox="0 0 16 16"
->
-  <path
-    d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"
-  />
-  <path
-    d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"
-  />
-</svg>`}
-}
-//Rellenand campos en Perfil
-//verifico si existe el objeto en el localStorage y relleno los campos
-if (localStorage.getItem('usuario: ' + cuenta.email)) {
-  document.getElementById("mail").value = usuario.email;
-  document.getElementById("nombre").value = usuario.nombre;
-  document.getElementById("nombre2").value = usuario.nombre2;
-  document.getElementById("apellido").value = usuario.apellido;
-  document.getElementById("apellido2").value = usuario.apellido2;
-  document.getElementById("tel").value = usuario.tel;
-  imgOsvg();
-}
-//Sino traigo el objeto creado a partir del login y relleno los campos
-else {
+//Relleno campos en Perfil
   document.getElementById("mail").value = cuenta.email;
   document.getElementById("nombre").value = cuenta.nombre;
+  document.getElementById("nombre2").value = cuenta.nombre2;
+  document.getElementById("apellido").value = cuenta.apellido;
+  document.getElementById("apellido2").value = cuenta.apellido2;
+  document.getElementById("tel").value = cuenta.tel;
   imgOsvg();
-};
 //Funcion para validar con BS5 y guardar datos.
 function validar() {
   // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -72,22 +44,32 @@ function validar() {
           console.log("error")
         } else {
           //Si se valida que introduzca este codigo
-          //Creo un objeto nuevo con los valores de los campos y lo reescribo en el localStorage
-          alert("Se valido correctamente")
-          let guardarPerfil = {
-            "nombre": document.getElementById("nombre").value,
-            "email": cuenta.email,
-            "nombre2": document.getElementById("nombre2").value,
-            "apellido": document.getElementById("apellido").value,
-            "apellido2": document.getElementById("apellido2").value,
-            "tel": document.getElementById("tel").value,
-            "img": img
-          };
+          // Traigo el array del localStorage
+          let arrayCuentas = JSON.parse(localStorage.getItem('Cuentas'));
+          //Modifico el array cuentas con el indice encontrado atraves de findIndex
+            arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == document.getElementById("mail").value)].nombre = document.getElementById("nombre").value;
+            arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == document.getElementById("mail").value)].nombre2 = document.getElementById("nombre2").value;
+            arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == document.getElementById("mail").value)].apellido = document.getElementById("apellido").value;
+            arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == document.getElementById("mail").value)].apellido2 = document.getElementById("apellido2").value;
+            arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == document.getElementById("mail").value)].tel = document.getElementById("tel").value;
+            arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == document.getElementById("mail").value)].img = img;
+          // Y lo actualizo ademas creo un objeto para actualizar tambien la cuenta logueada
+            let logueado = {
+              "nombre": document.getElementById("nombre").value,
+              "email": document.getElementById("mail").value,
+              "nombre2": document.getElementById("nombre2").value,
+              "apellido": document.getElementById("apellido").value,
+              "apellido2": document.getElementById("apellido2").value,
+              "tel": document.getElementById("tel").value,
+              "img": img
+            };
+            localStorage.setItem('logueado', JSON.stringify(logueado));
+            localStorage.setItem('Cuentas', JSON.stringify(arrayCuentas));
           //Cambiar imagen solamente si selecciono un archivo
           if (img != '') { document.getElementById("img").innerHTML = `<img src="${img}" alt="" width="150" height="150">`; }
-          localStorage.setItem('usuario: ' + cuenta.email, JSON.stringify(guardarPerfil));
+          imgOsvg();
+          alert("Se valido correctamente")
         }
-
         form.classList.add('was-validated')
       }, false)
     })

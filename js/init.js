@@ -46,12 +46,12 @@ let getJSONData = function(url){
 
 // Funcion Cerrar Sesion
 function cerrarS() {
-  localStorage.removeItem('logueado?');
+  localStorage.removeItem('logueado');
 }
 //Mostrar nombre en navbar
 let Nusuario = document.getElementsByClassName('Nusuario');
 // Llamo el objeto de local storage y lo modifico
-let cuentas = JSON.parse(localStorage.getItem('logueado?'));
+let cuentas = JSON.parse(localStorage.getItem('logueado'));
 //Recorro todas las clases Nusuario y las modifico
 for (i = 0; i < Nusuario.length; i++) {
   Nusuario[i].innerHTML = `
