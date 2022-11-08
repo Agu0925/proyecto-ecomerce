@@ -1,14 +1,14 @@
 let cuenta = JSON.parse(localStorage.getItem('logueado'));
 //Funcion para imprimir imagen si se encuentra en local storage o imprimimr SVG
 function imgOsvg() {
-  if (cuenta.img != '') { document.getElementById("img").innerHTML = `<img src="${cuenta.img}" alt="" width="150" height="150">`; }
+  if (cuenta.img != '') { document.getElementById("img").innerHTML = `<img src="${cuenta.img}" alt="" class="border border-dark mt-md-3" width="150" height="150">`; }
   else {
     document.getElementById("img").innerHTML = ` <svg
   xmlns="http://www.w3.org/2000/svg"
   width="150"
   height="150"
   fill="currentColor"
-  class="bi bi-person-bounding-box text-secondary"
+  class="bi bi-person-bounding-box text-secondary mt-md-3"
   viewBox="0 0 16 16"
 >
   <path
@@ -69,7 +69,7 @@ function validar() {
           localStorage.setItem('logueado', JSON.stringify(logueado));
           localStorage.setItem('Cuentas', JSON.stringify(arrayCuentas));
           //Cambiar imagen solamente si selecciono un archivo
-          if (img != '') { document.getElementById("img").innerHTML = `<img src="${img}" alt="" width="150" height="150">`; }
+          if (img != '') { document.getElementById("img").innerHTML = `<img src="${img}" alt="" class="border border-dark mt-md-3" width="150" height="150">`; }
         }
         form.classList.add('was-validated')
       }, false)
@@ -87,7 +87,7 @@ document.getElementById("imgperfil").addEventListener('change', () => {
     leerImagen.readAsDataURL(imagen);
     leerImagen.onload = () => {
       img = leerImagen.result;
-      document.getElementById("img").innerHTML = `<img src="${img}" alt="" width="150" height="150">`;
+      document.getElementById("img").innerHTML = `<img src="${img}" alt="" class="border border-dark mt-md-3" width="150" height="150">`;
     }
   } else {
     img = '';
@@ -96,7 +96,7 @@ document.getElementById("imgperfil").addEventListener('change', () => {
   width="150"
   height="150"
   fill="currentColor"
-  class="bi bi-person-bounding-box text-secondary"
+  class="bi bi-person-bounding-box text-secondary mt-md-3"
   viewBox="0 0 16 16"
 >
   <path

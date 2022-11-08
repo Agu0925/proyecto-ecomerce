@@ -2,7 +2,7 @@
 let arrayCuentas = JSON.parse(localStorage.getItem("Cuentas"));
 let cuentaSelec = JSON.parse(localStorage.getItem("logueado"));
 let cuenta = arrayCuentas[arrayCuentas.findIndex(arrayCuentas => arrayCuentas.email == cuentaSelec.email)]
-//Cuenta
+//Funcion para redirigir a un producto
 function setProdID(id) {
    localStorage.setItem("prodID", id);
    window.location = "product-info.html";
