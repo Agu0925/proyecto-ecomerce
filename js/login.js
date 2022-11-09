@@ -60,8 +60,7 @@ btn.addEventListener("click", function (event) {
             "apellido": iterator.apellido,
             "apellido2": iterator.apellido2,
             "tel": iterator.tel,
-            "img": iterator.img,
-            "carrito": ''
+            "img": iterator.img
           };
           localStorage.setItem("logueado", JSON.stringify(logueado));
           alert("Ingresaste Correctamente Bienvenido " + iterator.nombre);

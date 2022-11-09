@@ -75,7 +75,6 @@ function validar() {
       }, false)
     })
 }
-//Guardando configuracion de perfil
 //Creo el on change afuera de el boton guardar porque sino no actualiza en tiempo real la imagen 
 //guardo resultado en una variable.
 let img = '';
@@ -108,5 +107,5 @@ document.getElementById("imgperfil").addEventListener('change', () => {
 </svg>`
   }
 })
-//Guardo los datos con funcion validar
+//Guardo los datos del perfil con funcion validar
 document.getElementById("guardar").addEventListener("click", validar)
